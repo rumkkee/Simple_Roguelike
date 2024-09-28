@@ -9,10 +9,4 @@ public class TimeStack : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

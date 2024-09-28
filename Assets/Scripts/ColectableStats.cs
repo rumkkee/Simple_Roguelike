@@ -1,7 +1,17 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class ColectableStats : ScriptableObject
+public class CollectableStats : ScriptableObject
 {
-    [slider]
-   public int itemValue;
+    [Header("Collectable stats")]
+    [Tooltip("if its currency then don't keep the item")]
+    public bool isCurrency;
+    [Tooltip("Which item is it")]
+    public int itemID; 
+    
+    [Range(0,100)]
+    [Tooltip("How much the item is valued")]
+    public int itemValue;
+
+
 }

@@ -9,10 +9,4 @@ public class Stackable : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CollectableStats))]
 public class Collectable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    // Just add the stats as a depencency injection
+    public CollectableStats stats;
+    // void Start()
+    // {
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // }
 }
