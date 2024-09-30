@@ -38,24 +38,34 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        if (!_isMoving)
-        {
-            Vector2 moveVec = _move.ReadValue<Vector2>();
-
-            if (moveVec.sqrMagnitude > 0.1f)
-            {
-                Vector3 direction = new Vector3(moveVec.x, moveVec.y, 0);
-                move(direction);
-            }
-        }
-        else
+        if (_isMoving)
         {
             transform.position = Vector3.MoveTowards(transform.position, _targetPos, moveSpeed * Time.deltaTime);
             if (Vector3.Distance(transform.position, _targetPos) < float.Epsilon)
             {
                 _isMoving = false;
+                
             }
+            return;
         }
+
+        Vector2 moveVec = _move.ReadValue<Vector2>();
+
+        if (moveVec.sqrMagnitude > 0.1f)
+        {
+            Vector2 snapDir =_snapCardinal(moveVec);
+            Vector3 direction = new Vector3(snapDir.x, snapDir.y, 0);
+            move(direction);
+        }
+    }
+
+    private Vector2 _snapCardinal(Vector2 inputDir)
+    {
+        if (Mathf.Abs(inputDir.x) > Mathf.Abs(inputDir.y))
+        {
+            return new Vector2(Mathf.Sign(inputDir.x), 0);
+        }
+        return new Vector2(0, MathF.Sign(inputDir.y));
     }
 
     public void move(Vector2 direction)
