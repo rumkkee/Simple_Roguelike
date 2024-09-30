@@ -35,6 +35,24 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
                     ""processors"": ""NormalizeVector2"",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Backwards"",
+                    ""type"": ""Button"",
+                    ""id"": ""8783f0c3-f5a9-4849-80ca-95ed72b4160c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fowards"",
+                    ""type"": ""Button"",
+                    ""id"": ""c199341d-9942-4bfa-a439-cbfed3cbf395"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -257,6 +275,50 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""368d841c-27d4-49c2-b8fb-6b9f8b21ab2d"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Backwards"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""288b12b2-9e3e-4510-8e83-fc216cc98469"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Backwards"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40ff37b1-4419-4ffc-9d52-d0e876799313"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fowards"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ad69aeb-eb6a-487d-9cc4-c390535a110e"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fowards"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -266,6 +328,8 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
         // Main
         m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
         m_Main_Movement = m_Main.FindAction("Movement", throwIfNotFound: true);
+        m_Main_Backwards = m_Main.FindAction("Backwards", throwIfNotFound: true);
+        m_Main_Fowards = m_Main.FindAction("Fowards", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -328,11 +392,15 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Main;
     private List<IMainActions> m_MainActionsCallbackInterfaces = new List<IMainActions>();
     private readonly InputAction m_Main_Movement;
+    private readonly InputAction m_Main_Backwards;
+    private readonly InputAction m_Main_Fowards;
     public struct MainActions
     {
         private @PlayerMovement m_Wrapper;
         public MainActions(@PlayerMovement wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Main_Movement;
+        public InputAction @Backwards => m_Wrapper.m_Main_Backwards;
+        public InputAction @Fowards => m_Wrapper.m_Main_Fowards;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -345,6 +413,12 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @Backwards.started += instance.OnBackwards;
+            @Backwards.performed += instance.OnBackwards;
+            @Backwards.canceled += instance.OnBackwards;
+            @Fowards.started += instance.OnFowards;
+            @Fowards.performed += instance.OnFowards;
+            @Fowards.canceled += instance.OnFowards;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -352,6 +426,12 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @Backwards.started -= instance.OnBackwards;
+            @Backwards.performed -= instance.OnBackwards;
+            @Backwards.canceled -= instance.OnBackwards;
+            @Fowards.started -= instance.OnFowards;
+            @Fowards.performed -= instance.OnFowards;
+            @Fowards.canceled -= instance.OnFowards;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -372,5 +452,7 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
     public interface IMainActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnBackwards(InputAction.CallbackContext context);
+        void OnFowards(InputAction.CallbackContext context);
     }
 }

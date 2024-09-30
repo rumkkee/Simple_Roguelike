@@ -13,6 +13,24 @@
                     "processors": "NormalizeVector2",
                     "interactions": "Press",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Backwards",
+                    "type": "Button",
+                    "id": "8783f0c3-f5a9-4849-80ca-95ed72b4160c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fowards",
+                    "type": "Button",
+                    "id": "c199341d-9942-4bfa-a439-cbfed3cbf395",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -235,6 +253,50 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "368d841c-27d4-49c2-b8fb-6b9f8b21ab2d",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Backwards",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "288b12b2-9e3e-4510-8e83-fc216cc98469",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Backwards",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40ff37b1-4419-4ffc-9d52-d0e876799313",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fowards",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ad69aeb-eb6a-487d-9cc4-c390535a110e",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fowards",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

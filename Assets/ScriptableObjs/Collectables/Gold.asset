@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e775dd2335568664c9d495b0017f8852, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: 
-  isCurrency: 0
-  itemID: 0
-  itemValue: 0
+  itemID: GOLD
+  type: 0
+  itemValue: 10
