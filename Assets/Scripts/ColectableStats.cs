@@ -1,17 +1,20 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Collectable", menuName = "Collectable Object")]
 public class CollectableStats : ScriptableObject
 {
     [Header("Collectable stats")]
-    [Tooltip("if its currency then don't keep the item")]
-    public bool isCurrency;
     [Tooltip("Which item is it")]
-    public int itemID; 
-    
-    [Range(0,100)]
+    public string itemID; 
+    public enum itemType {
+        Currency,
+        Item,
+        Consumable,
+    }
+    public itemType type;
+
+    [Header("Currency Settings")]
     [Tooltip("How much the item is valued")]
     public int itemValue;
-
-
 }
