@@ -1,0 +1,45 @@
+{
+    "name": "InteractControls",
+    "maps": [
+        {
+            "name": "interact action map",
+            "id": "479a7c9a-96f2-4939-b3eb-755cedb2339c",
+            "actions": [
+                {
+                    "name": "interact",
+                    "type": "Button",
+                    "id": "8d2ecc82-c94a-46e4-8480-65c607efd8a5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9d16d0e0-4cdb-4957-8329-505e0e9fb537",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "430fd37f-baa4-4816-828b-28f7f69de0bb",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
