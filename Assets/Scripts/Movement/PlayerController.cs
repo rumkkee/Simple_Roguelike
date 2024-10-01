@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private TimeManager _timeManInstance;
     private PlayerMovement _controls;
     private InputAction _move;
+    private InputAction _action;
     private bool _isMoving;
     private bool _isReverting;
     private Vector3 _targetPos;
@@ -32,20 +33,24 @@ public class PlayerController : MonoBehaviour
     {
         _controls = new PlayerMovement();
         _move = _controls.Main.Movement;
+        _action = _controls.Main.Action;
     }
     private void Start()
     {
         _timeManInstance = TimeManager.instance;
         _controls.Main.Backwards.performed += reverseActions;
+        _controls.Main.Action.performed += action;
     }
     public void enableControls()
     {
         _move.Enable();
+        _action.Enable();
         _controls.Enable();
     }
     public void disableControls()
     {
         _move.Disable();
+        _action.Disable();
         _controls.Disable();
     }
 
@@ -120,7 +125,6 @@ public class PlayerController : MonoBehaviour
         }
         return true;
     }
-
     public void MoveToPosition(Vector3 pos)
     {
         Vector2 direction = new Vector2(pos.x - transform.position.x, pos.y - transform.position.y);
@@ -129,5 +133,8 @@ public class PlayerController : MonoBehaviour
             transform.position = pos;
             _currentGridPos = _groundTileMap.WorldToCell(transform.position);
         }
+    }
+    public void action(InputAction.CallbackContext context) {
+        Debug.Log("Action done!");
     }
 }
