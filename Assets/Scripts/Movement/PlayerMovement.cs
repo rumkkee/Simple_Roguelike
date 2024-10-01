@@ -53,6 +53,15 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Action"",
+                    ""type"": ""Button"",
+                    ""id"": ""96c3ee3f-eeb6-4d4f-a698-3c0ffb9efe58"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -319,6 +328,28 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
                     ""action"": ""Fowards"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b200204-044b-4833-a906-70d18a4a2e01"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3d8d4a9-26db-41f9-bc2f-6809355ff3c2"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -330,6 +361,7 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
         m_Main_Movement = m_Main.FindAction("Movement", throwIfNotFound: true);
         m_Main_Backwards = m_Main.FindAction("Backwards", throwIfNotFound: true);
         m_Main_Fowards = m_Main.FindAction("Fowards", throwIfNotFound: true);
+        m_Main_Action = m_Main.FindAction("Action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -394,6 +426,7 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
     private readonly InputAction m_Main_Movement;
     private readonly InputAction m_Main_Backwards;
     private readonly InputAction m_Main_Fowards;
+    private readonly InputAction m_Main_Action;
     public struct MainActions
     {
         private @PlayerMovement m_Wrapper;
@@ -401,6 +434,7 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Main_Movement;
         public InputAction @Backwards => m_Wrapper.m_Main_Backwards;
         public InputAction @Fowards => m_Wrapper.m_Main_Fowards;
+        public InputAction @Action => m_Wrapper.m_Main_Action;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -419,6 +453,9 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
             @Fowards.started += instance.OnFowards;
             @Fowards.performed += instance.OnFowards;
             @Fowards.canceled += instance.OnFowards;
+            @Action.started += instance.OnAction;
+            @Action.performed += instance.OnAction;
+            @Action.canceled += instance.OnAction;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -432,6 +469,9 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
             @Fowards.started -= instance.OnFowards;
             @Fowards.performed -= instance.OnFowards;
             @Fowards.canceled -= instance.OnFowards;
+            @Action.started -= instance.OnAction;
+            @Action.performed -= instance.OnAction;
+            @Action.canceled -= instance.OnAction;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -454,5 +494,6 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnBackwards(InputAction.CallbackContext context);
         void OnFowards(InputAction.CallbackContext context);
+        void OnAction(InputAction.CallbackContext context);
     }
 }

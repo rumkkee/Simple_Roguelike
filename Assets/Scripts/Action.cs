@@ -15,7 +15,9 @@ public class Action
         Movement,
     };
     public delegate void moveCallback(Vector3 pos);
-    public moveCallback callback;
+    public moveCallback mCallback;
+    public delegate void actionCallback(string desc);
+    public actionCallback aCallback;
     // What the hell are we doing.. 
     public TypeOfAction actionType;
     // IF its a Movement Is then to what position? 
@@ -31,7 +33,7 @@ public class Action
     {
         actionType = newType;
         position = lastPos;
-        callback = func;
+        mCallback = func;
     }
 
 

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private TimeManager _timeManInstance;
     private PlayerMovement _controls;
     private InputAction _move;
+    private InputAction _action;
     private bool _isMoving;
     private bool _isReverting;
     private Vector3 _targetPos;
@@ -26,26 +27,30 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     [Tooltip("The tile map that the collisions are determined is on")]
     private Tilemap _collisionTileMap;
+    private void OnEnable() => enableControls();
+    private void OnDisable() => disableControls();
     private void Awake()
     {
         _controls = new PlayerMovement();
         _move = _controls.Main.Movement;
+        _action = _controls.Main.Action;
     }
     private void Start()
     {
         _timeManInstance = TimeManager.instance;
         _controls.Main.Backwards.performed += reverseActions;
+        _controls.Main.Action.performed += action;
     }
-    private void OnEnable() => enableControls();
-    private void OnDisable() => disableControls();
     public void enableControls()
     {
         _move.Enable();
+        _action.Enable();
         _controls.Enable();
     }
     public void disableControls()
     {
         _move.Disable();
+        _action.Disable();
         _controls.Disable();
     }
 
@@ -54,6 +59,7 @@ public class PlayerController : MonoBehaviour
         if (_currentGridPos != _groundTileMap.WorldToCell(transform.position))
         {
             Debug.Log($"We moved cells: {_currentGridPos}");
+            // If its not our move its ignore.. 
             if (_isReverting)
             {
                 return;
@@ -77,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
         Vector2 moveVec = _move.ReadValue<Vector2>();
 
-        if (moveVec.sqrMagnitude > 0.1f)
+        if (moveVec.sqrMagnitude > float.Epsilon)
         {
             Vector2 snapDir = _snapCardinal(moveVec);
             Vector3 direction = new Vector3(snapDir.x, snapDir.y, 0);
@@ -119,7 +125,6 @@ public class PlayerController : MonoBehaviour
         }
         return true;
     }
-
     public void MoveToPosition(Vector3 pos)
     {
         Vector2 direction = new Vector2(pos.x - transform.position.x, pos.y - transform.position.y);
@@ -128,5 +133,8 @@ public class PlayerController : MonoBehaviour
             transform.position = pos;
             _currentGridPos = _groundTileMap.WorldToCell(transform.position);
         }
+    }
+    public void action(InputAction.CallbackContext context) {
+        Debug.Log("Action done!");
     }
 }

@@ -54,7 +54,12 @@ public class TimeManager : MonoBehaviour
         if (act.actionType == Action.TypeOfAction.Movement)
         {
             Debug.Log($"Going back to position: {act.position}");
-            act.callback(act.position);
+            act.mCallback(act.position);
+        }
+        else if (act.actionType == Action.TypeOfAction.Action) 
+        {
+            Debug.Log($"Going reverting Action: {act.actionDesc}");
+            act.aCallback(act.actionDesc);
         }
     }
 
