@@ -12,7 +12,7 @@ public class PlayerStats : ScriptableObject
     public long totalStepsTaken;
     // How many steps can the player take before getting thrown back to the start?
     public int stepsAvaliable;
-    // How many hits a player can take before fucking dying.
+    // How many hits a player can take before zucking dying.
     public int health; 
     // How much is our starting health? 
     public int startingHealth;  
