@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     [Tooltip("The tile map that the collisions are determined is on")]
     private Tilemap _collisionTileMap;
+    private void OnEnable() => enableControls();
+    private void OnDisable() => disableControls();
     private void Awake()
     {
         _controls = new PlayerMovement();
@@ -36,8 +38,6 @@ public class PlayerController : MonoBehaviour
         _timeManInstance = TimeManager.instance;
         _controls.Main.Backwards.performed += reverseActions;
     }
-    private void OnEnable() => enableControls();
-    private void OnDisable() => disableControls();
     public void enableControls()
     {
         _move.Enable();
@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
         if (_currentGridPos != _groundTileMap.WorldToCell(transform.position))
         {
             Debug.Log($"We moved cells: {_currentGridPos}");
+            // If its not our move its ignore.. 
             if (_isReverting)
             {
                 return;
@@ -77,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
         Vector2 moveVec = _move.ReadValue<Vector2>();
 
-        if (moveVec.sqrMagnitude > 0.1f)
+        if (moveVec.sqrMagnitude > float.Epsilon)
         {
             Vector2 snapDir = _snapCardinal(moveVec);
             Vector3 direction = new Vector3(snapDir.x, snapDir.y, 0);
