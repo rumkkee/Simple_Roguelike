@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Ink.Runtime;
+using Ink.UnityIntegration;
 using TMPro;
 using UnityEngine;
 
@@ -60,7 +61,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText; 
     
-    private bool dialogueActive;
+    public bool dialogueActive { get; private set; } //read only to outside scripts 
     private string currentCharacter; 
     private Story story;
     
@@ -100,15 +101,16 @@ public class DialogueManager : MonoBehaviour
         }
         
         //handle continuation to next line
-        if (Input.GetKeyDown(KeyCode.Space)) //this may change depending on input scheme 
+        if (Input.GetKeyUp(KeyCode.Space)) //this may change depending on input scheme 
         {
             continueDialogue(currentCharacter, story);
         }
-        
-        
     }
     
-    
+    public static DialogueManager GetInstance() 
+    {
+        return instance;
+    }
     
     public void setLanguage(string language)
     {

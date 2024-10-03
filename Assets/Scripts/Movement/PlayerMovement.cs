@@ -35,6 +35,24 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
                     ""processors"": ""NormalizeVector2"",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""8688bfad-38b1-4dab-a0ca-92db45b25767"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UI submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""ec58f7d1-bf38-48c3-b350-ad6f2f45678d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -147,6 +165,28 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1b6470f-acde-434f-9339-b36c9836f2a4"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67b68147-0ea7-4e9e-845a-396756be89d3"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UI submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -156,6 +196,8 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
         // Main
         m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
         m_Main_Movement = m_Main.FindAction("Movement", throwIfNotFound: true);
+        m_Main_Interact = m_Main.FindAction("Interact", throwIfNotFound: true);
+        m_Main_UIsubmit = m_Main.FindAction("UI submit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -218,11 +260,15 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Main;
     private List<IMainActions> m_MainActionsCallbackInterfaces = new List<IMainActions>();
     private readonly InputAction m_Main_Movement;
+    private readonly InputAction m_Main_Interact;
+    private readonly InputAction m_Main_UIsubmit;
     public struct MainActions
     {
         private @PlayerMovement m_Wrapper;
         public MainActions(@PlayerMovement wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Main_Movement;
+        public InputAction @Interact => m_Wrapper.m_Main_Interact;
+        public InputAction @UIsubmit => m_Wrapper.m_Main_UIsubmit;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -235,6 +281,12 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+            @UIsubmit.started += instance.OnUIsubmit;
+            @UIsubmit.performed += instance.OnUIsubmit;
+            @UIsubmit.canceled += instance.OnUIsubmit;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -242,6 +294,12 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+            @UIsubmit.started -= instance.OnUIsubmit;
+            @UIsubmit.performed -= instance.OnUIsubmit;
+            @UIsubmit.canceled -= instance.OnUIsubmit;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -262,5 +320,7 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
     public interface IMainActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnUIsubmit(InputAction.CallbackContext context);
     }
 }

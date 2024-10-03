@@ -29,8 +29,6 @@ public class DialogueTrigger : MonoBehaviour
             playerInRange = true; 
             Debug.Log(characterName + " entered"); 
         }
-        
-        
     }
 
 
@@ -49,11 +47,11 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (playerInRange)
+        if (playerInRange && !DialogueManager.GetInstance().dialogueActive)
         {
             visualCue.SetActive(true);
 
-            if (Input.GetKeyDown(KeyCode.Space)) // change later if the interact key changes 
+            if (Input.GetKeyUp(KeyCode.E)) // change later if the interact key changes 
             {
                 // Trigger the dialogue for this NPC via the DialogueManager
                 DialogueManager.instance.startDialogue(characterName);
