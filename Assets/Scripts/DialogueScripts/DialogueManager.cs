@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Ink.Runtime;
+using TMPro;
 using UnityEngine;
 
 
@@ -52,8 +53,19 @@ public class DialogueManager : MonoBehaviour
                                                     //the string corresponds to the character name OR quest objective
                                                     //more on that later 
     
-    
                                                     
+                                                    
+                                                    
+    [Header("Dialogue UI")]
+    [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] private TextMeshProUGUI dialogueText; 
+    
+    private bool dialogueActive;
+    private string currentCharacter; 
+    private Story story;
+    
+         
+    
     // We will use a singleton pattern to ensure we don't duplicate anything 
     void Awake()
     {
@@ -72,10 +84,30 @@ public class DialogueManager : MonoBehaviour
     
     private void Start()
     {
+        dialogueActive = false;
+        dialoguePanel.SetActive(false);
         questProgress = new Dictionary<string, bool>();
         setLanguage(currentLanguage); //initialize with default 
     }
 
+
+
+    private void Update()
+    {
+        if (!dialogueActive) //return right away if not playing 
+        {
+            return;
+        }
+        
+        //handle continuation to next line
+        if (Input.GetKeyDown(KeyCode.Space)) //this may change depending on input scheme 
+        {
+            continueDialogue(currentCharacter, story);
+        }
+        
+        
+    }
+    
     
     
     public void setLanguage(string language)
@@ -93,13 +125,20 @@ public class DialogueManager : MonoBehaviour
         {
             currentInkFiles = japaneseInkFiles;
         }
+        
+        Debug.Log("language:"+currentLanguage);
+        
+        //display current contents of currentInkFiles
+        debugPrintTextAssets();
+        
     }
-
     
     
     
     public void startDialogue(string characterName)
     {
+        currentCharacter = characterName; 
+        
         Debug.Log("starting dialogue");
         
         TextAsset inkFile = getCharacterInkFile(characterName); //get the specific character's story 
@@ -108,13 +147,16 @@ public class DialogueManager : MonoBehaviour
         
         if (inkFile != null)
         {
-            var story = new Story(inkFile.text);
+            story = new Story(inkFile.text);
+            dialogueActive = true;
+            dialoguePanel.SetActive(true);
             continueDialogue(characterName, story);
         }
         
     }
 
 
+    
     //here we will search for this character's story from all the loaded stories 
     private TextAsset getCharacterInkFile(string characterName)
     {
@@ -130,26 +172,56 @@ public class DialogueManager : MonoBehaviour
     }
 
     
+    
     public void continueDialogue(string characterName, Story story)
     {
-        if (!questProgress.ContainsKey(characterName) || !questProgress[characterName]) //if quest progress contains this relevant character's story 
-        {
-
+        
             if (story.canContinue)
             {
-                string text = story.Continue();
+                string text = story.Continue(); //continue here is like popping the next text off a stack 
+                dialogueText.text = text;
                 Debug.Log(text); //display dialogue text
                 questProgress[characterName] = true; // mark character or quest objective as already visited 
                                                     // comment out this line if you would like to repeat 
                                                     //the same story 
+                                                    
+                                                    //note: we may want to edit this whole section to create
+                                                    //different options for a default NPC response or something
             }
-            
-        }
-        else
+            else
+            {
+                exitDialogueMode();
+            }
+        
+    }
+
+    
+    
+    private void exitDialogueMode()
+    {
+        dialogueActive = false;
+        dialoguePanel.SetActive(false);
+        dialogueText.text = "";
+    }
+    
+    
+    
+    void debugPrintTextAssets()
+    {
+        // Loop through the array and print each TextAsset's contents
+        foreach (TextAsset textAsset in currentInkFiles)
         {
-            Debug.Log($"{characterName} has already been completed");
+            if (textAsset != null)
+            {
+                Debug.Log("currently loaded: " + textAsset.name); //+ ": " + textAsset.text);  // Print name and content of each TextAsset
+            }
+            else
+            {
+                Debug.LogWarning("Null TextAsset found in array.");
+            }
         }
     }
+    
     
     
 }

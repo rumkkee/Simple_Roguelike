@@ -6,15 +6,63 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public string characterName; // Name of the character whose dialogue will be triggered
 
+    [Header("visual que:")]
+    [SerializeField] private GameObject visualCue;
+    
+    public string characterName; // Name of the character whose dialogue will be triggered
+    private bool playerInRange;
+    
+    private void Awake()
+    {
+        playerInRange = false;
+        visualCue.SetActive(false);
+    }
+    
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
+        
+        if (other.CompareTag("Player"))
+        { 
+            playerInRange = true; 
+            Debug.Log(characterName + " entered"); 
+        }
+        
+        
+    }
+
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        
+        
         if (other.CompareTag("Player"))
         {
-           Debug.Log(characterName + " entered"); 
-            // Trigger the dialogue for this NPC via the DialogueManager
-            DialogueManager.instance.startDialogue(characterName);
+            playerInRange = false;
+            
+            Debug.Log(characterName + " exited"); 
+        }
+    }
+
+
+    private void Update()
+    {
+        if (playerInRange)
+        {
+            visualCue.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.Space)) // change later if the interact key changes 
+            {
+                // Trigger the dialogue for this NPC via the DialogueManager
+                DialogueManager.instance.startDialogue(characterName);
+            }
+            
+        }
+        else
+        {
+            visualCue.SetActive(false);
         }
     }
 }
