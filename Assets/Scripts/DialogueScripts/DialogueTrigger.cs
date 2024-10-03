@@ -4,52 +4,17 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class DialogueTrigger : MonoBehaviour
 {
-    [Header("Visual Cue")]
-    [SerializeField] private GameObject visualCue;
+    public string characterName; // Name of the character whose dialogue will be triggered
 
-    [Header("Ink JSON")]
-    [SerializeField] private TextAsset inkJSON;
-    
-    private bool playerInRange;
-    
-    private void Awake()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        playerInRange = false; 
-        visualCue.SetActive(false);
-    }
-
-    private void Update()
-    {
-        if (playerInRange)
+        if (other.CompareTag("Player"))
         {
-            visualCue.SetActive(true);
-            if (InputManager.GetInstance().GetInteractPressed())
-            {
-                Debug.Log(inkJSON.text);
-            }
-        }
-        else
-        {
-            visualCue.SetActive(false);
+           Debug.Log(characterName + " entered"); 
+            // Trigger the dialogue for this NPC via the DialogueManager
+            DialogueManager.instance.startDialogue(characterName);
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Player")
-        {
-            playerInRange = true;
-        }
-    }
-    
-    private void OnTriggerExit2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Player")
-        {
-            playerInRange = false;
-        }
-    }
-        
 }

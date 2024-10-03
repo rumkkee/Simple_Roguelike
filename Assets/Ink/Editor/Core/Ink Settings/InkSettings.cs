@@ -61,15 +61,6 @@ namespace Ink.UnityIntegration {
 		}
 		// #endif
 
-        public class AssetSaver : UnityEditor.AssetModificationProcessor {
-            static string[] OnWillSaveAssets(string[] paths) {
-                InkSettings.instance.Save(true);
-                return paths;
-            }
-        }
-
-		
-		
 		public DefaultAsset templateFile;
 		public string templateFilePath {
 			get {
@@ -92,6 +83,8 @@ namespace Ink.UnityIntegration {
 		public bool printInkLogsInConsoleOnCompile;
 		
 		public bool suppressStartupWindow;
+		
+		public bool automaticallyAddDefineSymbols = true;
 
 		#if UNITY_EDITOR && !UNITY_2018_1_OR_NEWER
 		[MenuItem("Edit/Project Settings/Ink", false, 500)]
@@ -127,18 +120,6 @@ namespace Ink.UnityIntegration {
 					filesToCompileAutomatically.RemoveAt(i);
 				}
             }
-            // Deletes the persistent version of this asset that we used to use prior to 0.9.71
-			if(!Application.isPlaying && EditorUtility.IsPersistent(this)) {
-				var path = AssetDatabase.GetAssetPath(this);
-				if(!string.IsNullOrEmpty(path)) {
-					#if !UNITY_2020_1_OR_NEWER
-                    if(_instance == this) _instance = null;
-					#endif
-                    AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(this));
-					AssetDatabase.Refresh();
-					return;
-				}
-			}
 		}
 	}	
 }
