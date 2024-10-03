@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.Utilities;
 using UnityEngine.Tilemaps;
 
 public class EnemyPathfinding : MonoBehaviour
@@ -30,11 +29,21 @@ public class EnemyPathfinding : MonoBehaviour
         float leftWeight = _checkTile(Vector2.left, _currentTile);
         float rightWeight = _checkTile(Vector2.right, _currentTile);
 
-        
+
+        return new List<Vector3Int>();
 
     }
 
     private float _checkTile(Vector2 direction, Vector3Int currentTile) {
 
+
+        return 0.0f;
+    }
+
+    private bool _compareFloat(float compare1, float compare2) {
+        const float TOLERLANCE = 1e-5f;
+        // How close can a float be? Before its equal? 
+        float diff = Mathf.Abs(compare1 - compare2);
+        return diff <= TOLERLANCE;
     }
 }
