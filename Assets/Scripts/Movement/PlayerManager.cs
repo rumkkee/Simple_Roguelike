@@ -5,17 +5,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
-public class PlayerController : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
     [Header("Movement Settings")]
     [Tooltip("How fast a player moves")]
     public float moveSpeed = 5f;
     private TimeManager _timeManInstance;
-    private PlayerMovement _controls;
+    private PlayerControls _controls;
     private InputAction _move;
     private InputAction _action;
     private bool _isMoving;
-    private bool _isReverting;
     private Vector3 _targetPos;
     private Vector3Int _currentGridPos;
     // Tilemap stuff.. 
@@ -31,22 +30,24 @@ public class PlayerController : MonoBehaviour
     private void OnDisable() => disableControls();
     private void Awake()
     {
-        _controls = new PlayerMovement();
+        _controls = new PlayerControls();
         _move = _controls.Main.Movement;
         _action = _controls.Main.Action;
     }
     private void Start()
     {
         _timeManInstance = TimeManager.instance;
-        _controls.Main.Backwards.performed += reverseActions;
-        _controls.Main.Action.performed += action;
+        _controls.Main.Backwards.performed += ctx => reverseActions();
+        _controls.Main.Action.performed += ctx => action();
     }
+    // enables controls
     public void enableControls()
     {
         _move.Enable();
         _action.Enable();
         _controls.Enable();
     }
+    // disables controls
     public void disableControls()
     {
         _move.Disable();
@@ -59,11 +60,6 @@ public class PlayerController : MonoBehaviour
         if (_currentGridPos != _groundTileMap.WorldToCell(transform.position))
         {
             Debug.Log($"We moved cells: {_currentGridPos}");
-            // If its not our move its ignore.. 
-            if (_isReverting)
-            {
-                return;
-            }
             Action movement = new Action(Action.TypeOfAction.Movement, _currentGridPos, MoveToPosition);
             _currentGridPos = _groundTileMap.WorldToCell(transform.position);
             _timeManInstance.IncrementIndex();
@@ -100,7 +96,7 @@ public class PlayerController : MonoBehaviour
         return new Vector2(0, MathF.Sign(inputDir.y));
     }
 
-    private void reverseActions(InputAction.CallbackContext context)
+    private void reverseActions()
     {
         disableControls();
         _timeManInstance.revertAction();
@@ -134,7 +130,7 @@ public class PlayerController : MonoBehaviour
             _currentGridPos = _groundTileMap.WorldToCell(transform.position);
         }
     }
-    public void action(InputAction.CallbackContext context) {
+    public void action() {
         Debug.Log("Action done!");
     }
 }
