@@ -41,12 +41,12 @@ public class PlayerMovement : MonoBehaviour
             _timeManInstance.IncrementIndex();
             _timeManInstance.addAction(movement);
         }
-        // If we not moved 
-        if (!isMoving)
+        // Not moving don't care lol.. 
+        if (isMoving!)
         {
             return;
         }
-        // We did move
+        // We are movin and grovin
         transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
         if (Vector3.Distance(transform.position, targetPos) < float.Epsilon)
         {
@@ -64,6 +64,12 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Move(Vector2 direction)
     {
+        // No point and taking direction while moving.. 
+        if (isMoving)
+        {
+            return;
+        }
+        // Lets check if we can move.. 
         if (canMove(direction))
         {
             targetPos = transform.position + (Vector3)direction;
@@ -72,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public bool canMove(Vector2 direction)
     {
+        // Lets check if we can move.. 
         Vector3Int gridPos = groundTileMap.WorldToCell(transform.position + (Vector3)direction);
         if (!groundTileMap.HasTile(gridPos) || collisionTileMap.HasTile(gridPos))
         {
@@ -81,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void MoveToPosition(Vector3 pos)
     {
+        // take a direction!
         Vector2 direction = new Vector2(pos.x - transform.position.x, pos.y - transform.position.y);
         if (canMove(direction))
         {
