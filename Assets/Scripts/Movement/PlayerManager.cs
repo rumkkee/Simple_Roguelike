@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerStats stats; 
     private InputAction _move;
     private InputAction _action;
+    public EnemyEntity testEnemy; 
     private void OnEnable() => enableControls();
     private void OnDisable() => disableControls();
     private void Awake()
@@ -37,6 +38,7 @@ public class PlayerManager : MonoBehaviour
         _move.Enable();
         _action.Enable();
         _controls.Enable();
+        Debug.Log("Controls Enabled");
     }
     // disables controls
     public void disableControls()
@@ -44,6 +46,7 @@ public class PlayerManager : MonoBehaviour
         _move.Disable();
         _action.Disable();
         _controls.Disable();
+        Debug.Log("Controls Disabled");
     }
 
     void Update()
@@ -52,7 +55,7 @@ public class PlayerManager : MonoBehaviour
 
         if (moveVec.sqrMagnitude > float.Epsilon)
         {
-            Vector2 snapDir = PlayerMovement.snapCardinal(moveVec);
+            Vector2 snapDir = PlayerMovement.SnapCardinal(moveVec);
             Vector3 direction = new Vector3(snapDir.x, snapDir.y, 0);
             Movement.Move(direction);
         }
@@ -61,6 +64,7 @@ public class PlayerManager : MonoBehaviour
     public void action()
     {
         Debug.Log("Action done!");
+        testEnemy.pathFind(transform);
     }
 
     private void reverseActions()

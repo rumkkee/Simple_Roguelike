@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
             _timeManInstance.addAction(movement);
         }
         // Not moving don't care lol.. 
-        if (isMoving!)
+        if (!isMoving)
         {
             return;
         }
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
-    public static Vector2 snapCardinal(Vector2 inputDir)
+    public static Vector2 SnapCardinal(Vector2 inputDir)
     {
         if (Mathf.Abs(inputDir.x) > Mathf.Abs(inputDir.y))
         {
@@ -67,16 +67,19 @@ public class PlayerMovement : MonoBehaviour
         // No point and taking direction while moving.. 
         if (isMoving)
         {
+            // Debug.Log("Player is already moving");
             return;
         }
         // Lets check if we can move.. 
-        if (canMove(direction))
+        if (CanMove(direction))
         {
+            
             targetPos = transform.position + (Vector3)direction;
             isMoving = true;
+            // Debug.Log($"Lets move?: isMoving? {isMoving}");
         }
     }
-    public bool canMove(Vector2 direction)
+    public bool CanMove(Vector2 direction)
     {
         // Lets check if we can move.. 
         Vector3Int gridPos = groundTileMap.WorldToCell(transform.position + (Vector3)direction);
@@ -90,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // take a direction!
         Vector2 direction = new Vector2(pos.x - transform.position.x, pos.y - transform.position.y);
-        if (canMove(direction))
+        if (CanMove(direction))
         {
             transform.position = pos;
             currentGridPos = groundTileMap.WorldToCell(transform.position);

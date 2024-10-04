@@ -173,6 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {fileID: 6568324391289941857}
+  stats: {fileID: 0}
+  testEnemy: {fileID: 0}
 --- !u!114 &6568324391289941857
 MonoBehaviour:
   m_ObjectHideFlags: 0
