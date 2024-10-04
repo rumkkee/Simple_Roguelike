@@ -13,7 +13,6 @@ public class PlayerManager : MonoBehaviour
     public PlayerStats stats; 
     private InputAction _move;
     private InputAction _action;
-    public EnemyEntity testEnemy; 
     private void OnEnable() => enableControls();
     private void OnDisable() => disableControls();
     private void Awake()
@@ -64,7 +63,7 @@ public class PlayerManager : MonoBehaviour
     public void action()
     {
         Debug.Log("Action done!");
-        testEnemy.pathFind(transform);
+        
     }
 
     private void reverseActions()

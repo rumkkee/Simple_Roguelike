@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 targetPos;
     [HideInInspector]
     public Vector3Int currentGridPos;
+    public EnemyEntity testEnemy; 
     private TimeManager _timeManInstance;
     private void Start()
     {
@@ -37,9 +38,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log($"We moved cells: {currentGridPos}");
             Action movement = new Action(Action.TypeOfAction.Movement, currentGridPos, MoveToPosition);
+            testEnemy.pathFind(transform);
             currentGridPos = groundTileMap.WorldToCell(transform.position);
             _timeManInstance.IncrementIndex();
             _timeManInstance.addAction(movement);
+            
         }
         // Not moving don't care lol.. 
         if (!isMoving)

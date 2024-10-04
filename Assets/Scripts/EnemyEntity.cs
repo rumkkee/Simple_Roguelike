@@ -8,6 +8,7 @@ public class EnemyEntity : MonoBehaviour
 
 
     public void pathFind(Transform target) {
+        Debug.Log($"Pathfinding to transform.Pos{target.position}");
         pathfinding.pathfindTo(target);
     }
 }
