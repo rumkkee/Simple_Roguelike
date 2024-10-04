@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9046316114888486922}
   - component: {fileID: 6572871991645436289}
   - component: {fileID: 1172304579182323835}
+  - component: {fileID: 6568324391289941857}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -171,6 +172,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538926c9e4db9b047824a0aad91ca912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Movement: {fileID: 6568324391289941857}
+--- !u!114 &6568324391289941857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6319103495921026832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 257b5e31b2c901d4b961b74d3aa38936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   moveSpeed: 5
-  _groundTileMap: {fileID: 0}
-  _collisionTileMap: {fileID: 0}
+  groundTileMap: {fileID: 0}
+  collisionTileMap: {fileID: 0}
+  isMoving: 0
+  targetPos: {x: 0, y: 0, z: 0}
+  currentGridPos: {x: 0, y: 0, z: 0}

@@ -7,30 +7,21 @@ using UnityEngine.Tilemaps;
 
 public class PlayerManager : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    [Tooltip("How fast a player moves")]
-    public float moveSpeed = 5f;
     private TimeManager _timeManInstance;
     private PlayerControls _controls;
+    public PlayerMovement Movement;
+    public PlayerStats stats; 
     private InputAction _move;
     private InputAction _action;
-    private bool _isMoving;
-    private Vector3 _targetPos;
-    private Vector3Int _currentGridPos;
-    // Tilemap stuff.. 
-    [Header("Tilemap collisions")]
-    [SerializeField]
-    [Tooltip("The tile map that the ground is on")]
-    private Tilemap _groundTileMap;
-
-    [SerializeField]
-    [Tooltip("The tile map that the collisions are determined is on")]
-    private Tilemap _collisionTileMap;
     private void OnEnable() => enableControls();
     private void OnDisable() => disableControls();
     private void Awake()
     {
         _controls = new PlayerControls();
+        if (Movement == null)
+        {
+            Movement = GetComponent<PlayerMovement>();
+        }
         _move = _controls.Main.Movement;
         _action = _controls.Main.Action;
     }
@@ -57,43 +48,19 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        if (_currentGridPos != _groundTileMap.WorldToCell(transform.position))
-        {
-            Debug.Log($"We moved cells: {_currentGridPos}");
-            Action movement = new Action(Action.TypeOfAction.Movement, _currentGridPos, MoveToPosition);
-            _currentGridPos = _groundTileMap.WorldToCell(transform.position);
-            _timeManInstance.IncrementIndex();
-            _timeManInstance.addAction(movement);
-
-        }
-        if (_isMoving)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, _targetPos, moveSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, _targetPos) < float.Epsilon)
-            {
-                _isMoving = false;
-
-            }
-            return;
-        }
-
         Vector2 moveVec = _move.ReadValue<Vector2>();
 
         if (moveVec.sqrMagnitude > float.Epsilon)
         {
-            Vector2 snapDir = _snapCardinal(moveVec);
+            Vector2 snapDir = PlayerMovement.snapCardinal(moveVec);
             Vector3 direction = new Vector3(snapDir.x, snapDir.y, 0);
-            Move(direction);
+            Movement.Move(direction);
         }
     }
 
-    private Vector2 _snapCardinal(Vector2 inputDir)
+    public void action()
     {
-        if (Mathf.Abs(inputDir.x) > Mathf.Abs(inputDir.y))
-        {
-            return new Vector2(Mathf.Sign(inputDir.x), 0);
-        }
-        return new Vector2(0, MathF.Sign(inputDir.y));
+        Debug.Log("Action done!");
     }
 
     private void reverseActions()
@@ -101,36 +68,5 @@ public class PlayerManager : MonoBehaviour
         disableControls();
         _timeManInstance.revertAction();
         enableControls();
-    }
-
-    public void Move(Vector2 direction)
-    {
-
-        if (canMove(direction))
-        {
-            _targetPos = transform.position + (Vector3)direction;
-            _isMoving = true;
-        }
-    }
-    public bool canMove(Vector2 direction)
-    {
-        Vector3Int gridPos = _groundTileMap.WorldToCell(transform.position + (Vector3)direction);
-        if (!_groundTileMap.HasTile(gridPos) || _collisionTileMap.HasTile(gridPos))
-        {
-            return false;
-        }
-        return true;
-    }
-    public void MoveToPosition(Vector3 pos)
-    {
-        Vector2 direction = new Vector2(pos.x - transform.position.x, pos.y - transform.position.y);
-        if (canMove(direction))
-        {
-            transform.position = pos;
-            _currentGridPos = _groundTileMap.WorldToCell(transform.position);
-        }
-    }
-    public void action() {
-        Debug.Log("Action done!");
     }
 }
