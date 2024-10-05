@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,20 @@ public class EnemyPathfinding : MonoBehaviour
     public Tilemap groundTiles;
     public Tilemap wallTiles;
     public float EnemyMoveSpeed;
-    public float spriteOffset = 0.5f;
+    [HideInInspector]
+    public enum Priorites
+    {
+        Horizontal,
+        Vertical,
+    }
+    [HideInInspector]
+    public bool isMoving;
+    public Priorites priority = Priorites.Horizontal;
     private Vector3Int _currentTile;
     private TimeManager _timeManger;
     // Which directions? 
-    private readonly List<Vector2> _CARDINAL_DIR = new List<Vector2> {Vector2.left, Vector2.right, Vector2.up, Vector2.down };
-
+    private readonly List<Vector2> _CARDINAL_DIR_HR = new List<Vector2> { Vector2.left, Vector2.right, Vector2.up, Vector2.down };
+    private readonly List<Vector2> _CARDINAL_DIR_VR = new List<Vector2> { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
     public void Awake()
     {
         _timeManger = TimeManager.instance;
@@ -49,6 +58,8 @@ public class EnemyPathfinding : MonoBehaviour
         Vector3Int start = _currentTile;
         Vector3Int goal = groundTiles.WorldToCell(target.position);
 
+        List<Vector2> dirList = (priority == Priorites.Horizontal) ? _CARDINAL_DIR_HR : _CARDINAL_DIR_VR;
+
         // Open list of nodes to evaluate
         List<Vector3Int> openSet = new List<Vector3Int> { start };
         HashSet<Vector3Int> closedSet = new HashSet<Vector3Int>();
@@ -73,14 +84,14 @@ public class EnemyPathfinding : MonoBehaviour
             Debug.Log(openSet.Count);
 
             // Explore neighbors
-            foreach (Vector2 direction in _CARDINAL_DIR)
+            foreach (Vector2 direction in dirList)
             {
                 Vector3Int neighbor = current + new Vector3Int((int)direction.x, (int)direction.y, 0);
                 if (closedSet.Contains(neighbor) || !canMove(neighbor))
                 {
                     continue;
                 }
-                
+
 
                 // Calculate gScore (cost to move to neighbor)
                 float tentativeGScore = gScore[current] + 1; // All moves have equal cost FOR NOW
