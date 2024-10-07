@@ -14,5 +14,9 @@ public class FloorResources : MonoBehaviour
     public List<Room> puzzleRooms;
     public Room shopRoom;
 
-
+    public Vector2 roomScale;
+    public Vector2 GetRoomScale()
+    {
+        return roomScale;
+    }
 }

@@ -71,7 +71,7 @@ public class FloorGenerator : MonoBehaviour
             roomNodes.Add(roomNode);
 
             Debug.Log(newNodePos.x + ", " + newNodePos.y);
-            newRoom = Instantiate(floorResources.startingRoomPrefab, newNodePos * 11, Quaternion.identity, floorsContainer.transform);
+            newRoom = Instantiate(floorResources.startingRoomPrefab, newNodePos * floorResources.GetRoomScale(), Quaternion.identity, floorsContainer.transform);
 
             roomsGeneratedCount++;
         }
