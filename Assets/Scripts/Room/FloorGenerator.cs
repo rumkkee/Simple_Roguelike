@@ -15,12 +15,17 @@ public class FloorGenerator : MonoBehaviour
 
     
     [SerializeField] private int roomCount; // Number of rooms to generate, apart from starting room.
+    public int seed;
 
     // Generates the placements for rooms
 
     // Test Start Script
     private void Start()
     {
+        // Set Seed
+        int randomSeed = Random.Range(0, int.MaxValue);
+        Debug.Log(randomSeed);
+        Random.InitState(randomSeed);
         GenerateNodes();
     }
     public void GenerateNodes()
@@ -31,7 +36,7 @@ public class FloorGenerator : MonoBehaviour
         startingNode.gridPos = Vector2.zero;
 
         roomNodes.Add(startingNode);
-        Room newRoom = Instantiate(floorResources.startingRoomPrefab, Vector2.zero, Quaternion.identity, floorsContainer.transform);
+        //Room newRoom = Instantiate(floorResources.startingRoomPrefab, Vector2.zero, Quaternion.identity, floorsContainer.transform);
 
         int roomsGeneratedCount = 0;
 
@@ -71,7 +76,7 @@ public class FloorGenerator : MonoBehaviour
             roomNodes.Add(roomNode);
 
             Debug.Log(newNodePos.x + ", " + newNodePos.y);
-            newRoom = Instantiate(floorResources.startingRoomPrefab, newNodePos * floorResources.GetRoomScale(), Quaternion.identity, floorsContainer.transform);
+            Room newRoom = Instantiate(floorResources.startingRoomPrefab, newNodePos * floorResources.GetRoomScale(), Quaternion.identity, floorsContainer.transform);
 
             roomsGeneratedCount++;
         }
