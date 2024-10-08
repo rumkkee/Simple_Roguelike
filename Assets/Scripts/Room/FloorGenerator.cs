@@ -29,6 +29,7 @@ public class FloorGenerator : MonoBehaviour
         Random.InitState(randomSeed);
         GenerateNodes();
         SetEndRoomNodes();
+        SetSpecialRoom(RoomType.bossRoom, true);
     }
 
     public void GenerateNodes()
@@ -38,6 +39,7 @@ public class FloorGenerator : MonoBehaviour
         RoomNode startingNode = new RoomNode();
         startingNode.gridPos = Vector2.zero;
         startingNode.roomType = RoomType.firstRoom;
+        startingNode.distanceFromSpawn = 0;
 
         roomNodes.Add(startingNode);
         //Room newRoom = Instantiate(floorResources.startingRoomPrefab, Vector2.zero, Quaternion.identity, floorsContainer.transform);
@@ -78,6 +80,7 @@ public class FloorGenerator : MonoBehaviour
             RoomNode roomNode = new RoomNode();
             roomNode.gridPos = newNodePos;
             roomNode.roomType = RoomType.dungeonRoom;
+            roomNode.distanceFromSpawn += nodeSpawnedFrom.distanceFromSpawn + 1;
             roomNode.AddNeighborNode(-gridPosShift, nodeSpawnedFrom);
             nodeSpawnedFrom.AddNeighborNode(gridPosShift, roomNode);
 
@@ -112,6 +115,31 @@ public class FloorGenerator : MonoBehaviour
                 Debug.Log("Found an end room");
                 endRoomNodes.Add(roomNode);
             }
+        }
+    }
+
+    private void SetSpecialRoom(RoomType roomType, bool setAtFurthestValidEndRoom)
+    {
+        if (setAtFurthestValidEndRoom)
+        {
+            int furthestFoundDistance = 0;
+            RoomNode currentChosenEndRoomNode = endRoomNodes[0];
+
+            foreach (RoomNode endRoomNode in endRoomNodes)
+            {
+                Debug.Log(endRoomNode.distanceFromSpawn);
+                if(endRoomNode.roomType == RoomType.dungeonRoom)
+                {
+                    if(endRoomNode.distanceFromSpawn > furthestFoundDistance)
+                    {
+                        furthestFoundDistance = endRoomNode.distanceFromSpawn;
+                        currentChosenEndRoomNode = endRoomNode;
+                    }
+                }
+            }
+
+            currentChosenEndRoomNode.roomType = roomType;
+            //Debug.Log("Boss/NextFloor Room Placed at: " + currentChosenEndRoomNode.distanceFromSpawn + "||" + currentChosenEndRoomNode.ToString());
         }
     }
 
