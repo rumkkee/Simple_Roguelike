@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerStats : ScriptableObject
 {
     // Exists for stats reasons
-    public long totalCurrency;
+    public static long totalCurrency;
     // Again stats reasons
     public long totalStepsTaken;
     // How many steps can the player take before getting thrown back to the start?
