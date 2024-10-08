@@ -39,7 +39,12 @@ public class TimeManager : MonoBehaviour
             // Gets the previous and pushes it to the future stack.. 
             _futureActions.Push(_previousActions.Peek());
             // Revert goes here
-            _revert(_previousActions.Peek());
+            bool check = _revert(_previousActions.Peek());
+            if(!check) {
+                // Can not be reverted.. 
+                break;
+            }
+
             if (_previousActions.TryPop(out var input))
             {
                 Debug.Log($"Action: {input.actionType} : {input.actionType} at {input.actionIndex}");
@@ -51,18 +56,20 @@ public class TimeManager : MonoBehaviour
         }
     }
     // Add redo for later... 
-    private void _revert(Action act)
+    private bool _revert(Action act)
     {
         if (act.actionType == Action.TypeOfAction.Movement)
         {
             Debug.Log($"Going back to position: {act.position}");
-            act.mCallback(act.position);
+            return act.mCallback(act.position);
         }
         else if (act.actionType == Action.TypeOfAction.Action) 
         {
             Debug.Log($"Going reverting Action: {act.actionDesc}");
-            act.aCallback(act.actionDesc);
+            return act.aCallback(act.actionDesc);
         }
+        // This action cannot be reverted.. 
+        return false;
     }
 
     public void IncrementIndex() => _currentActionIndex++;

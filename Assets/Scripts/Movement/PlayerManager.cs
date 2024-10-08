@@ -52,9 +52,10 @@ public class PlayerManager : MonoBehaviour
     {
         Vector2 moveVec = _move.ReadValue<Vector2>();
 
-        if (moveVec.sqrMagnitude > float.Epsilon && !Movement.isMoving)
+        if (moveVec.sqrMagnitude > float.Epsilon)
         {
             Vector2 snapDir = PlayerMovement.SnapCardinal(moveVec);
+            // Debug.Log($"snapDir ${snapDir}");
             Vector3 direction = new Vector3(snapDir.x, snapDir.y, 0);
             Movement.Move(direction);
         }

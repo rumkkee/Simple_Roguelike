@@ -22,6 +22,8 @@ public class EnemyPathfinding : MonoBehaviour
     public Priorites priority = Priorites.Horizontal;
     private Vector3Int _currentTile;
     private TimeManager _timeManger;
+    private Collider2D _objectCollider;
+    public LayerMask enemyLayerMask;
     // Which directions? 
 
     // Just horizontal
@@ -33,6 +35,10 @@ public class EnemyPathfinding : MonoBehaviour
     public void Awake()
     {
         _timeManger = TimeManager.instance;
+    }
+
+    public void Start() {
+        _objectCollider = GetComponent<Collider2D>();
     }
 
     public IEnumerator pathfindTo(Transform target)
@@ -99,7 +105,6 @@ public class EnemyPathfinding : MonoBehaviour
 
             openSet.Remove(current);
             closedSet.Add(current);
-            Debug.Log(openSet.Count);
 
             // Explore neighbors
             foreach (Vector2 direction in dirList)
@@ -109,12 +114,9 @@ public class EnemyPathfinding : MonoBehaviour
                 {
                     continue;
                 }
-
-
-                // Calculate gScore (cost to move to neighbor)
+            
                 float tentativeGScore = gScore[current] + 1; // All moves have equal cost FOR NOW
 
-                // If this path to neighbor is shorter, or we haven't checked this tile yet
                 if (!gScore.ContainsKey(neighbor) || tentativeGScore < gScore[neighbor])
                 {
                     cameFrom[neighbor] = current;
@@ -165,6 +167,18 @@ public class EnemyPathfinding : MonoBehaviour
 
     public IEnumerator MoveToPosition(Vector3 targetPosition)
     {
+        float rayDistance = 1.0f;
+        Vector2 direction = new Vector2(targetPosition.x - transform.position.x, targetPosition.y - transform.position.y);
+        Vector2 rayOrigin = _objectCollider.bounds.center;
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, direction, rayDistance, enemyLayerMask);
+
+        // Check if there's an enemy in the direction we're trying to move
+        if (hit.collider != null && hit.collider.CompareTag("Enemy"))
+        {
+            Debug.Log("Enemy detected in direction: " + direction);
+            // We would attack here actually.. 
+            // return false;
+        }
         while (Vector3.Distance(transform.position, targetPosition) > float.Epsilon)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, EnemyMoveSpeed * Time.deltaTime);

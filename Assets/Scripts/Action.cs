@@ -14,9 +14,9 @@ public class Action
         Action,
         Movement,
     };
-    public delegate void moveCallback(Vector3 pos);
+    public delegate bool moveCallback(Vector3 pos);
     public moveCallback mCallback;
-    public delegate void actionCallback(string desc);
+    public delegate bool actionCallback(string desc);
     public actionCallback aCallback;
     // What the hell are we doing.. 
     public TypeOfAction actionType;

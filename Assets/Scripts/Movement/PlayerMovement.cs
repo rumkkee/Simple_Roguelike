@@ -32,20 +32,10 @@ public class PlayerMovement : MonoBehaviour
         // Get the time manger 
         _timeManInstance = TimeManager.instance;
         _objectCollider = GetComponent<Collider2D>();
+        currentGridPos = groundTileMap.WorldToCell(transform.position);
     }
     private void Update()
     {
-        // Check if we moved
-        if (currentGridPos != groundTileMap.WorldToCell(transform.position))
-        {
-            Debug.Log($"We moved cells: {currentGridPos}");
-            Action movement = new Action(Action.TypeOfAction.Movement, currentGridPos, MoveToPosition);
-            StartCoroutine(EnemyManager.instance.doAllEnemyActions(transform));
-            currentGridPos = groundTileMap.WorldToCell(transform.position);
-            _timeManInstance.IncrementIndex();
-            _timeManInstance.addAction(movement);
-
-        }
         // Not moving don't care lol.. 
         if (!isMoving)
         {
@@ -56,6 +46,12 @@ public class PlayerMovement : MonoBehaviour
         if (Vector3.Distance(transform.position, targetPos) < float.Epsilon)
         {
             isMoving = false;
+             Debug.Log($"We moved cells: {currentGridPos}");
+            Action movement = new Action(Action.TypeOfAction.Movement, currentGridPos, MoveToPosition);
+            StartCoroutine(EnemyManager.instance.doAllEnemyActions(transform));
+            currentGridPos = groundTileMap.WorldToCell(transform.position);
+            _timeManInstance.IncrementIndex();
+            _timeManInstance.addAction(movement);
 
         }
     }
@@ -88,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (EnemyManager.instance.enemyTurn)
         {
-            Debug.Log($"isEnemy turn: {EnemyManager.instance.enemyTurn}");
             return false;
         }
 
@@ -99,7 +94,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         float rayDistance = 1.0f;
-        lastDirection = direction;
         Vector2 rayOrigin = _objectCollider.bounds.center;
         // Raycast in the given direction (the direction the player wants to move)
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, direction, rayDistance, enemyLayerMask);
@@ -114,25 +108,18 @@ public class PlayerMovement : MonoBehaviour
 
         return true;
     }
-
-    private Vector2 lastDirection;    // Store the last direction for debugging
-    void OnDrawGizmosSelected()
+    public bool MoveToPosition(Vector3 pos)
     {
-        // Set Gizmo color for the ray
-        Gizmos.color = Color.red;
 
-        // Draw the ray in the direction of movement
-        Vector2 rayOrigin = _objectCollider.bounds.center;
-        Gizmos.DrawLine(rayOrigin, (Vector2)rayOrigin + lastDirection * 1.0f);
-    }
-    public void MoveToPosition(Vector3 pos)
-    {
         // take a direction!
         Vector2 direction = new Vector2(pos.x - transform.position.x, pos.y - transform.position.y);
         if (CanMove(direction))
         {
             transform.position = pos;
             currentGridPos = groundTileMap.WorldToCell(transform.position);
+            return true;
+        } else {
+            return false;
         }
     }
 }
