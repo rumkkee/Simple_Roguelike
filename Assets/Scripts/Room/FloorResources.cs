@@ -9,6 +9,7 @@ public class FloorResources : MonoBehaviour
     // TODO: Add list for puzzle rooms
     // TODO: Add Shop Room, treasure room, boss room
     public Room startingRoomPrefab;
+    public Room exitRoom; // This will be the boss room or exit room depending on what floor this is
     public List<Room> enemyRooms;
     public List<Room> idleRooms;
     public List<Room> puzzleRooms;
@@ -18,5 +19,11 @@ public class FloorResources : MonoBehaviour
     public Vector2 GetRoomScale()
     {
         return roomScale;
+    }
+
+    public Room GetExitRoom()
+    {
+        // TODO: If this is the last floor of the game, return the boss room. Else, return 
+        return exitRoom;
     }
 }
