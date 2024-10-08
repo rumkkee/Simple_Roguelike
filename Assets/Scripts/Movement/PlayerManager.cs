@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviour
         _move.Enable();
         _action.Enable();
         _controls.Enable();
-        Debug.Log("Controls Enabled");
+        // Debug.Log("Controls Enabled");
     }
     // disables controls
     public void disableControls()
@@ -45,14 +45,14 @@ public class PlayerManager : MonoBehaviour
         _move.Disable();
         _action.Disable();
         _controls.Disable();
-        Debug.Log("Controls Disabled");
+        // Debug.Log("Controls Disabled");
     }
 
     void Update()
     {
         Vector2 moveVec = _move.ReadValue<Vector2>();
 
-        if (moveVec.sqrMagnitude > float.Epsilon)
+        if (moveVec.sqrMagnitude > float.Epsilon && !Movement.isMoving)
         {
             Vector2 snapDir = PlayerMovement.SnapCardinal(moveVec);
             Vector3 direction = new Vector3(snapDir.x, snapDir.y, 0);
@@ -62,7 +62,7 @@ public class PlayerManager : MonoBehaviour
 
     public void action()
     {
-        Debug.Log("Action done!");
+        // Debug.Log("Action done!");
         
     }
 

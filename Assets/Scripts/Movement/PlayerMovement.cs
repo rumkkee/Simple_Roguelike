@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     [Tooltip("The tile map that the collisions are determined is on")]
     public Tilemap collisionTileMap;
+    public LayerMask enemyLayerMask;
     // is the player moving?
     [HideInInspector]
     public bool isMoving;
@@ -24,12 +25,13 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 targetPos;
     [HideInInspector]
     public Vector3Int currentGridPos;
-    public EnemyEntity testEnemy; 
     private TimeManager _timeManInstance;
+    private Collider2D _objectCollider;
     private void Start()
     {
         // Get the time manger 
         _timeManInstance = TimeManager.instance;
+        _objectCollider = GetComponent<Collider2D>();
     }
     private void Update()
     {
@@ -38,11 +40,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log($"We moved cells: {currentGridPos}");
             Action movement = new Action(Action.TypeOfAction.Movement, currentGridPos, MoveToPosition);
-            testEnemy.pathFind(transform);
+            StartCoroutine(EnemyManager.instance.doAllEnemyActions(transform));
             currentGridPos = groundTileMap.WorldToCell(transform.position);
             _timeManInstance.IncrementIndex();
             _timeManInstance.addAction(movement);
-            
+
         }
         // Not moving don't care lol.. 
         if (!isMoving)
@@ -76,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         // Lets check if we can move.. 
         if (CanMove(direction))
         {
-            
+
             targetPos = transform.position + (Vector3)direction;
             isMoving = true;
             // Debug.Log($"Lets move?: isMoving? {isMoving}");
@@ -84,13 +86,44 @@ public class PlayerMovement : MonoBehaviour
     }
     public bool CanMove(Vector2 direction)
     {
-        // Lets check if we can move.. 
+        if (EnemyManager.instance.enemyTurn)
+        {
+            Debug.Log($"isEnemy turn: {EnemyManager.instance.enemyTurn}");
+            return false;
+        }
+
         Vector3Int gridPos = groundTileMap.WorldToCell(transform.position + (Vector3)direction);
         if (!groundTileMap.HasTile(gridPos) || collisionTileMap.HasTile(gridPos))
         {
             return false;
         }
+
+        float rayDistance = 1.0f;
+        lastDirection = direction;
+        Vector2 rayOrigin = _objectCollider.bounds.center;
+        // Raycast in the given direction (the direction the player wants to move)
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, direction, rayDistance, enemyLayerMask);
+
+        // Check if there's an enemy in the direction we're trying to move
+        if (hit.collider != null && hit.collider.CompareTag("Enemy"))
+        {
+            Debug.Log("Enemy detected in direction: " + direction);
+            // We would attack here actually.. 
+            return false;
+        }
+
         return true;
+    }
+
+    private Vector2 lastDirection;    // Store the last direction for debugging
+    void OnDrawGizmosSelected()
+    {
+        // Set Gizmo color for the ray
+        Gizmos.color = Color.red;
+
+        // Draw the ray in the direction of movement
+        Vector2 rayOrigin = _objectCollider.bounds.center;
+        Gizmos.DrawLine(rayOrigin, (Vector2)rayOrigin + lastDirection * 1.0f);
     }
     public void MoveToPosition(Vector3 pos)
     {

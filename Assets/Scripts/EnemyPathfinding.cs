@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -14,6 +15,7 @@ public class EnemyPathfinding : MonoBehaviour
     {
         Horizontal,
         Vertical,
+        Random,
     }
     [HideInInspector]
     public bool isMoving;
@@ -21,14 +23,19 @@ public class EnemyPathfinding : MonoBehaviour
     private Vector3Int _currentTile;
     private TimeManager _timeManger;
     // Which directions? 
+
+    // Just horizontal
     private readonly List<Vector2> _CARDINAL_DIR_HR = new List<Vector2> { Vector2.left, Vector2.right, Vector2.up, Vector2.down };
+
+    // Just vertical 
     private readonly List<Vector2> _CARDINAL_DIR_VR = new List<Vector2> { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
+
     public void Awake()
     {
         _timeManger = TimeManager.instance;
     }
 
-    public void pathfindTo(Transform target)
+    public IEnumerator pathfindTo(Transform target)
     {
         // Gets Current tile. 
         Vector3 pos = transform.position;
@@ -36,18 +43,26 @@ public class EnemyPathfinding : MonoBehaviour
 
         // we only need to run this when something major changes.. 
         List<Vector3Int> ptp = _getPath(target);
-        foreach (Vector3Int item in ptp)
-        {
-            Debug.Log(item);
-        }
-        Debug.Log($"Size of path {ptp.Count}");
+
         if (ptp.Count < 1)
         {
             Debug.LogWarning("No valid path found!");
-            return;
+            yield break;
         }
-        Debug.Log($"Moving to {ptp[1]} from {_currentTile}");
-        StartCoroutine(MoveToPosition(groundTiles.CellToWorld(ptp[1])));
+        // Debug.Log($"Moving to {ptp[1]} from {_currentTile}");
+        Vector3Int goal = groundTiles.WorldToCell(target.position);
+        if (ptp[1] == goal)
+        {
+            // Debug.Log("Melee range of the player.. Imagine it attacking");
+            yield break;
+        }
+        yield return StartCoroutine(MoveToPosition(groundTiles.CellToWorld(ptp[1])));
+    }
+
+    // Really just a helper for the AI.
+    public List<Vector3Int> getPath(Transform target)
+    {
+        return _getPath(target);
     }
 
     private List<Vector3Int> _getPath(Transform target)
@@ -59,7 +74,10 @@ public class EnemyPathfinding : MonoBehaviour
         Vector3Int goal = groundTiles.WorldToCell(target.position);
 
         List<Vector2> dirList = (priority == Priorites.Horizontal) ? _CARDINAL_DIR_HR : _CARDINAL_DIR_VR;
-
+        if (priority == Priorites.Random)
+        {
+            dirList.Shuffle();
+        }
         // Open list of nodes to evaluate
         List<Vector3Int> openSet = new List<Vector3Int> { start };
         HashSet<Vector3Int> closedSet = new HashSet<Vector3Int>();
@@ -139,7 +157,7 @@ public class EnemyPathfinding : MonoBehaviour
         while (cameFrom.ContainsKey(current))
         {
             current = cameFrom[current];
-            totalPath.Insert(0, current); // Build the path backward
+            totalPath.Insert(0, current);
         }
 
         return totalPath;
@@ -147,8 +165,6 @@ public class EnemyPathfinding : MonoBehaviour
 
     public IEnumerator MoveToPosition(Vector3 targetPosition)
     {
-        // targetPosition.x += spriteOffset;
-        // targetPosition.y += spriteOffset; 
         while (Vector3.Distance(transform.position, targetPosition) > float.Epsilon)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, EnemyMoveSpeed * Time.deltaTime);
