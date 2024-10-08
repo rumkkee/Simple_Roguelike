@@ -5,16 +5,7 @@ using UnityEngine;
 public class RoomNode
 {
     public Vector2 gridPos;
+    public RoomType roomType;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }
