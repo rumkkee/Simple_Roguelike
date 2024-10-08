@@ -2698,6 +2698,10 @@ PrefabInstance:
       propertyPath: groundTiles
       value: 
       objectReference: {fileID: 795887687}
+    - target: {fileID: 5182862434107161078, guid: a1cb4f8f2c1dc17458dc56e995a5f5e0, type: 3}
+      propertyPath: enemyLayerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 5510841137554583270, guid: a1cb4f8f2c1dc17458dc56e995a5f5e0, type: 3}
       propertyPath: m_Name
       value: Enemy2 (1)
@@ -2758,17 +2762,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 582621713}
   m_SourcePrefab: {fileID: 100100000, guid: a1cb4f8f2c1dc17458dc56e995a5f5e0, type: 3}
---- !u!114 &1443155896 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4650798241987311501, guid: a1cb4f8f2c1dc17458dc56e995a5f5e0, type: 3}
-  m_PrefabInstance: {fileID: 4556964942076989702}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813993154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3150c3ac81be669459eb5fab5ee14ce1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1444659590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2805,6 +2798,10 @@ PrefabInstance:
       propertyPath: groundTiles
       value: 
       objectReference: {fileID: 795887687}
+    - target: {fileID: 5182862434107161078, guid: a1cb4f8f2c1dc17458dc56e995a5f5e0, type: 3}
+      propertyPath: enemyLayerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 5510841137554583270, guid: a1cb4f8f2c1dc17458dc56e995a5f5e0, type: 3}
       propertyPath: m_Name
       value: Enemy2
@@ -3063,6 +3060,7 @@ GameObject:
   - component: {fileID: 2022890376}
   - component: {fileID: 2022890375}
   - component: {fileID: 2022890377}
+  - component: {fileID: 2022890378}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -3110,6 +3108,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTurn: 0
+--- !u!114 &2022890378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022890374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121ee9acca0736344b25b86eb4afa370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 0}
+  _feature: {fileID: 0}
 --- !u!1001 &138078699983069252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3187,6 +3199,10 @@ PrefabInstance:
       propertyPath: groundTiles
       value: 
       objectReference: {fileID: 795887687}
+    - target: {fileID: 5182862434107161078, guid: a1cb4f8f2c1dc17458dc56e995a5f5e0, type: 3}
+      propertyPath: enemyLayerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 5510841137554583270, guid: a1cb4f8f2c1dc17458dc56e995a5f5e0, type: 3}
       propertyPath: m_Name
       value: Enemy1
@@ -3428,7 +3444,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 438604518655028876, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 438604518655028876, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3466,22 +3482,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1172304579182323835, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: testEnemy
-      value: 
-      objectReference: {fileID: 1443155896}
-    - target: {fileID: 4251588294155573424, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6319103495921026832, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
-    - target: {fileID: 6568324391289941857, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: testEnemy
-      value: 
-      objectReference: {fileID: 1443155896}
     - target: {fileID: 6568324391289941857, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
       propertyPath: groundTileMap
       value: 
@@ -3490,26 +3494,6 @@ PrefabInstance:
       propertyPath: collisionTileMap
       value: 
       objectReference: {fileID: 47100714}
-    - target: {fileID: 6568324391289941857, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: enemyLayerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 6572871991645436289, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6572871991645436289, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6572871991645436289, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6572871991645436289, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
