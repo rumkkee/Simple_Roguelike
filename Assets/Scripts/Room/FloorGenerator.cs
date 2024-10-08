@@ -9,6 +9,7 @@ public class FloorGenerator : MonoBehaviour
     // Have a reference to floor resources, room nodes
 
     private List<RoomNode> roomNodes;
+    private List<RoomNode> endRoomNodes; // roomNodes that have only one entrance, used for special rooms.
 
     [SerializeField] private FloorResources floorResources;
     [SerializeField]private GameObject floorsContainer;
@@ -27,13 +28,16 @@ public class FloorGenerator : MonoBehaviour
         Debug.Log(randomSeed);
         Random.InitState(randomSeed);
         GenerateNodes();
+        SetEndRoomNodes();
     }
+
     public void GenerateNodes()
     {
         roomNodes = new List<RoomNode>();
 
         RoomNode startingNode = new RoomNode();
         startingNode.gridPos = Vector2.zero;
+        startingNode.roomType = RoomType.firstRoom;
 
         roomNodes.Add(startingNode);
         //Room newRoom = Instantiate(floorResources.startingRoomPrefab, Vector2.zero, Quaternion.identity, floorsContainer.transform);
@@ -73,6 +77,10 @@ public class FloorGenerator : MonoBehaviour
 
             RoomNode roomNode = new RoomNode();
             roomNode.gridPos = newNodePos;
+            roomNode.roomType = RoomType.dungeonRoom;
+            roomNode.AddNeighborNode(-gridPosShift, nodeSpawnedFrom);
+            nodeSpawnedFrom.AddNeighborNode(gridPosShift, roomNode);
+
             roomNodes.Add(roomNode);
 
             Debug.Log(newNodePos.x + ", " + newNodePos.y);
@@ -92,6 +100,19 @@ public class FloorGenerator : MonoBehaviour
             } 
         }
         return false;
+    }
+
+    private void SetEndRoomNodes()
+    {
+        endRoomNodes = new List<RoomNode>();
+        foreach (RoomNode roomNode in roomNodes)
+        {
+            if (roomNode.neighborCount == 1)
+            {
+                Debug.Log("Found an end room");
+                endRoomNodes.Add(roomNode);
+            }
+        }
     }
 
     // // Places rooms at each room node
