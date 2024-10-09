@@ -48,14 +48,4 @@ public class PlayerController : MonoBehaviour
         }
         return true;
     }
-
-    public bool checkForDialogue()
-    {
-        if (DialogueManager.GetInstance().dialogueActive)
-        {
-            return false;
-        }
-        return true;
-    }
-
 }
