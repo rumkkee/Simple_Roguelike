@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 public class FloorResources : MonoBehaviour
 {
-    // TODO: Add starting room prefab,
-
-    // TODO: Add list for enemy rooms
-    // TODO: Add list for puzzle rooms
-    // TODO: Add Shop Room, treasure room, boss room
     public Room startingRoomPrefab;
     public Room exitRoom; // This will be the boss room or exit room depending on what floor this is
-    public List<Room> enemyRooms;
+    public List<Room> dungeonRooms;
     public List<Room> idleRooms;
     public List<Room> puzzleRooms;
     public Room shopRoom;
+    public Room treasureRoom;
 
     public Vector2 roomScale;
     public Vector2 GetRoomScale()
@@ -25,5 +21,20 @@ public class FloorResources : MonoBehaviour
     {
         // TODO: If this is the last floor of the game, return the boss room. Else, return 
         return exitRoom;
+    }
+
+    public Room GetRoom(RoomNode roomNode)
+    {
+        if(roomNode.roomType == RoomType.bossRoom || roomNode.roomType == RoomType.nextFloorRoom)
+        {
+            return exitRoom;
+        }
+        else
+        {
+            int size = dungeonRooms.Count;
+            int randomIndex = Random.Range(0, size - 1);
+            Room randomDungeonRoom = dungeonRooms[randomIndex];
+            return randomDungeonRoom;
+        }
     }
 }

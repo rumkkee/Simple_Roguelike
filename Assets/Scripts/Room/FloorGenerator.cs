@@ -12,24 +12,24 @@ public class FloorGenerator : MonoBehaviour
     private List<RoomNode> endRoomNodes; // roomNodes that have only one entrance, used for special rooms.
 
     [SerializeField] private FloorResources floorResources;
-    [SerializeField]private GameObject floorsContainer;
-
+    [SerializeField] private GameObject floorsContainer;
     
     [SerializeField] private int roomCount; // Number of rooms to generate, apart from starting room.
     public int seed;
 
     // Generates the placements for rooms
 
-    // Test Start Script
+    // On Start, the floor generation behaviors will be called.
     private void Start()
     {
-        // Set Seed
+        // Setting random seed
         int randomSeed = Random.Range(0, int.MaxValue);
-        Debug.Log(randomSeed);
         Random.InitState(randomSeed);
+
         GenerateNodes();
         SetEndRoomNodes();
         SetSpecialRoom(RoomType.bossRoom, true);
+        GenerateRooms();
     }
 
     public void GenerateNodes()
@@ -42,7 +42,6 @@ public class FloorGenerator : MonoBehaviour
         startingNode.distanceFromSpawn = 0;
 
         roomNodes.Add(startingNode);
-        //Room newRoom = Instantiate(floorResources.startingRoomPrefab, Vector2.zero, Quaternion.identity, floorsContainer.transform);
 
         int roomsGeneratedCount = 0;
 
@@ -86,8 +85,7 @@ public class FloorGenerator : MonoBehaviour
 
             roomNodes.Add(roomNode);
 
-            Debug.Log(newNodePos.x + ", " + newNodePos.y);
-            Room newRoom = Instantiate(floorResources.startingRoomPrefab, newNodePos * floorResources.GetRoomScale(), Quaternion.identity, floorsContainer.transform);
+            //Debug.Log(newNodePos.x + ", " + newNodePos.y);
 
             roomsGeneratedCount++;
         }
@@ -112,7 +110,7 @@ public class FloorGenerator : MonoBehaviour
         {
             if (roomNode.neighborCount == 1)
             {
-                Debug.Log("Found an end room");
+                //Debug.Log("Found an end room");
                 endRoomNodes.Add(roomNode);
             }
         }
@@ -127,7 +125,7 @@ public class FloorGenerator : MonoBehaviour
 
             foreach (RoomNode endRoomNode in endRoomNodes)
             {
-                Debug.Log(endRoomNode.distanceFromSpawn);
+                //Debug.Log(endRoomNode.distanceFromSpawn);
                 if(endRoomNode.roomType == RoomType.dungeonRoom)
                 {
                     if(endRoomNode.distanceFromSpawn > furthestFoundDistance)
@@ -146,7 +144,13 @@ public class FloorGenerator : MonoBehaviour
     // // Places rooms at each room node
     public void GenerateRooms()
     {
-
+        foreach(RoomNode roomNode in roomNodes)
+        {
+            Room roomPrefab = floorResources.GetRoom(roomNode);
+            Vector2 pos = roomNode.gridPos * floorResources.GetRoomScale();
+            Room room = Instantiate(roomPrefab, pos, Quaternion.identity);
+            
+        }
     }
 
 }
