@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 public class PlayerController : MonoBehaviour
 {
     private PlayerMovement _controls;
-    
+
     [SerializeField]
     private Tilemap _groundTitleMap;
 
@@ -41,12 +41,6 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove(Vector2 direction)
     {
-
-        if (DialogueManager.GetInstance().dialogueActive)
-        {
-            return false;
-        }
-        
         Vector3Int gridPos = _groundTitleMap.WorldToCell(transform.position + (Vector3)direction);
         if (!_groundTitleMap.HasTile(gridPos) || _collisionTileMap.HasTile(gridPos))
         {
@@ -54,7 +48,14 @@ public class PlayerController : MonoBehaviour
         }
         return true;
     }
-    
-    
-    
+
+    public bool checkForDialogue()
+    {
+        if (DialogueManager.GetInstance().dialogueActive)
+        {
+            return false;
+        }
+        return true;
+    }
+
 }
