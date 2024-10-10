@@ -210,6 +210,7 @@ MonoBehaviour:
   floorResources: {fileID: 1128915141}
   floorsContainer: {fileID: 867597007}
   roomCount: 12
+  maxPuzzleRooms: 2
   seed: 1998256269
 --- !u!1 &1128915139
 GameObject:
@@ -260,7 +261,8 @@ MonoBehaviour:
   dungeonRooms:
   - {fileID: 1579837887346114385, guid: f7ff9250ce713f74a9b800bff13a0020, type: 3}
   idleRooms: []
-  puzzleRooms: []
+  puzzleRooms:
+  - {fileID: 1579837887346114385, guid: 1c35d93cc972c6a40a4bdd1ef94604cf, type: 3}
   shopRoom: {fileID: 0}
   treasureRoom: {fileID: 1579837887346114385, guid: 8196c2982e500f547a59869b1ff215a2, type: 3}
   roomScale: {x: 18, y: 10}

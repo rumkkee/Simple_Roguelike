@@ -6,6 +6,7 @@ public enum RoomType
 {
     firstRoom = 0,
     dungeonRoom = 100,
+    puzzleRoom = 130,
     nextFloorRoom = 150,
     bossRoom = 200,
     shop = 300,

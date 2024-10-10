@@ -14,7 +14,9 @@ public class FloorGenerator : MonoBehaviour
     [SerializeField] private FloorResources floorResources;
     [SerializeField] private GameObject floorsContainer;
     
-    [SerializeField] private int roomCount; // Number of rooms to generate, apart from starting room.
+    public int roomCount; // Number of rooms to generate, apart from starting room.
+
+    public int maxPuzzleRooms; // The max possible amount of puzzle rooms that will be generated. The min is 1
     public int seed;
 
     // Generates the placements for rooms
@@ -30,6 +32,7 @@ public class FloorGenerator : MonoBehaviour
         SetEndRoomNodes();
         SetSpecialRoom(RoomType.bossRoom, true);
         SetSpecialRoom(RoomType.treasureRoom, false);
+        SetPuzzleRooms();
         GenerateRooms();
     }
 
@@ -156,6 +159,52 @@ public class FloorGenerator : MonoBehaviour
                 attemptCount++;
             } while (!specialRoomSet && attemptCount > 0);
             
+        }
+    }
+
+    public void SetPuzzleRooms()
+    {
+        int puzzleRoomCount = Random.Range(1, maxPuzzleRooms);
+
+        int puzzleRoomsSet = 0;
+        int attemptLimit = 30;
+        int attempts = 0;
+
+        while(puzzleRoomsSet < maxPuzzleRooms && attempts < attemptLimit)
+        {
+            attempts++;
+            int randomRoomNode = Random.Range(0, roomNodes.Count - 1);
+
+            RoomNode randomNode = roomNodes[randomRoomNode];
+            Debug.Log("RNode Pos: " + randomNode.gridPos);
+            if(randomNode.roomType == RoomType.dungeonRoom)
+            {
+                if (randomNode.neighborRooms.ContainsKey(Vector2.up) &&
+                    randomNode.neighborRooms[Vector2.up].roomType == RoomType.puzzleRoom)
+                {
+                    continue;
+                }
+                else if(randomNode.neighborRooms.ContainsKey(Vector2.right) &&
+                    randomNode.neighborRooms[Vector2.right].roomType == RoomType.puzzleRoom)
+                {
+                    continue;
+                }
+                else if (randomNode.neighborRooms.ContainsKey(Vector2.down) &&
+                    randomNode.neighborRooms[Vector2.down].roomType == RoomType.puzzleRoom)
+                {
+                    continue;
+                }
+                else if (randomNode.neighborRooms.ContainsKey(Vector2.left) &&
+                    randomNode.neighborRooms[Vector2.left].roomType == RoomType.puzzleRoom)
+                {
+                    continue;
+                }
+
+                randomNode.roomType = RoomType.puzzleRoom;
+                puzzleRoomsSet++;
+                Debug.Log("Puzzle rooms set: " + puzzleRoomsSet);
+            }
+            Debug.Log("Attempts: " + attempts);
         }
     }
 

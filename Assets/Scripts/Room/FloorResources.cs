@@ -29,8 +29,19 @@ public class FloorResources : MonoBehaviour
         {
             return exitRoom;
         }
+        else if(roomNode.roomType == RoomType.puzzleRoom)
+        {
+            int size = puzzleRooms.Count;
+            int randomIndex = Random.Range(0, size - 1);
+            Room randomPuzzleRoom = puzzleRooms[randomIndex];
+            return randomPuzzleRoom;
+        }
         else if(roomNode.roomType == RoomType.treasureRoom){
             return treasureRoom;
+        }
+        else if(roomNode.roomType == RoomType.firstRoom)
+        {
+            return startingRoomPrefab;
         }
         else
         {
