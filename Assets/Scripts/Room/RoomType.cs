@@ -8,5 +8,6 @@ public enum RoomType
     dungeonRoom = 100,
     nextFloorRoom = 150,
     bossRoom = 200,
-    shop = 300
+    shop = 300,
+    treasureRoom = 400
 }

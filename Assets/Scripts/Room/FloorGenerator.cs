@@ -29,6 +29,7 @@ public class FloorGenerator : MonoBehaviour
         GenerateNodes();
         SetEndRoomNodes();
         SetSpecialRoom(RoomType.bossRoom, true);
+        SetSpecialRoom(RoomType.treasureRoom, false);
         GenerateRooms();
     }
 
@@ -138,6 +139,23 @@ public class FloorGenerator : MonoBehaviour
 
             currentChosenEndRoomNode.roomType = roomType;
             //Debug.Log("Boss/NextFloor Room Placed at: " + currentChosenEndRoomNode.distanceFromSpawn + "||" + currentChosenEndRoomNode.ToString());
+        }
+        else
+        {
+            int attemptCount = 0;
+            bool specialRoomSet = false;
+            do
+            {
+                int randIndex = Random.Range(0, endRoomNodes.Count);
+                RoomNode randEndRoomNode = endRoomNodes[randIndex];
+                if (randEndRoomNode.roomType == RoomType.dungeonRoom)
+                {
+                    randEndRoomNode.roomType = roomType;
+                    specialRoomSet = true;
+                }
+                attemptCount++;
+            } while (!specialRoomSet && attemptCount > 0);
+            
         }
     }
 

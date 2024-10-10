@@ -262,6 +262,7 @@ MonoBehaviour:
   idleRooms: []
   puzzleRooms: []
   shopRoom: {fileID: 0}
+  treasureRoom: {fileID: 1579837887346114385, guid: 8196c2982e500f547a59869b1ff215a2, type: 3}
   roomScale: {x: 18, y: 10}
 --- !u!1 &1536918861
 GameObject:

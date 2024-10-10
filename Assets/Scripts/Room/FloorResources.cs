@@ -29,6 +29,9 @@ public class FloorResources : MonoBehaviour
         {
             return exitRoom;
         }
+        else if(roomNode.roomType == RoomType.treasureRoom){
+            return treasureRoom;
+        }
         else
         {
             int size = dungeonRooms.Count;
@@ -36,5 +39,6 @@ public class FloorResources : MonoBehaviour
             Room randomDungeonRoom = dungeonRooms[randomIndex];
             return randomDungeonRoom;
         }
+        // If a room isn't special pick between the dungeon, puzzle, and idle rooms.
     }
 }
