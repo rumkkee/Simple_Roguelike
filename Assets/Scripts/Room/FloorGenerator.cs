@@ -86,8 +86,6 @@ public class FloorGenerator : MonoBehaviour
 
             roomNodes.Add(roomNode);
 
-            //Debug.Log(newNodePos.x + ", " + newNodePos.y);
-
             roomsGeneratedCount++;
         }
     }
@@ -111,7 +109,6 @@ public class FloorGenerator : MonoBehaviour
         {
             if (roomNode.neighborCount == 1)
             {
-                //Debug.Log("Found an end room");
                 endRoomNodes.Add(roomNode);
             }
         }
@@ -126,7 +123,6 @@ public class FloorGenerator : MonoBehaviour
 
             foreach (RoomNode endRoomNode in endRoomNodes)
             {
-                //Debug.Log(endRoomNode.distanceFromSpawn);
                 if(endRoomNode.roomType == RoomType.dungeonRoom)
                 {
                     if(endRoomNode.distanceFromSpawn > furthestFoundDistance)
@@ -138,7 +134,6 @@ public class FloorGenerator : MonoBehaviour
             }
 
             currentChosenEndRoomNode.roomType = roomType;
-            //Debug.Log("Boss/NextFloor Room Placed at: " + currentChosenEndRoomNode.distanceFromSpawn + "||" + currentChosenEndRoomNode.ToString());
         }
         else
         {
@@ -167,13 +162,12 @@ public class FloorGenerator : MonoBehaviour
         int attemptLimit = 30;
         int attempts = 0;
 
-        while(puzzleRoomsSet < maxPuzzleRooms && attempts < attemptLimit)
+        while(puzzleRoomsSet < puzzleRoomCount && attempts < attemptLimit)
         {
             attempts++;
             int randomRoomNode = Random.Range(0, roomNodes.Count - 1);
 
             RoomNode randomNode = roomNodes[randomRoomNode];
-            Debug.Log("RNode Pos: " + randomNode.gridPos);
             if(randomNode.roomType == RoomType.dungeonRoom)
             {
                 if (randomNode.neighborRooms.ContainsKey(Vector2.up) &&
@@ -199,9 +193,7 @@ public class FloorGenerator : MonoBehaviour
 
                 randomNode.roomType = RoomType.puzzleRoom;
                 puzzleRoomsSet++;
-                Debug.Log("Puzzle rooms set: " + puzzleRoomsSet);
             }
-            Debug.Log("Attempts: " + attempts);
         }
     }
 
@@ -212,8 +204,7 @@ public class FloorGenerator : MonoBehaviour
         {
             Room roomPrefab = floorResources.GetRoom(roomNode);
             Vector2 pos = roomNode.gridPos * floorResources.GetRoomScale();
-            Room room = Instantiate(roomPrefab, pos, Quaternion.identity);
-            
+            Room room = Instantiate(roomPrefab, pos, Quaternion.identity);    
         }
     }
 
