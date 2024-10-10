@@ -51,21 +51,21 @@ public class ButtonClickHandler : MonoBehaviour
             
             
             case 5:
-                Debug.Log("Button 1 clicked! Buying random Item!");
+                Debug.Log("Button 5 clicked! Buying random Item!");
                 // Add functionality for random 
                 break;
             case 6:
-                Debug.Log("Button 2 clicked! Buying random Item!");
+                Debug.Log("Button 6 clicked! Buying random Item!");
                 // Add functionality for random
                 break;
             case 7:
-                Debug.Log("Button 3 clicked! Buying random Item!");
+                Debug.Log("Button 7 clicked! Buying random Item!");
                 // Add functionality for random
                 break;
             
             
             case 8:
-                Debug.Log("Button 4 clicked! Exiting to dungeon!");
+                Debug.Log("Button 8 clicked! Exiting to dungeon!");
                 // Add functionality for exit screen
                 break;
             
