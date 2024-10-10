@@ -9,7 +9,7 @@ public class RoomNode
 
     public int distanceFromSpawn; // measured in rooms
     public Dictionary<Vector2, RoomNode> neighborRooms;
-    public int neighborCount; // Number of rooms this room is connected to
+    public int neighborCount; // Number of rooms this room is connected to. Helps determine end rooms.
     
 
     public void AddNeighborNode(Vector2 direction, RoomNode neighborNode)

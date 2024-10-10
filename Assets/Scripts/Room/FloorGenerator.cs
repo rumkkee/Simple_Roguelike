@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 
 public class FloorGenerator : MonoBehaviour
 {
-    // Have a reference to floor resources, room nodes
 
     private List<RoomNode> roomNodes;
     private List<RoomNode> endRoomNodes; // roomNodes that have only one entrance, used for special rooms.
@@ -18,8 +17,6 @@ public class FloorGenerator : MonoBehaviour
 
     public int maxPuzzleRooms; // The max possible amount of puzzle rooms that will be generated. The min is 1
     public int seed;
-
-    // Generates the placements for rooms
 
     // On Start, the floor generation behaviors will be called.
     private void Start()
