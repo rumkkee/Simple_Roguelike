@@ -12,6 +12,7 @@ public class DialogueTrigger : MonoBehaviour
     
     public string characterName; // Name of the character whose dialogue will be triggered
     private bool playerInRange;
+    private static bool isActive = DialogueManager.dialogueActive; 
     
     private void Awake()
     {
@@ -47,11 +48,12 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (playerInRange && !DialogueManager.GetInstance().dialogueActive)
+        if (playerInRange && !DialogueManager.dialogueActive)
         {
             visualCue.SetActive(true);
-
-            if (Input.GetKeyUp(KeyCode.E)) // change later if the interact key changes 
+            
+            
+            if (Input.GetKeyUp(KeyCode.E)  && !DialogueManager.dialogueActive) // change later if the interact key changes 
             {
                 // Trigger the dialogue for this NPC via the DialogueManager
                 DialogueManager.instance.startDialogue(characterName);

@@ -61,7 +61,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText; 
     
-    public bool dialogueActive { get; private set; } //read only to outside scripts 
+    public static bool dialogueActive { get; private set; } //read only to outside scripts 
     private string currentCharacter; 
     private Story story;
     
