@@ -6,7 +6,6 @@ public class FloorResources : MonoBehaviour
     public Room startingRoomPrefab;
     public Room exitRoom; // This will be the boss room or exit room depending on what floor this is
     public List<Room> dungeonRooms;
-    public List<Room> idleRooms;
     public List<Room> puzzleRooms;
     public Room shopRoom;
     public Room treasureRoom;
