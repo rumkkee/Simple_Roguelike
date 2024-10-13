@@ -173,7 +173,7 @@ public class FloorGenerator : MonoBehaviour
             int randomRoomNode = Random.Range(0, roomNodes.Count - 1);
 
             RoomNode randomNode = roomNodes[randomRoomNode];
-            Debug.Log("RNode Pos: " + randomNode.gridPos);
+            //Debug.Log("RNode Pos: " + randomNode.gridPos);
             if(randomNode.roomType == RoomType.dungeonRoom)
             {
                 if (randomNode.neighborRooms.ContainsKey(Vector2.up) &&
@@ -199,9 +199,9 @@ public class FloorGenerator : MonoBehaviour
 
                 randomNode.roomType = RoomType.puzzleRoom;
                 puzzleRoomsSet++;
-                Debug.Log("Puzzle rooms set: " + puzzleRoomsSet);
+                //Debug.Log("Puzzle rooms set: " + puzzleRoomsSet);
             }
-            Debug.Log("Attempts: " + attempts);
+            //Debug.Log("Attempts: " + attempts);
         }
     }
 
