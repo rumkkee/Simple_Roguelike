@@ -212,7 +212,7 @@ public class FloorGenerator : MonoBehaviour
         {
             Room roomPrefab = floorResources.GetRoom(roomNode);
             Vector2 pos = roomNode.gridPos * floorResources.GetRoomScale();
-            Room room = Instantiate(roomPrefab, pos, Quaternion.identity);
+            Room room = Instantiate(roomPrefab, pos, Quaternion.identity, floorsContainer.transform);
             
         }
     }
