@@ -12,7 +12,7 @@ public class FloorGenerator : MonoBehaviour
     private List<RoomNode> endRoomNodes; // roomNodes that have only one entrance, used for special rooms.
 
     [SerializeField] private FloorResources floorResources;
-    [SerializeField] private GameObject floorsContainer;
+    private GameObject floorsContainer;
     
     public int roomCount; // Number of rooms to generate, apart from starting room.
 
@@ -209,6 +209,9 @@ public class FloorGenerator : MonoBehaviour
     // // Places rooms at each room node
     public void GenerateRoomsAndDoors()
     {
+        floorsContainer = Instantiate(new GameObject(), Vector3.zero, Quaternion.identity);
+        floorsContainer.name = "FloorsContainer";
+
         foreach(RoomNode roomNode in roomNodes)
         {
             Room roomPrefab = floorResources.GetRoom(roomNode);

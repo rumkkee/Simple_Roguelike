@@ -21,7 +21,6 @@ public class FloorManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        // Okay then init
         instance = this;
         rooms = new List<Room>();
         DontDestroyOnLoad(gameObject);
@@ -54,18 +53,13 @@ public class FloorManager : MonoBehaviour
         foreach (Room room in rooms)
         {
             BoundsInt bounds = room.doorTilemap.cellBounds;
-
             for (int x = bounds.xMin; x < bounds.xMax; x++)
             {
                 for (int y = bounds.yMin; y < bounds.yMax; y++)
                 {
                     Vector3Int tilePosition = new Vector3Int(x, y, 0);
-                    Debug.Log("Checking tile: " + x + "," + y);
-                    // Check if there's an existing tile at this position
                     if (room.doorTilemap.GetTile(tilePosition) != null)
                     {
-                        // Replace the existing tile with the new tile
-                        Debug.Log("Changed tile");
                         room.doorTilemap.SetTile(tilePosition, doorTile);
                     }
                 }
