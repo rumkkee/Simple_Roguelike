@@ -5,9 +5,18 @@ using UnityEngine.Tilemaps;
 
 public class Room : MonoBehaviour
 {
+    [Header("Tilemap collisions")]
+    [SerializeField]
+    [Tooltip("The tile map that the ground is on")]
     public Tilemap groundTilemap;
+    [SerializeField]
+    [Tooltip("The tile map that the collisions are determined is on")]
     public Tilemap collisionTilemap;
+    [SerializeField]
+    [Tooltip("The tile map that doors will be on")]
     public Tilemap doorTilemap;
+
+    public bool doorsAreOpen;
 
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -16,9 +25,7 @@ public class Room : MonoBehaviour
         PlayerMovement player = collider.GetComponent<PlayerMovement>();
         if(player != null)
         {
-            player.doorTileMap = doorTilemap;
-            player.collisionTileMap = collisionTilemap;
-            player.groundTileMap = groundTilemap;
+            player.activeRoom = this;
         }
     }
 }
