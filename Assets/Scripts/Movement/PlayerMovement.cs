@@ -17,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     [Tooltip("The tile map that the collisions are determined is on")]
     public Tilemap collisionTileMap;
+    [SerializeField]
+    [Tooltip("The tile map that doors will be on")]
+    public Tilemap doorTileMap;
     public LayerMask enemyLayerMask;
     // is the player moving?
     [HideInInspector]
@@ -74,8 +77,15 @@ public class PlayerMovement : MonoBehaviour
         // Lets check if we can move.. 
         if (CanMove(direction))
         {
-
-            targetPos = transform.position + (Vector3)direction;
+            Vector3Int gridPos = doorTileMap.WorldToCell(transform.position + (Vector3)direction);
+            Debug.Log("gridpos: " + gridPos);
+            Vector3 movementScale = (Vector3)direction;
+            if (doorTileMap.HasTile(gridPos))
+            {
+                Debug.Log("At Door");
+                movementScale = (Vector3)direction * 3;
+            }
+            targetPos = transform.position + movementScale;
             isMoving = true;
             // Debug.Log($"Lets move?: isMoving? {isMoving}");
         }
@@ -88,12 +98,20 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector3Int gridPos = groundTileMap.WorldToCell(transform.position + (Vector3)direction);
-        if (!groundTileMap.HasTile(gridPos) || collisionTileMap.HasTile(gridPos))
+
+        if (doorTileMap.HasTile(gridPos))
+        {
+            Debug.Log("Door tile bumped at:" + gridPos);
+        }
+        else if (!groundTileMap.HasTile(gridPos) || collisionTileMap.HasTile(gridPos))
         {
             return false;
         }
 
+        //
+
         float rayDistance = 1.0f;
+
         Vector2 rayOrigin = _objectCollider.bounds.center;
         // Raycast in the given direction (the direction the player wants to move)
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, direction, rayDistance, enemyLayerMask);
