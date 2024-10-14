@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (FloorManager.instance.doorsAreOpen && activeRoom.doorTilemap.HasTile(gridPos)) // also check if doors are open
         {
-            Debug.Log("Door tile bumped at:" + gridPos);
+            return true;
         }
         else if (!activeRoom.groundTilemap.HasTile(gridPos) || activeRoom.collisionTilemap.HasTile(gridPos))
         {
