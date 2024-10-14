@@ -30,7 +30,7 @@ public class FloorGenerator : MonoBehaviour
         SetSpecialRoom(RoomType.bossRoom, true);
         SetSpecialRoom(RoomType.treasureRoom, false);
         SetPuzzleRooms();
-        GenerateRooms();
+        GenerateRoomsAndDoors();
     }
 
     public void GenerateNodes()
@@ -206,14 +206,20 @@ public class FloorGenerator : MonoBehaviour
     }
 
     // // Places rooms at each room node
-    public void GenerateRooms()
+    public void GenerateRoomsAndDoors()
     {
         foreach(RoomNode roomNode in roomNodes)
         {
             Room roomPrefab = floorResources.GetRoom(roomNode);
             Vector2 pos = roomNode.gridPos * floorResources.GetRoomScale();
             Room room = Instantiate(roomPrefab, pos, Quaternion.identity, floorsContainer.transform);
-            
+
+            foreach(KeyValuePair<Vector2, RoomNode> entry in roomNode.neighborRooms)
+            {
+                // Place Door based on entry
+                // Set Teleporter based on entry
+                Debug.Log("Door to spawn");
+            }
         }
     }
 
