@@ -12,6 +12,8 @@ public class FloorManager : MonoBehaviour
 
     public FloorResources floorResources;
 
+    public bool developerDoorToggle; // When enabled, pressing k toggles the doors
+
     public void Awake()
     {
         if (instance != null && instance != this)
@@ -27,7 +29,7 @@ public class FloorManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (developerDoorToggle && Input.GetKeyDown(KeyCode.K))
         {
             ToggleDoors();
         }

@@ -147,6 +147,7 @@ MonoBehaviour:
   doorsAreOpen: 1
   rooms: []
   floorResources: {fileID: 1128915141}
+  developerDoorToggle: 1
 --- !u!1 &558090782
 GameObject:
   m_ObjectHideFlags: 0
