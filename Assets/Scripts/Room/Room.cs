@@ -16,7 +16,6 @@ public class Room : MonoBehaviour
         PlayerMovement player = collider.GetComponent<PlayerMovement>();
         if(player != null)
         {
-            Debug.Log("Player entered room trigger, setting tilemaps!");
             player.doorTileMap = doorTilemap;
             player.collisionTileMap = collisionTilemap;
             player.groundTileMap = groundTilemap;

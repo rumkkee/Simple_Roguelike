@@ -78,11 +78,9 @@ public class PlayerMovement : MonoBehaviour
         if (CanMove(direction))
         {
             Vector3Int gridPos = doorTileMap.WorldToCell(transform.position + (Vector3)direction);
-            Debug.Log("gridpos: " + gridPos);
             Vector3 movementScale = (Vector3)direction;
             if (doorTileMap.HasTile(gridPos))
             {
-                Debug.Log("At Door");
                 movementScale = (Vector3)direction * 3;
             }
             targetPos = transform.position + movementScale;
