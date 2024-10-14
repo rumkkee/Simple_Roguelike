@@ -215,6 +215,7 @@ public class FloorGenerator : MonoBehaviour
             Vector2 pos = roomNode.gridPos * floorResources.GetRoomScale();
             Room room = Instantiate(roomPrefab, pos, Quaternion.identity, floorsContainer.transform);
             roomNode.room = room;
+            FloorManager.instance.rooms.Add(room);
 
             foreach(KeyValuePair<Vector2, RoomNode> entry in roomNode.neighborRooms)
             {
@@ -243,8 +244,8 @@ public class FloorGenerator : MonoBehaviour
                     rightSideGridPos = new Vector3Int(0, -5);
                 }
 
-                room.doorTilemap.SetTile(leftSideGridPos, floorResources.doorTile);
-                room.doorTilemap.SetTile(rightSideGridPos, floorResources.doorTile);
+                room.doorTilemap.SetTile(leftSideGridPos, floorResources.doorTileOpen);
+                room.doorTilemap.SetTile(rightSideGridPos, floorResources.doorTileOpen);
             }
         }
     }

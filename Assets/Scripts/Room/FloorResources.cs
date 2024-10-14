@@ -11,7 +11,8 @@ public class FloorResources : MonoBehaviour
     public Room shopRoom;
     public Room treasureRoom;
 
-    public Tile doorTile;
+    public Tile doorTileOpen;
+    public Tile doorTileClosed;
 
     public Vector2 roomScale;
     public Vector2 GetRoomScale()

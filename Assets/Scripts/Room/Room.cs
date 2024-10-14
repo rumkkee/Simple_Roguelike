@@ -16,8 +16,6 @@ public class Room : MonoBehaviour
     [Tooltip("The tile map that doors will be on")]
     public Tilemap doorTilemap;
 
-    public bool doorsAreOpen;
-
 
     private void OnTriggerEnter2D(Collider2D collider)
     {

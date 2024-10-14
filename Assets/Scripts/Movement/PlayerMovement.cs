@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
         // Get the time manger 
         _timeManInstance = TimeManager.instance;
         _objectCollider = GetComponent<Collider2D>();
-        currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
+        //currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
     }
     private void Update()
     {
@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3Int gridPos = activeRoom.groundTilemap.WorldToCell(transform.position + (Vector3)direction);
 
-        if (activeRoom.doorsAreOpen && activeRoom.doorTilemap.HasTile(gridPos)) // also check if doors are open
+        if (FloorManager.instance.doorsAreOpen && activeRoom.doorTilemap.HasTile(gridPos)) // also check if doors are open
         {
             Debug.Log("Door tile bumped at:" + gridPos);
         }
