@@ -923,10 +923,6 @@ PrefabInstance:
       value: FloorGenerator
       objectReference: {fileID: 0}
     - target: {fileID: 5393496024502226536, guid: fcca71b7956c54d47a0c8eaea782c9c3, type: 3}
-      propertyPath: floorResources
-      value: 
-      objectReference: {fileID: 9018631834194142861, guid: c042986323cbc84409920305ab8360e2, type: 3}
-    - target: {fileID: 5393496024502226536, guid: fcca71b7956c54d47a0c8eaea782c9c3, type: 3}
       propertyPath: floorsContainer
       value: 
       objectReference: {fileID: 0}
