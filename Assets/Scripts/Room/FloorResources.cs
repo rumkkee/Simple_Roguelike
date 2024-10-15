@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 public class FloorResources : MonoBehaviour
 {
     public Room startingRoomPrefab;
@@ -9,6 +10,9 @@ public class FloorResources : MonoBehaviour
     public List<Room> puzzleRooms;
     public Room shopRoom;
     public Room treasureRoom;
+
+    public Tile doorTileOpen;
+    public Tile doorTileClosed;
 
     public Vector2 roomScale;
     public Vector2 GetRoomScale()
