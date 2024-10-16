@@ -2444,7 +2444,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4943396, g: 0.1818796, b: 0.1818796, a: 1}
   m_Origin: {x: -9, y: -5, z: 0}
   m_Size: {x: 18, y: 11, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -2689,6 +2689,7 @@ Transform:
   - {fileID: 1510688538853389154}
   - {fileID: 399378720212450837}
   - {fileID: 9146767958573295967}
+  - {fileID: 4613166002842760823}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &5403629130462359901
@@ -2790,3 +2791,65 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 18, y: 10}
   m_EdgeRadius: 0
+--- !u!1001 &8658633296672349255
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6909574546844404793}
+    m_Modifications:
+    - target: {fileID: 4047864230028749360, guid: 389c376c125ec784b87247873c60f7ba, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047864230028749360, guid: 389c376c125ec784b87247873c60f7ba, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047864230028749360, guid: 389c376c125ec784b87247873c60f7ba, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047864230028749360, guid: 389c376c125ec784b87247873c60f7ba, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047864230028749360, guid: 389c376c125ec784b87247873c60f7ba, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047864230028749360, guid: 389c376c125ec784b87247873c60f7ba, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047864230028749360, guid: 389c376c125ec784b87247873c60f7ba, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047864230028749360, guid: 389c376c125ec784b87247873c60f7ba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047864230028749360, guid: 389c376c125ec784b87247873c60f7ba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047864230028749360, guid: 389c376c125ec784b87247873c60f7ba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6278153080275371655, guid: 389c376c125ec784b87247873c60f7ba, type: 3}
+      propertyPath: m_Name
+      value: RoomCameraConfiner
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 389c376c125ec784b87247873c60f7ba, type: 3}
+--- !u!4 &4613166002842760823 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4047864230028749360, guid: 389c376c125ec784b87247873c60f7ba, type: 3}
+  m_PrefabInstance: {fileID: 8658633296672349255}
+  m_PrefabAsset: {fileID: 0}
