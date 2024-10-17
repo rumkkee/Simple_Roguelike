@@ -122,11 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1839735485 &47100714 stripped
-Tilemap:
-  m_CorrespondingSourceObject: {fileID: 8946994632748027971, guid: 6aa54c7d18f4d7c4fb345b1601cac159, type: 3}
-  m_PrefabInstance: {fileID: 7140625817090586322}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &280646143
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +135,7 @@ GameObject:
   - component: {fileID: 280646146}
   m_Layer: 0
   m_Name: Virtual Camera
-  m_TagString: Untagged
+  m_TagString: Camera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,7 +175,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 802921771}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -213,8 +208,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BoundingShape2D: {fileID: 0}
-  m_Damping: 0.5
-  m_MaxWindowSize: 0
+  m_Damping: 0
+  m_MaxWindowSize: -1
 --- !u!1 &558090782
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,16 +499,6 @@ Tilemap:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6909574546844404793, guid: 6aa54c7d18f4d7c4fb345b1601cac159, type: 3}
   m_PrefabInstance: {fileID: 7140625817090586322}
-  m_PrefabAsset: {fileID: 0}
---- !u!1839735485 &795887687 stripped
-Tilemap:
-  m_CorrespondingSourceObject: {fileID: 560438880679907152, guid: 6aa54c7d18f4d7c4fb345b1601cac159, type: 3}
-  m_PrefabInstance: {fileID: 7140625817090586322}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &802921771 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 438604518655028876, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-  m_PrefabInstance: {fileID: 7765643567387208003}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1258783209 stripped
 GameObject:
@@ -1527,14 +1512,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 438604518655028876, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 438604518655028876, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 231832987689413816, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 280646145}
     - target: {fileID: 438604518655028876, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1575,34 +1556,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2528827932719975802, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: _groundTileMap
-      value: 
-      objectReference: {fileID: 795887687}
-    - target: {fileID: 2528827932719975802, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: _collisionTileMap
-      value: 
-      objectReference: {fileID: 47100714}
-    - target: {fileID: 4251588294155573424, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: m_SortingOrder
-      value: 99
-      objectReference: {fileID: 0}
     - target: {fileID: 6319103495921026832, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
-    - target: {fileID: 6568324391289941857, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: doorTileMap
-      value: 
-      objectReference: {fileID: 558090788}
-    - target: {fileID: 6568324391289941857, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: groundTileMap
-      value: 
-      objectReference: {fileID: 795887687}
-    - target: {fileID: 6568324391289941857, guid: c78e6ce489a92634e92c68d9eb774580, type: 3}
-      propertyPath: collisionTileMap
-      value: 
-      objectReference: {fileID: 47100714}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
