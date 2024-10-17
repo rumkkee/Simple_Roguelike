@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6572871991645436289}
   - component: {fileID: 1172304579182323835}
   - component: {fileID: 6568324391289941857}
+  - component: {fileID: 231832987689413816}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 99
   m_Sprite: {fileID: 21300000, guid: 821b190a5cd53374d92afca4bbc8da87, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -173,6 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {fileID: 6568324391289941857}
+  Camera: {fileID: 0}
   stats: {fileID: 0}
 --- !u!114 &6568324391289941857
 MonoBehaviour:
@@ -187,11 +189,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  groundTileMap: {fileID: 0}
-  collisionTileMap: {fileID: 0}
+  activeRoom: {fileID: 0}
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
   isMoving: 0
   targetPos: {x: 0, y: 0, z: 0}
   currentGridPos: {x: 0, y: 0, z: 0}
+--- !u!114 &231832987689413816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6319103495921026832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a4c6ba64618f54db9cc0dda7534bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  cameraLayer:
+    serializedVersion: 2
+    m_Bits: 0
