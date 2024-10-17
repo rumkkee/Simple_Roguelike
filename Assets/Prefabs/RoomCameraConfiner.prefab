@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4047864230028749360}
   - component: {fileID: 2859665076688516744}
-  m_Layer: 2
+  m_Layer: 31
   m_Name: RoomCameraConfiner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
