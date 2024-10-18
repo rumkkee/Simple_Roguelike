@@ -20,6 +20,10 @@ public class PlayerMovement : MonoBehaviour
     public Vector3Int currentGridPos;
     private TimeManager _timeManInstance;
     private Collider2D _objectCollider;
+
+    public delegate void PlayerMove(int steps);
+    public static PlayerMove CurrentStepsUpdated;
+
     private void Start()
     {
         // Get the time manger 
@@ -45,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
             currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
             _timeManInstance.IncrementIndex();
             _timeManInstance.addAction(movement);
-
+            //CurrentStepsUpdated(_timeManInstance.)
         }
     }
     public static Vector2 SnapCardinal(Vector2 inputDir)
@@ -75,11 +79,18 @@ public class PlayerMovement : MonoBehaviour
             }
             targetPos = transform.position + movementScale;
             isMoving = true;
+            PlayerManager.instance.stats.stepTaken();
             // Debug.Log($"Lets move?: isMoving? {isMoving}");
         }
     }
     public bool CanMove(Vector2 direction)
     {
+        if(PlayerManager.instance.stats.remainingSteps() <= 0)
+        {
+            //Debug.Log("Become unalive");
+            return false;
+        }
+
         if (EnemyManager.instance.enemyTurn)
         {
             return false;

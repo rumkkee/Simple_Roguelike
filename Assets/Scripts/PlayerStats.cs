@@ -25,7 +25,7 @@ public class PlayerStats : ScriptableObject
     public int startingSpeed = 1;
     public double startingCurrency = 0.00;
     public int startingStepsTaken = 0;
-    public int startingStepsAvailable = 0;
+    public int startingStepsAvailable = 16;
 
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Items list for storing items.
@@ -34,5 +34,36 @@ public class PlayerStats : ScriptableObject
     public List<ArmorItem> armorItems = new List<ArmorItem>();
     public List<SpeedItem> speedItems = new List<SpeedItem>();
 
+    public delegate void StepsUpdated(int steps);
+    public static StepsUpdated StepsRemainingUpdated; // The number of steps in the current stack
+
+    public void OnEnable()
+    {
+        // Subscribe to when the playerMovement calls the PlayerMoved(int) event
+        // generally, to when the player moves, taking in an int of steps taken
+        StepsRemainingUpdated(remainingSteps());
+    }
+
+    public void stepTaken()
+    {
+        stepsTakenUpdated(++startingStepsTaken);
+    }
+
+    public void stepReversed()
+    {
+        stepsTakenUpdated(--startingStepsTaken);
+    }
+
+    public void stepsTakenUpdated(int stepsTaken)
+    {
+        
+        startingStepsTaken = stepsTaken;
+        StepsRemainingUpdated(remainingSteps());
+    }
+
+    public int remainingSteps()
+    {
+        return startingStepsAvailable - startingStepsTaken;
+    }
 
 }

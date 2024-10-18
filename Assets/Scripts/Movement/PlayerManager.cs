@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class PlayerManager : MonoBehaviour
 {
+    public static PlayerManager instance;
     private TimeManager _timeManInstance;
     private PlayerControls _controls;
     public PlayerMovement Movement;
@@ -17,6 +18,14 @@ public class PlayerManager : MonoBehaviour
     private void OnDisable() => disableControls();
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
         _controls = new PlayerControls();
         if (Movement == null)
         {
@@ -24,6 +33,7 @@ public class PlayerManager : MonoBehaviour
         }
         _move = _controls.Main.Movement;
         _action = _controls.Main.Action;
+        createPlayerStats();
     }
     private void Start()
     {
@@ -72,5 +82,14 @@ public class PlayerManager : MonoBehaviour
         disableControls();
         _timeManInstance.revertAction();
         enableControls();
+    }
+
+    public void createPlayerStats()
+    {
+        if(stats == null)
+        {
+            PlayerStats newStats = new PlayerStats();
+            stats = newStats;
+        }
     }
 }

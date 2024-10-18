@@ -949,6 +949,7 @@ GameObject:
   - component: {fileID: 1649572492}
   - component: {fileID: 1649572494}
   - component: {fileID: 1649572493}
+  - component: {fileID: 1649572495}
   m_Layer: 5
   m_Name: StepsPanel
   m_TagString: Untagged
@@ -1014,6 +1015,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649572491}
   m_CullTransparentMesh: 1
+--- !u!114 &1649572495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649572491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1199565decd0784fa4efafe7c19ee2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepsRemainingText: {fileID: 659575627}
 --- !u!1 &1988083516
 GameObject:
   m_ObjectHideFlags: 0
