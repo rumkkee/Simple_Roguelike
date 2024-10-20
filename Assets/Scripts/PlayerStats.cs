@@ -37,6 +37,9 @@ public class PlayerStats : ScriptableObject
     public delegate void StepsUpdated(int steps);
     public static StepsUpdated StepsRemainingUpdated; // The number of steps in the current stack
 
+    public delegate void CurrencyUpdated(double currency);
+    public static CurrencyUpdated StartingCurrencyUpdated;
+
     public void OnEnable()
     {
         // Subscribe to when the playerMovement calls the PlayerMoved(int) event
@@ -44,6 +47,13 @@ public class PlayerStats : ScriptableObject
         StepsRemainingUpdated(remainingSteps());
     }
 
+    public void UpdateCurrency(int changeInCurrency)
+    {
+        startingCurrency += changeInCurrency;
+        StartingCurrencyUpdated(startingCurrency);
+    }
+
+    #region Steps
     public void stepTaken()
     {
         stepsTakenUpdated(++startingStepsTaken);
@@ -65,5 +75,6 @@ public class PlayerStats : ScriptableObject
     {
         return startingStepsAvailable - startingStepsTaken;
     }
+    #endregion
 
 }
