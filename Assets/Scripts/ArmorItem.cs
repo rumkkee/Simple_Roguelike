@@ -5,26 +5,26 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ArmorItemScriptableObject", menuName = "ScriptableObjects/ArmorItem")]
 public class ArmorItem : ScriptableObject
 {
-    public int armor = 1; // Default armor
+    public int value = 1; // Default armor
 
     public List<ArmorItem> armorItems = new List<ArmorItem>();
 
     // Reference to the armor tiers
-    public ArmorItem armorTier1;
-    public ArmorItem armorTier2;
-    public ArmorItem armorTier3;
-    public ArmorItem armorTier4;
-    public ArmorItem armorTier5;
+    public static ArmorItem armorTier1;
+    public static ArmorItem armorTier2;
+    public static ArmorItem armorTier3;
+    public static ArmorItem armorTier4;
+    public static ArmorItem armorTier5;
 
     // This method initializes the list and assigns armor values
     public void InitializeArmorItems()
     {
         // Assign armor values to each tier
-        armorTier1.armor = 1;
-        armorTier2.armor = 2;
-        armorTier3.armor = 3;
-        armorTier4.armor = 4;
-        armorTier5.armor = 5;
+        armorTier1.value = 1;
+        armorTier2.value = 2;
+        armorTier3.value = 3;
+        armorTier4.value = 4;
+        armorTier5.value = 5;
 
         // Initialize the list
         armorItems = new List<ArmorItem>
@@ -35,5 +35,10 @@ public class ArmorItem : ScriptableObject
             armorTier4,
             armorTier5
         };
+    }
+
+    public ArmorItem randomArmor() {
+        System.Random rnd = new System.Random();
+        return armorTier1;
     }
 }

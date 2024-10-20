@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DamageItemScriptableObject", menuName = "ScriptableObjects/DamageItem")]
 public class DamageItem : ScriptableObject
 {
-    public int damage = 1; // Default damage
+    public int value = 1; // Default damage
 
     public List<DamageItem> damageItems = new List<DamageItem>();
 
@@ -20,11 +20,11 @@ public class DamageItem : ScriptableObject
     public void InitializeDamageItems()
     {
         // Assign damage values to each tier
-        damageTier1.damage = 1;
-        damageTier2.damage = 2;
-        damageTier3.damage = 3;
-        damageTier4.damage = 4;
-        damageTier5.damage = 5;
+        damageTier1.value = 1;
+        damageTier2.value = 2;
+        damageTier3.value = 3;
+        damageTier4.value = 4;
+        damageTier5.value = 5;
 
         // Initialize the list
         damageItems = new List<DamageItem>

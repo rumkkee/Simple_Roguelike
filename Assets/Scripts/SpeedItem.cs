@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SpeedItemScriptableObject", menuName = "ScriptableObjects/SpeedItem")]
 public class SpeedItem : ScriptableObject
 {
-    public int speed = 1; // Default speed
+    public int value = 1; // Default speed
 
     public List<SpeedItem> speedItems = new List<SpeedItem>();
 
@@ -20,11 +20,11 @@ public class SpeedItem : ScriptableObject
     public void InitializeSpeedItems()
     {
         // Assign speed values to each tier
-        speedTier1.speed = 1;
-        speedTier2.speed = 2;
-        speedTier3.speed = 3;
-        speedTier4.speed = 4;
-        speedTier5.speed = 5;
+        speedTier1.value = 1;
+        speedTier2.value = 2;
+        speedTier3.value = 3;
+        speedTier4.value = 4;
+        speedTier5.value = 5;
 
         // Initialize the list
         speedItems = new List<SpeedItem>
