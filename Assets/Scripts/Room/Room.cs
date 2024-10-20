@@ -6,24 +6,24 @@ using UnityEngine.Tilemaps;
 public class Room : MonoBehaviour
 {
     [Header("Tilemap collisions")]
-    [SerializeField]
     [Tooltip("The tile map that the ground is on")]
     public Tilemap groundTilemap;
-    [SerializeField]
     [Tooltip("The tile map that the collisions are determined is on")]
     public Tilemap collisionTilemap;
-    [SerializeField]
     [Tooltip("The tile map that doors will be on")]
     public Tilemap doorTilemap;
-
+    [Tooltip("The polygonCollider which the camera is locked to")]
+    public BoxCollider2D cameraConfines; 
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         // Set the player's grids to use this room's grids.
-        PlayerMovement player = collider.GetComponent<PlayerMovement>();
-        if(player != null)
-        {
-            player.activeRoom = this;
-        }
+        PlayerManager player = collider.GetComponent<PlayerManager>();
+        if(player == null) return;
+        player.Movement.activeRoom = this;
+        // Set the camera's Confiners to this.. 
+        Debug.Log(player.Camera);
+        player.Camera.setConfines(cameraConfines, groundTilemap.transform);
+
     }
 }

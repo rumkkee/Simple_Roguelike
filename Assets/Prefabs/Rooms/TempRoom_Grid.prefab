@@ -2444,7 +2444,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4943396, g: 0.1818796, b: 0.1818796, a: 1}
   m_Origin: {x: -9, y: -5, z: 0}
   m_Size: {x: 18, y: 11, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -2718,6 +2718,7 @@ MonoBehaviour:
   groundTilemap: {fileID: 560438880679907152}
   collisionTilemap: {fileID: 8946994632748027971}
   doorTilemap: {fileID: 8759990373852939971}
+  cameraConfines: {fileID: 723877180983154677}
 --- !u!50 &4045516694559704695
 Rigidbody2D:
   serializedVersion: 4
