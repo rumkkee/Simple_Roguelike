@@ -20,6 +20,34 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.7660377
       objectReference: {fileID: 0}
+    - target: {fileID: 6883249724617239247, guid: 6aa54c7d18f4d7c4fb345b1601cac159, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6883249724617239247, guid: 6aa54c7d18f4d7c4fb345b1601cac159, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6883249724617239247, guid: 6aa54c7d18f4d7c4fb345b1601cac159, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6883249724617239247, guid: 6aa54c7d18f4d7c4fb345b1601cac159, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6883249724617239247, guid: 6aa54c7d18f4d7c4fb345b1601cac159, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6883249724617239247, guid: 6aa54c7d18f4d7c4fb345b1601cac159, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6883249724617239247, guid: 6aa54c7d18f4d7c4fb345b1601cac159, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6909574546844404793, guid: 6aa54c7d18f4d7c4fb345b1601cac159, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -62,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8914176494982799723, guid: 6aa54c7d18f4d7c4fb345b1601cac159, type: 3}
       propertyPath: m_Name
-      value: DungeonRoom_Grid Variant
+      value: DungeonRoom_Grid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

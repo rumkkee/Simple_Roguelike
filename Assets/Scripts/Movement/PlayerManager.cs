@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     private TimeManager _timeManInstance;
     private PlayerControls _controls;
     public PlayerMovement Movement;
+    public PlayerCamera Camera;
     public PlayerStats stats; 
     private InputAction _move;
     private InputAction _action;
@@ -30,6 +31,10 @@ public class PlayerManager : MonoBehaviour
         if (Movement == null)
         {
             Movement = GetComponent<PlayerMovement>();
+        }
+        if(Camera == null) 
+        {
+            Camera = GetComponent<PlayerCamera>();
         }
         _move = _controls.Main.Movement;
         _action = _controls.Main.Action;
