@@ -52,6 +52,7 @@ public class HealthUI : MonoBehaviour
         {
             while (healthMarkers.Count != maxHealth)
             {
+
                 Image healthMarker = healthMarkers[healthMarkers.Count - 1];
                 healthMarkers.Remove(healthMarker);
                 Destroy(healthMarker);
