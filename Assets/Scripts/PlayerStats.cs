@@ -40,11 +40,25 @@ public class PlayerStats : ScriptableObject
     public delegate void CurrencyUpdated(double currency);
     public static CurrencyUpdated StartingCurrencyUpdated;
 
-    public void OnEnable()
+    public delegate void HealthUpdated(int health);
+    public static HealthUpdated StartingHealthUpdated;
+    public static HealthUpdated MaxHealthUpdated;
+
+    public void Awake()
     {
-        // Subscribe to when the playerMovement calls the PlayerMoved(int) event
-        // generally, to when the player moves, taking in an int of steps taken
-        StepsRemainingUpdated(remainingSteps());
+        //health = 5;
+        //startingHealth = 3;
+    }
+
+    public void SetMaxHealth(int maxHealth)
+    {
+        this.health = maxHealth;
+        MaxHealthUpdated(maxHealth);
+    }
+
+    public void SetCurrentHealth(int currentHealth) { 
+        startingHealth = currentHealth;
+        StartingHealthUpdated(startingHealth);
     }
 
     public void UpdateCurrency(int changeInCurrency)
