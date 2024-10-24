@@ -22,7 +22,7 @@ public class HealthUI : MonoBehaviour
         setMaxHealthDisplayed(maxHealth);
         currentHealth = maxHealth;
 
-        int startingHealth = PlayerManager.instance.stats.startingHealth;
+        int startingHealth = PlayerStats.startingHealth;
         setCurrentHealthDisplayed(startingHealth);
 
         PlayerStats.MaxHealthUpdated += setMaxHealthDisplayed;

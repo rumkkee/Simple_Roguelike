@@ -9,14 +9,17 @@ public class EnemyEntity : MonoBehaviour
     public static int totalEnemies = 0;
     [HideInInspector]
     public int enemyID; 
+    public EnemyStats enemyStats;
+    public int currentHealth;
     private void Start() {
         enemyID = totalEnemies + 1;
+        currentHealth = enemyStats.startingHealth;
         totalEnemies++;
         Debug.Log($"enemy ID {enemyID}");
         EnemyManager.instance.addEnemyToDict(enemyID, this);
     }
     public void pathFind(Transform target) {
         Debug.Log($"Pathfinding to transform.Pos{target.position}");
-        pathfinding.pathfindTo(target);
+        StartCoroutine(pathfinding.pathfindTo(target));
     }
 }
