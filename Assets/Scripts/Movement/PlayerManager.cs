@@ -12,7 +12,9 @@ public class PlayerManager : MonoBehaviour
     private PlayerControls _controls;
     public PlayerMovement Movement;
     public PlayerCamera Camera;
-    public PlayerStats stats; 
+    public PlayerStats stats;
+    public int currentHealth;
+    public int currentSpeed;
     private InputAction _move;
     private InputAction _action;
     private void OnEnable() => enableControls();
@@ -96,5 +98,9 @@ public class PlayerManager : MonoBehaviour
             PlayerStats newStats = new PlayerStats();
             stats = newStats;
         }
+    }
+
+    public void changeStats() {
+        
     }
 }
