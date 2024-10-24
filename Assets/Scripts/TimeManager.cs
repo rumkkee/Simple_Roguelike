@@ -61,6 +61,7 @@ public class TimeManager : MonoBehaviour
         if (act.actionType == Action.TypeOfAction.Movement)
         {
             Debug.Log($"Going back to position: {act.position}");
+            PlayerManager.instance.stats.stepReversed();
             return act.mCallback(act.position);
         }
         else if (act.actionType == Action.TypeOfAction.Action) 

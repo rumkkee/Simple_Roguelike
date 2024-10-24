@@ -29,7 +29,7 @@ public class PlayerStats : ScriptableObject
     public int startingSpeed = 1;
     public double startingCurrency = 0.00;
     public int startingStepsTaken = 0;
-    public int startingStepsAvailable = 0;
+    public int startingStepsAvailable = 16;
 
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Items list for storing items.
@@ -39,6 +39,64 @@ public class PlayerStats : ScriptableObject
     public List<DamageItem> damageItems = new List<DamageItem>();
     public List<ArmorItem> armorItems = new List<ArmorItem>();
     public List<SpeedItem> speedItems = new List<SpeedItem>();
+
+
+    public delegate void StepsUpdated(int steps);
+    public static StepsUpdated StepsRemainingUpdated; // The number of steps in the current stack
+
+    public delegate void CurrencyUpdated(double currency);
+    public static CurrencyUpdated StartingCurrencyUpdated;
+
+    public delegate void HealthUpdated(int health);
+    public static HealthUpdated StartingHealthUpdated;
+    public static HealthUpdated MaxHealthUpdated;
+
+    public void Awake()
+    {
+        //health = 5;
+        //startingHealth = 3;
+    }
+
+    public void SetMaxHealth(int maxHealth)
+    {
+        this.health = maxHealth;
+        MaxHealthUpdated(maxHealth);
+    }
+
+    public void SetCurrentHealth(int currentHealth) { 
+        startingHealth = currentHealth;
+        StartingHealthUpdated(startingHealth);
+    }
+
+    public void UpdateCurrency(int changeInCurrency)
+    {
+        startingCurrency += changeInCurrency;
+        StartingCurrencyUpdated(startingCurrency);
+    }
+
+    #region Steps
+    public void stepTaken()
+    {
+        stepsTakenUpdated(++startingStepsTaken);
+    }
+
+    public void stepReversed()
+    {
+        stepsTakenUpdated(--startingStepsTaken);
+    }
+
+    public void stepsTakenUpdated(int stepsTaken)
+    {
+        
+        startingStepsTaken = stepsTaken;
+        StepsRemainingUpdated(remainingSteps());
+    }
+
+    public int remainingSteps()
+    {
+        return startingStepsAvailable - startingStepsTaken;
+    }
+    #endregion
 
     public string Serialize()
     {
@@ -69,6 +127,7 @@ public class PlayerStats : ScriptableObject
             Debug.LogError($"Data length mismatch: expected {NUM_OF_ITEMS} elements.");
             return;
         }
+
 
         totalCurrency = long.Parse(values[0]);
         totalStepsTaken = long.Parse(values[1]);
