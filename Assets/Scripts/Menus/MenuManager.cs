@@ -29,4 +29,10 @@ public class MenuManager : MonoBehaviour
         optionsMenuManager.gameObject.SetActive(true);
         eventSystem.SetSelectedGameObject(optionsMenuManager.lastSelectedButton);
     }
+
+    public void OpenMainMenu()
+    {
+        mainMenuManager.gameObject.SetActive(true);
+        eventSystem.SetSelectedGameObject(mainMenuManager.lastSelectedButton);
+    }
 }

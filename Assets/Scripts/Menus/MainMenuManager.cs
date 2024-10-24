@@ -22,6 +22,8 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnOptionsPressed()
     {
+
+        lastSelectedButton = MenuManager.instance.eventSystem.currentSelectedGameObject;
         MenuManager.instance.OpenOptionsMenu();
     }
 

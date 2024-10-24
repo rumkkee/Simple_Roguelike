@@ -7,5 +7,10 @@ public class OptionsMenuManager : MonoBehaviour
 {
     public GameObject lastSelectedButton;
 
-
+    public void OnExitPressed()
+    {
+        lastSelectedButton = MenuManager.instance.eventSystem.currentSelectedGameObject;
+        this.gameObject.SetActive(false);
+        MenuManager.instance.OpenMainMenu();
+    }
 }
