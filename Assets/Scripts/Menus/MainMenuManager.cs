@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
+
+    public GameObject lastSelectedButton;
 
     public void OnContinuePressed()
     {
@@ -19,10 +22,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnOptionsPressed()
     {
-        // TODO: Implement OnOptions
-
-        // 11:53pm
-
+        MenuManager.instance.OpenOptionsMenu();
     }
 
     public void OnExitPressed()
