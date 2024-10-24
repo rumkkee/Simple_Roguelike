@@ -7,6 +7,8 @@ public class RoomNode
     public Vector2 gridPos;
     public RoomType roomType;
 
+    public Room room;
+
     public int distanceFromSpawn; // measured in rooms
     public Dictionary<Vector2, RoomNode> neighborRooms;
     public int neighborCount; // Number of rooms this room is connected to. Helps determine end rooms.
@@ -22,4 +24,5 @@ public class RoomNode
         neighborCount++;
 
     }
+
 }

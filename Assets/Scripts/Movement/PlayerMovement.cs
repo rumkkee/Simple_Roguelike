@@ -9,14 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     [Tooltip("How fast a player moves")]
     public float moveSpeed = 5f;
-    // Tilemap stuff.. 
-    [Header("Tilemap collisions")]
-    [SerializeField]
-    [Tooltip("The tile map that the ground is on")]
-    public Tilemap groundTileMap;
-    [SerializeField]
-    [Tooltip("The tile map that the collisions are determined is on")]
-    public Tilemap collisionTileMap;
+    public Room activeRoom; // The room the player is in
     public LayerMask enemyLayerMask;
     // is the player moving?
     [HideInInspector]
@@ -27,12 +20,16 @@ public class PlayerMovement : MonoBehaviour
     public Vector3Int currentGridPos;
     private TimeManager _timeManInstance;
     private Collider2D _objectCollider;
+
+    public delegate void PlayerMove(int steps);
+    public static PlayerMove CurrentStepsUpdated;
+
     private void Start()
     {
         // Get the time manger 
         _timeManInstance = TimeManager.instance;
         _objectCollider = GetComponent<Collider2D>();
-        currentGridPos = groundTileMap.WorldToCell(transform.position);
+        //currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
     }
     private void Update()
     {
@@ -49,10 +46,10 @@ public class PlayerMovement : MonoBehaviour
              Debug.Log($"We moved cells: {currentGridPos}");
             Action movement = new Action(Action.TypeOfAction.Movement, currentGridPos, MoveToPosition);
             StartCoroutine(EnemyManager.instance.doAllEnemyActions(transform));
-            currentGridPos = groundTileMap.WorldToCell(transform.position);
+            currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
             _timeManInstance.IncrementIndex();
             _timeManInstance.addAction(movement);
-
+            //CurrentStepsUpdated(_timeManInstance.)
         }
     }
     public static Vector2 SnapCardinal(Vector2 inputDir)
@@ -74,26 +71,46 @@ public class PlayerMovement : MonoBehaviour
         // Lets check if we can move.. 
         if (CanMove(direction))
         {
-
-            targetPos = transform.position + (Vector3)direction;
+            Vector3Int gridPos = activeRoom.doorTilemap.WorldToCell(transform.position + (Vector3)direction);
+            Vector3 movementScale = (Vector3)direction;
+            if (activeRoom.doorTilemap.HasTile(gridPos))
+            {
+                movementScale = (Vector3)direction * 3;
+            }
+            targetPos = transform.position + movementScale;
             isMoving = true;
+            PlayerManager.instance.stats.stepTaken();
             // Debug.Log($"Lets move?: isMoving? {isMoving}");
         }
     }
     public bool CanMove(Vector2 direction)
     {
+        if(PlayerManager.instance.stats.remainingSteps() <= 0)
+        {
+            //Debug.Log("Become unalive");
+            return false;
+        }
+
         if (EnemyManager.instance.enemyTurn)
         {
             return false;
         }
 
-        Vector3Int gridPos = groundTileMap.WorldToCell(transform.position + (Vector3)direction);
-        if (!groundTileMap.HasTile(gridPos) || collisionTileMap.HasTile(gridPos))
+        Vector3Int gridPos = activeRoom.groundTilemap.WorldToCell(transform.position + (Vector3)direction);
+
+        if (FloorManager.instance.doorsAreOpen && activeRoom.doorTilemap.HasTile(gridPos)) // also check if doors are open
+        {
+            return true;
+        }
+        else if (!activeRoom.groundTilemap.HasTile(gridPos) || activeRoom.collisionTilemap.HasTile(gridPos))
         {
             return false;
         }
 
+        //
+
         float rayDistance = 1.0f;
+
         Vector2 rayOrigin = _objectCollider.bounds.center;
         // Raycast in the given direction (the direction the player wants to move)
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin, direction, rayDistance, enemyLayerMask);
@@ -116,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
         if (CanMove(direction))
         {
             transform.position = pos;
-            currentGridPos = groundTileMap.WorldToCell(transform.position);
+            currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
             return true;
         } else {
             return false;

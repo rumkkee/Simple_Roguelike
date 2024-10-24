@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3395028213768034089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 138999827248183004}
+  - component: {fileID: 9018631834194142861}
+  m_Layer: 0
+  m_Name: FloorResources_floor1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &138999827248183004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3395028213768034089}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9018631834194142861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3395028213768034089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebdecd6c4feec346b20030a0d200a07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingRoomPrefab: {fileID: 1579837887346114385, guid: 6aa54c7d18f4d7c4fb345b1601cac159, type: 3}
+  exitRoom: {fileID: 5053980418205075925, guid: c5d008711b9bd584f9371ba165c6d053, type: 3}
+  dungeonRooms:
+  - {fileID: 3019559883109214031, guid: e8c82fd86757e624d860093ae9e3ee66, type: 3}
+  puzzleRooms:
+  - {fileID: 2674208039893315860, guid: dbb1e6e936ac0244489afd4318b71276, type: 3}
+  shopRoom: {fileID: 0}
+  treasureRoom: {fileID: 1410207637895938537, guid: eb8ccd24c2782f2469d4c8ae613dab63, type: 3}
+  doorTileOpen: {fileID: 11400000, guid: 2be4dc046b43d4143b66a462eb0a928e, type: 2}
+  doorTileClosed: {fileID: 11400000, guid: 5cdc3cda28a168c4ca00d4babdbd46e4, type: 2}
+  roomScale: {x: 18, y: 10}

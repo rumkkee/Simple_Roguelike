@@ -6,6 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     // TAKKKYOOONNN
     // https://youtu.be/yO3VWqbe8Lc?si=Bv_lNIgKgM9ThvRv
+    [HideInInspector]
     public static EnemyManager instance;
     [HideInInspector]
     public Dictionary<int, EnemyEntity> enemyDict;

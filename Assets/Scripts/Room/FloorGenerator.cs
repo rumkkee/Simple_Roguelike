@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 public class FloorGenerator : MonoBehaviour
@@ -11,7 +12,7 @@ public class FloorGenerator : MonoBehaviour
     private List<RoomNode> endRoomNodes; // roomNodes that have only one entrance, used for special rooms.
 
     [SerializeField] private FloorResources floorResources;
-    [SerializeField] private GameObject floorsContainer;
+    private GameObject floorsContainer;
     
     public int roomCount; // Number of rooms to generate, apart from starting room.
 
@@ -30,7 +31,7 @@ public class FloorGenerator : MonoBehaviour
         SetSpecialRoom(RoomType.bossRoom, true);
         SetSpecialRoom(RoomType.treasureRoom, false);
         SetPuzzleRooms();
-        GenerateRooms();
+        GenerateRoomsAndDoors();
     }
 
     public void GenerateNodes()
@@ -173,7 +174,7 @@ public class FloorGenerator : MonoBehaviour
             int randomRoomNode = Random.Range(0, roomNodes.Count - 1);
 
             RoomNode randomNode = roomNodes[randomRoomNode];
-            Debug.Log("RNode Pos: " + randomNode.gridPos);
+            //Debug.Log("RNode Pos: " + randomNode.gridPos);
             if(randomNode.roomType == RoomType.dungeonRoom)
             {
                 if (randomNode.neighborRooms.ContainsKey(Vector2.up) &&
@@ -199,21 +200,56 @@ public class FloorGenerator : MonoBehaviour
 
                 randomNode.roomType = RoomType.puzzleRoom;
                 puzzleRoomsSet++;
-                Debug.Log("Puzzle rooms set: " + puzzleRoomsSet);
+                //Debug.Log("Puzzle rooms set: " + puzzleRoomsSet);
             }
-            Debug.Log("Attempts: " + attempts);
+            //Debug.Log("Attempts: " + attempts);
         }
     }
 
     // // Places rooms at each room node
-    public void GenerateRooms()
+    public void GenerateRoomsAndDoors()
     {
+        floorsContainer = Instantiate(new GameObject(), Vector3.zero, Quaternion.identity);
+        floorsContainer.name = "FloorsContainer";
+
         foreach(RoomNode roomNode in roomNodes)
         {
             Room roomPrefab = floorResources.GetRoom(roomNode);
             Vector2 pos = roomNode.gridPos * floorResources.GetRoomScale();
-            Room room = Instantiate(roomPrefab, pos, Quaternion.identity);
-            
+            Room room = Instantiate(roomPrefab, pos, Quaternion.identity, floorsContainer.transform);
+            roomNode.room = room;
+            FloorManager.instance.rooms.Add(room);
+
+            foreach(KeyValuePair<Vector2, RoomNode> entry in roomNode.neighborRooms)
+            {
+                // Create tiles of door
+                Vector3Int leftSideGridPos = Vector3Int.zero;
+                Vector3Int rightSideGridPos = Vector3Int.zero;
+
+                if(entry.Key == Vector2.right)
+                {
+                    leftSideGridPos = new Vector3Int(8,-1);
+                    rightSideGridPos = new Vector3Int(8,0);
+                }
+                else if(entry.Key == Vector2.left)
+                {
+                    leftSideGridPos = new Vector3Int(-9, 0);
+                    rightSideGridPos = new Vector3Int(-9, -1);
+                }
+                else if (entry.Key == Vector2.up)
+                {
+                    leftSideGridPos = new Vector3Int(-1, 4);
+                    rightSideGridPos = new Vector3Int(0, 4);
+                }
+                else
+                {
+                    leftSideGridPos = new Vector3Int(-1,-5);
+                    rightSideGridPos = new Vector3Int(0, -5);
+                }
+
+                room.doorTilemap.SetTile(leftSideGridPos, floorResources.doorTileOpen);
+                room.doorTilemap.SetTile(rightSideGridPos, floorResources.doorTileOpen);
+            }
         }
     }
 
