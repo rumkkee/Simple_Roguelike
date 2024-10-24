@@ -15,9 +15,9 @@ public class PlayerStats : ScriptableObject
     // Again stats reasons
     public static long totalStepsTaken;
     // How many steps can the player take before getting thrown back to the start?
-    // public int stepsAvaliable;
+    public int stepsAvaliable;
     // How many hits a player can take before zucking dying.
-    // public int health; 
+    public int health; 
     // How much is our starting health? 
     public static int startingHealth;  
     // How much Armor does the player has? 
@@ -29,7 +29,7 @@ public class PlayerStats : ScriptableObject
     public int startingSpeed = 1;
     public double startingCurrency = 0.00;
     public int startingStepsTaken = 0;
-    public int startingStepsAvailable = 16;
+    public int startingStepsAvailable = 999;
     public int currentHealth;
     public int currentSpeed;
 

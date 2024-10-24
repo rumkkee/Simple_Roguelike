@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     [Tooltip("How fast a player moves")]
     public float moveSpeed = 5f;
-    public Room activeRoom; // The room the player is in
+    public static Room activeRoom; // The room the player is in
     public LayerMask enemyLayerMask;
     // is the player moving?
     [HideInInspector]

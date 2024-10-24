@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,42 +31,50 @@ public class EnemyAI : MonoBehaviour
         switch (behaviorType)
         {
             case AIType.MELEE:
-                _meleeDecisions(stats, playerPos);
-                break;
-            case AIType.RANGED:
+                StartCoroutine(_meleeDecisions(stats, playerPos));
                 break;
             case AIType.SUICIDE:
-                _suicideDecisions(stats, playerPos);
+                StartCoroutine(_suicideDecisions(stats, playerPos));
                 break;
-            case AIType.SUPPORT:
+            default:
                 break;
         }
 
     }
 
-    private void _meleeDecisions(PlayerStats stats, Transform playerPos)
+    private IEnumerator _meleeDecisions(PlayerStats stats, Transform playerPos)
     {
         List<Vector3Int> path = pathfinding.getPath(playerPos);
         // This code base needs a hero.. AM NOT DOING THAT JOKE. 
         if (path.Count < 1)
         {
             Debug.LogWarning("No valid path found!");
-            return;
+            yield break;
         }
 
     }
 
-    private void _suicideDecisions(PlayerStats stats, Transform playerPos)
+    private IEnumerator _suicideDecisions(PlayerStats stats, Transform playerPos)
     {
-        List<Vector3Int> path = pathfinding.getPath(playerPos);
+        List<Vector3Int> ptp = pathfinding.getPath(playerPos);
         // Yeah we aint going in front of the player.. 
-        if (path.Count < 1)
+        if (ptp.Count < 1)
         {
             Debug.LogWarning("No valid path found!");
-            return;
+            yield break;
         }
 
+        // Debug.Log($"Moving to {ptp[1]} from {_currentTile}");
+        Vector3Int goal = pathfinding.groundTiles.WorldToCell(playerPos.position);
+        if (ptp[1] == goal)
+        {
+            // Debug.Log("Melee range of the player.. Imagine it attacking");
+            yield break;
+        }
+        // Okay now we make a decison
 
-        // The oldest xbox known to man
+        
+
+        yield return StartCoroutine(pathfinding.MoveToPosition(pathfinding.groundTiles.CellToWorld(ptp[1])));
     }
 }

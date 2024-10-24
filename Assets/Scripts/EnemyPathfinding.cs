@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -39,6 +40,7 @@ public class EnemyPathfinding : MonoBehaviour
 
     public void Start() {
         _objectCollider = GetComponent<Collider2D>();
+
     }
 
     public IEnumerator pathfindTo(Transform target)
@@ -46,6 +48,7 @@ public class EnemyPathfinding : MonoBehaviour
         // Gets Current tile. 
         Vector3 pos = transform.position;
         _currentTile = groundTiles.WorldToCell(pos);
+        Debug.Log(target);
 
         // we only need to run this when something major changes.. 
         List<Vector3Int> ptp = _getPath(target);
@@ -55,6 +58,7 @@ public class EnemyPathfinding : MonoBehaviour
             Debug.LogWarning("No valid path found!");
             yield break;
         }
+
         // Debug.Log($"Moving to {ptp[1]} from {_currentTile}");
         Vector3Int goal = groundTiles.WorldToCell(target.position);
         if (ptp[1] == goal)
@@ -78,7 +82,7 @@ public class EnemyPathfinding : MonoBehaviour
 
         Vector3Int start = _currentTile;
         Vector3Int goal = groundTiles.WorldToCell(target.position);
-
+        Debug.Log(goal);
         List<Vector2> dirList = (priority == Priorites.Horizontal) ? _CARDINAL_DIR_HR : _CARDINAL_DIR_VR;
         if (priority == Priorites.Random)
         {
@@ -175,9 +179,11 @@ public class EnemyPathfinding : MonoBehaviour
         // Check if there's an enemy in the direction we're trying to move
         if (hit.collider != null && hit.collider.CompareTag("Enemy"))
         {
-            Debug.Log("Enemy detected in direction: " + direction);
-            // We would attack here actually.. 
-            // return false;
+            if (hit.collider.gameObject != gameObject)
+            {
+                Debug.Log("Enemy detected in direction: " + direction);
+                yield break;
+            }
         }
         while (Vector3.Distance(transform.position, targetPosition) > float.Epsilon)
         {
@@ -186,6 +192,7 @@ public class EnemyPathfinding : MonoBehaviour
         }
         transform.position = targetPosition;
     }
+
 
     public bool canMove(Vector3Int gridPos)
     {

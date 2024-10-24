@@ -19,11 +19,12 @@ public class Room : MonoBehaviour
     {
         // Set the player's grids to use this room's grids.
         PlayerManager player = collider.GetComponent<PlayerManager>();
-        if(player == null) return;
-        player.Movement.activeRoom = this;
-        // Set the camera's Confiners to this.. 
-        Debug.Log(player.Camera);
-        player.Camera.setConfines(cameraConfines, groundTilemap.transform);
-
+        if(player != null) {
+            PlayerMovement.activeRoom = this;
+            // Set the camera's Confiners to this.. 
+            Debug.Log(player.Camera);
+            player.Camera.setConfines(cameraConfines, groundTilemap.transform);
+            return;
+        }
     }
 }

@@ -48,6 +48,9 @@ public class EnemyManager : MonoBehaviour
 
     public IEnumerator doAllEnemyActions(Transform player)
     {
+        if(enemyTurn) {
+            yield break;
+        }
         enemyTurn = true;
         foreach (var item in enemyDict)
         {
