@@ -11,7 +11,7 @@ public class Options : MonoBehaviour
     public void SetDefault()
     {
         musicVol = 1;
-        language = Language.english;
+        language = Language.English;
     }
 
 }

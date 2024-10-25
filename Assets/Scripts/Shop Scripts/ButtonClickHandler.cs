@@ -27,13 +27,13 @@ public class ButtonClickHandler : MonoBehaviour
             case 0:
                 Debug.Log("Button 0 clicked! Speaking to merchant!");
                 // Add functionality for Merchant
-                playerStats.
+                //playerStats.
                 break;
             
             case 1:
                 Debug.Log("Button 1 clicked! Adding Health!");
                 // Add functionality for Health++
-                playerStats
+                //playerStats.he
                 break;
             case 2:
                 Debug.Log("Button 2 clicked! Adding Steps!");

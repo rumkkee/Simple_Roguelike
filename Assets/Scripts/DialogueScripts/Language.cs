@@ -4,6 +4,6 @@ using UnityEngine;
 
 public enum Language
 {
-    english = 0,
-    spanish = 10
+    English = 0,
+    Spanish = 10
 }
