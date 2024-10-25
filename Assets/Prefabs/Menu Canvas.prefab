@@ -952,6 +952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastSelectedButton: {fileID: 1808823416158832348}
   languageText: {fileID: 3667356415839698615}
+  screenModeText: {fileID: 3097287256207521301}
 --- !u!114 &40320502380882782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3487,11 +3488,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7679269276399098614, guid: b8a743c7032f7cd4ea2fee1567a3b276, type: 3}
       propertyPath: m_text
-      value: Resolution
+      value: Screen Mode
       objectReference: {fileID: 0}
     - target: {fileID: 7679269276399098614, guid: b8a743c7032f7cd4ea2fee1567a3b276, type: 3}
       propertyPath: m_HorizontalAlignment
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8078015094932105595, guid: b8a743c7032f7cd4ea2fee1567a3b276, type: 3}
       propertyPath: m_Name

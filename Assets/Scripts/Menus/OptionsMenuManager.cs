@@ -8,6 +8,7 @@ public class OptionsMenuManager : MonoBehaviour
 {
     public GameObject lastSelectedButton;
     public TextMeshProUGUI languageText;
+    public TextMeshProUGUI screenModeText;
 
     public void OnExitPressed()
     {
@@ -21,5 +22,19 @@ public class OptionsMenuManager : MonoBehaviour
         LanguageManager.instance.toggleLanguage();
         string currentLang = LanguageManager.instance.currentLanguage.ToString();
         languageText.text = currentLang;
+    }
+
+    public void OnScreenModePressed()
+    {
+        if (Screen.fullScreen == true)
+        {
+            Screen.fullScreen = false;
+            screenModeText.text = "Windowed";
+        }
+        else
+        {
+            Screen.fullScreen = true;
+            screenModeText.text = "Full Screen";
+        }
     }
 }
