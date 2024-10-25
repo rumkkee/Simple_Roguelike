@@ -48,6 +48,11 @@ public class OptionsMenuManager : MonoBehaviour
         StartCoroutine(OnSliderBeingControlled());
     }
 
+    public void OnSliderValueChanged()
+    {
+        AudioManager.instance.SetVolume(musicVolumeSlider.value);
+    }
+
     private IEnumerator OnSliderBeingControlled()
     {
         while(MenuManager.instance.eventSystem.currentSelectedGameObject == musicVolumeSlider.gameObject)
