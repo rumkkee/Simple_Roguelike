@@ -18,8 +18,10 @@ public class PlayerStats : ScriptableObject
     public int stepsAvaliable;
     // How many hits a player can take before zucking dying.
     public int health; 
+    //Speed??
+    public int speed;
     // How much is our starting health? 
-    public static int startingHealth;  
+    public int startingHealth;  
     // How much Armor does the player has? 
     public static int armorValue;  
     // How much is our starting armor
@@ -143,5 +145,15 @@ public class PlayerStats : ScriptableObject
         startingCurrency = double.Parse(values[9]);
         startingStepsTaken = int.Parse(values[10]);
         startingStepsAvailable = int.Parse(values[11]);
+    }
+
+    public void DecreaseHealth(int amount) {
+        health -= amount;
+    }
+    public void DecreaseSteps(int amount) {
+        stepsAvaliable -= amount;
+    }
+    public void DecreaseSpeed(int amount) {
+        speed -= amount;
     }
 }
