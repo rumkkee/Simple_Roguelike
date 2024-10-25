@@ -19,6 +19,8 @@ public class PlayerStats : ScriptableObject
     // How many hits a player can take before zucking dying.
     //Health??
     public int health;
+    //Steps??
+    public int steps;
     //Speed??
     public int speed;
     // How much is our starting health? 

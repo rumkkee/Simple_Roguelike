@@ -20,6 +20,8 @@ public class ButtonClickHandler : MonoBehaviour
 
     
     // Method that accepts a parameter to handle different button clicks
+    //Making all the items cost 2 gold for now, change up after playtesting.
+    //Adding 3000 just to see change.
     public void OnButtonClick(int buttonID)
     {
         switch (buttonID)
@@ -27,21 +29,40 @@ public class ButtonClickHandler : MonoBehaviour
             case 0:
                 Debug.Log("Button 0 clicked! Speaking to merchant!");
                 // Add functionality for Merchant
-                playerStats.
+                /*
+                How do I handle dialogue...
+                */
                 break;
             
             case 1:
                 Debug.Log("Button 1 clicked! Adding Health!");
                 // Add functionality for Health++
-                playerStats
+                if (playerStats.startingCurrency >= 2) {
+                    playerStats.health += 3000;
+                    
+                    //Decrement starting currency:
+                    playerStats.startingCurrency -= 2;
+                }
                 break;
             case 2:
                 Debug.Log("Button 2 clicked! Adding Steps!");
                 // Add functionality for Steps++
+                if (playerStats.startingCurrency >= 2) {
+                    playerStats.steps += 3000;
+
+                    //Decrement starting currency:
+                    playerStats.startingCurrency -= 2;
+                }
                 break;
             case 3:
                 Debug.Log("Button 3 clicked! Adding Speed!");
                 // Add functionality for Speed++
+                if (playerStats.startingCurrency >= 2) {
+                    playerStats.speed += 3000;
+
+                    //Decrement starting currency:
+                    playerStats.startingCurrency -= 2;
+                }
                 break;
     
             case 4:
