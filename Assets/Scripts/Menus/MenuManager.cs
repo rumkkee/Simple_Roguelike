@@ -6,15 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public static MenuManager instance;
+
     public MainMenuManager mainMenuManager;
     public OptionsMenuManager optionsMenuManager;
     public PauseMenuManager pauseMenuManager;
 
-    public GameObject currentPausePanel;
-
     public EventSystem eventSystem;
-
-    public static MenuManager instance;
 
     private void Awake()
     {

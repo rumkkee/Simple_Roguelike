@@ -11,6 +11,10 @@ public class PauseMenuManager : MonoBehaviour
     public GameObject pauseMenuPanel;
     public GameObject lastSelectedButton;
 
+    public GameObject gameSavedPanel;
+
+    private IEnumerator gameSavedTextCoroutine;
+
     private void Awake()
     {
 
@@ -41,6 +45,24 @@ public class PauseMenuManager : MonoBehaviour
         Debug.Log(SaveManger.instance.fetchSave(SaveManger.saveFileOne));
         Debug.Log(SaveManger.instance.fetchSave("Eos"));
 
+        // Display game saved text
+
+        //StartCoroutine(GameSavedTextDisplay());
+        if (gameSavedTextCoroutine != null)
+        {
+            StopCoroutine(gameSavedTextCoroutine);
+        }
+
+        gameSavedTextCoroutine = GameSavedTextDisplay();
+        StartCoroutine(gameSavedTextCoroutine);
+    }
+
+    private IEnumerator GameSavedTextDisplay()
+    {
+        gameSavedPanel.SetActive(true);
+        yield return new WaitForSecondsRealtime(1f);
+        gameSavedPanel.SetActive(false);
+        gameSavedTextCoroutine = null;
     }
 
     public void OnSettingsPressed()
