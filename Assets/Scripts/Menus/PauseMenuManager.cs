@@ -8,11 +8,12 @@ public class PauseMenuManager : MonoBehaviour
     public static PauseMenuManager instance;
 
     public GameObject pauseMenuPanel;
+    public GameObject lastSelectedButton;
 
     private void Awake()
     {
-        
-        if(instance == null)
+
+        if (instance == null)
         {
             instance = this;
         }
@@ -42,8 +43,10 @@ public class PauseMenuManager : MonoBehaviour
     public void OnExitToMainPressed()
     {
         pauseMenuPanel.SetActive(false);
+        MenuManager.instance.mainMenuManager.mainMenuPanel.SetActive(true);
         SceneManager.LoadScene(Scenes.instance.mainMenuScene);
     }
 
+    public bool isGamePaused() => pauseMenuPanel.activeInHierarchy;
 
 }

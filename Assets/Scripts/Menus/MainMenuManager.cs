@@ -13,14 +13,12 @@ public class MainMenuManager : MonoBehaviour
     public void OnContinuePressed()
     {
         LoadGameScene();
-        mainMenuPanel.SetActive(false);
     }
 
     public void OnNewGamePressed()
     {
         // TODO: If a currentRunData exists, wipe the currentData
         LoadGameScene();
-        mainMenuPanel.SetActive(false);
     }
 
     public void OnOptionsPressed()
@@ -39,6 +37,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void LoadGameScene()
     {
+        mainMenuPanel.SetActive(false);
         SceneManager.LoadScene(Scenes.instance.gameScene);
     }
 }
