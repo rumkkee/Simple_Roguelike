@@ -16,9 +16,9 @@ public class OptionsMenuManager : MonoBehaviour
 
     public void OnExitPressed()
     {
-        lastSelectedButton = MenuManager.instance.eventSystem.currentSelectedGameObject;
+        lastSelectedButton = EventSystem.current.currentSelectedGameObject;
         this.gameObject.SetActive(false);
-        MenuManager.instance.OpenMainMenu();
+        MenuManager.instance.OnOptionsMenuClosed();
     }
 
     public void OnLanguageButtonPressed()
@@ -44,7 +44,7 @@ public class OptionsMenuManager : MonoBehaviour
 
     public void OnMusicVolumeButtonPressed()
     {
-        MenuManager.instance.eventSystem.SetSelectedGameObject(musicVolumeSlider.gameObject);
+        EventSystem.current.SetSelectedGameObject(musicVolumeSlider.gameObject);
         StartCoroutine(OnSliderBeingControlled());
     }
 
@@ -55,12 +55,12 @@ public class OptionsMenuManager : MonoBehaviour
 
     private IEnumerator OnSliderBeingControlled()
     {
-        while(MenuManager.instance.eventSystem.currentSelectedGameObject == musicVolumeSlider.gameObject)
+        while(EventSystem.current.currentSelectedGameObject == musicVolumeSlider.gameObject)
         {
             yield return null;
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                MenuManager.instance.eventSystem.SetSelectedGameObject(musicButton.gameObject);
+                EventSystem.current.SetSelectedGameObject(musicButton.gameObject);
                 yield break;
             }
         }
