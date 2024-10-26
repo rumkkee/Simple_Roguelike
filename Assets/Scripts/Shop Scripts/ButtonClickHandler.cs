@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ButtonClickHandler : MonoBehaviour
 {
-    private PlayerStats playerStats;
+    public PlayerStats playerStats;
     public enum ButtonType
     {
         BuyHealth,
@@ -18,7 +18,6 @@ public class ButtonClickHandler : MonoBehaviour
         SpeakMerchant
     }
 
-    
     // Method that accepts a parameter to handle different button clicks
     //Making all the items cost 2 gold for now, change up after playtesting.
     //Adding 3000 just to see change.
@@ -36,13 +35,14 @@ public class ButtonClickHandler : MonoBehaviour
             
             case 1:
                 Debug.Log("Button 1 clicked! Adding Health!");
+                Debug.Log(playerStats);
                 // Add functionality for Health++
                 if (playerStats.startingCurrency >= 2) {
-                    playerStats.health += 3000;
+                    playerStats.startingHealth += 5000;
                     
                     //Decrement starting currency:
                     playerStats.startingCurrency -= 2;
-                }
+                } 
                 break;
             case 2:
                 Debug.Log("Button 2 clicked! Adding Steps!");

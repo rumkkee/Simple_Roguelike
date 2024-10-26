@@ -148,13 +148,7 @@ public class PlayerStats : ScriptableObject
         startingStepsAvailable = int.Parse(values[11]);
     }
 
-    public void DecreaseHealth(int amount) {
-        health -= amount;
-    }
-    public void DecreaseSteps(int amount) {
-        stepsAvaliable -= amount;
-    }
-    public void DecreaseSpeed(int amount) {
-        speed -= amount;
+    public void IncreaseHealth(int amount) {
+        startingHealth += amount;
     }
 }
