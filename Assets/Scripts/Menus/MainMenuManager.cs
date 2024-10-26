@@ -8,16 +8,19 @@ public class MainMenuManager : MonoBehaviour
 {
 
     public GameObject lastSelectedButton;
+    public GameObject mainMenuPanel;
 
     public void OnContinuePressed()
     {
         LoadGameScene();
+        mainMenuPanel.SetActive(false);
     }
 
     public void OnNewGamePressed()
     {
         // TODO: If a currentRunData exists, wipe the currentData
         LoadGameScene();
+        mainMenuPanel.SetActive(false);
     }
 
     public void OnOptionsPressed()
