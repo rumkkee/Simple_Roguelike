@@ -55,8 +55,9 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnSceneLoaded()
     {
-        bool savedDataExists = false;
-        // Set up Continue button based on game data existing
+        string savedFile = SaveManger.instance.fetchSave(SaveManger.saveFileOne);
+        bool savedDataExists = (savedFile != "") ? true : false;
+        //Debug.Log(savedFile);
 
         if (savedDataExists)
         {
