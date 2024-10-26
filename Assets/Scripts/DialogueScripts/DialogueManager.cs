@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Ink.Runtime;
-using Ink.UnityIntegration;
 using TMPro;
 using UnityEngine;
 
@@ -48,6 +47,7 @@ public class DialogueManager : MonoBehaviour
     private TextAsset[] currentInkFiles; //currently loaded files 
     
     private string currentLanguage = "english"; //default is English, change later with menu buttons 
+    private Language currentLang;
 
     private Dictionary<string, bool> questProgress; //this is to keep track of which NPCs you have talked to
                                                     //and what story elements you triggered 
@@ -89,6 +89,7 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         questProgress = new Dictionary<string, bool>();
         setLanguage(currentLanguage); //initialize with default 
+        setLanguage(currentLang);
     }
 
 
@@ -134,6 +135,35 @@ public class DialogueManager : MonoBehaviour
         debugPrintTextAssets();
         
     }
+
+    public void setLanguage(Language language) {
+        currentLang = language;
+        if (language == Language.English)
+        {
+            currentInkFiles = englishInkFiles;
+        }
+        else if (language == Language.Spanish) { 
+            currentInkFiles= spanishInkFiles;
+        }
+        Debug.Log("language:" + currentLanguage);
+
+        //display current contents of currentInkFiles
+        debugPrintTextAssets();
+    }
+
+    public void toggleLanguage()
+    {
+        if (currentLang == Language.English)
+        {
+            setLanguage(Language.Spanish);
+        }
+        else
+        {
+            setLanguage(Language.English);
+        }
+    }
+
+    public Language getCurrentLanguage() => currentLang;
     
     
     

@@ -36,6 +36,6 @@ public class MainMenuManager : MonoBehaviour
 
     private void LoadGameScene()
     {
-        SceneManager.LoadScene(Scenes.instance.gameScene.name);
+        SceneManager.LoadScene(Scenes.instance.gameScene);
     }
 }

@@ -8,8 +8,8 @@ public class Scenes : MonoBehaviour
 {
     public static Scenes instance;
 
-    public SceneAsset mainMenuScene;
-    public SceneAsset gameScene;
+    public string mainMenuScene;
+    public string gameScene;
 
 
     private void Awake()
