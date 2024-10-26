@@ -18,6 +18,7 @@ public class OptionsMenuManager : MonoBehaviour
     {
         lastSelectedButton = EventSystem.current.currentSelectedGameObject;
         this.gameObject.SetActive(false);
+        MenuManager.instance.OnOptionsMenuClosed();
     }
 
     public void OnLanguageButtonPressed()

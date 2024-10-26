@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,15 @@ public class MainMenuManager : MonoBehaviour
 
     public GameObject lastSelectedButton;
     public GameObject mainMenuPanel;
+
+    public Button continueButton; // Will be selected first if a saved game exists. Else, is made unselectable.
+    public TextMeshProUGUI continueButtonText; // will be greyed if disabled
+    public Button newGameButton; // Will be selected first if no saved game exists
+
+    public void Start()
+    {
+        OnSceneLoaded();
+    }
 
     public void OnContinuePressed()
     {
@@ -40,5 +50,26 @@ public class MainMenuManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         SceneManager.LoadScene(Scenes.instance.gameScene);
+    }
+
+
+    public void OnSceneLoaded()
+    {
+        bool savedDataExists = false;
+        // Set up Continue button based on game data existing
+
+        if (savedDataExists)
+        {
+            continueButton.interactable = true;
+            continueButtonText.color = Color.white;
+            EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
+
+        }
+        else
+        {
+            continueButton.interactable = false;
+            continueButtonText.color = Color.gray;
+            EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
+        }
     }
 }

@@ -28,6 +28,7 @@ public class PauseMenuManager : MonoBehaviour
     public void OnContinuePressed()
     {
         // Call the game time to resume, if paused
+        lastSelectedButton = EventSystem.current.currentSelectedGameObject;
         pauseMenuPanel.SetActive(false);
         PlayerManager.instance.gameObject.SetActive(true);
     }
@@ -39,6 +40,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OnSettingsPressed()
     {
+        lastSelectedButton = EventSystem.current.currentSelectedGameObject;
         MenuManager.instance.OpenOptionsMenu();
     }
 

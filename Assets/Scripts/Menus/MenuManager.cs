@@ -78,6 +78,16 @@ public class MenuManager : MonoBehaviour
         pauseMenuManager.gameObject.SetActive(false);
     }
 
-    
+    public void OnOptionsMenuClosed()
+    {
+        if(SceneManager.GetActiveScene().name == Scenes.instance.gameScene)
+        {
+            OpenPauseMenu();
+        }
+        else
+        {
+            OpenMainMenu();
+        }
+    }
 
 }
