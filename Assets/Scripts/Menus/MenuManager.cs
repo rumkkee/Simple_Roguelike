@@ -40,7 +40,7 @@ public class MenuManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K)) {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
             if (!mainMenuManager.mainMenuPanel.activeSelf)
             {
                 Debug.Log("Eos");
@@ -66,12 +66,11 @@ public class MenuManager : MonoBehaviour
 
     public void OpenPauseMenu()
     {
+        // prevent player from moving
+        PlayerManager.instance.gameObject.SetActive(false);
+
         pauseMenuManager.gameObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(pauseMenuManager.lastSelectedButton);
     }
 
-    public void UpdateEventSystem()
-    {
-        eventSystem = EventSystem.current;
-    }
 }

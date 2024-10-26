@@ -28,6 +28,7 @@ public class PauseMenuManager : MonoBehaviour
     {
         // Call the game time to resume, if paused
         pauseMenuPanel.SetActive(false);
+        PlayerManager.instance.gameObject.SetActive(true);
     }
 
     public void OnSavePressed()
@@ -43,6 +44,8 @@ public class PauseMenuManager : MonoBehaviour
     public void OnExitToMainPressed()
     {
         pauseMenuPanel.SetActive(false);
+        PlayerManager.instance.gameObject.SetActive(true);
+
         MenuManager.instance.mainMenuManager.mainMenuPanel.SetActive(true);
         SceneManager.LoadScene(Scenes.instance.mainMenuScene);
     }
