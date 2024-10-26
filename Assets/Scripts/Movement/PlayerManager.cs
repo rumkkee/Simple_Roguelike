@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerStats stats;
     public int currentHealth;
     public int currentSpeed;
+    public int currentAttack; 
     private InputAction _move;
     private InputAction _action;
     private void OnEnable() => enableControls();
@@ -47,6 +48,9 @@ public class PlayerManager : MonoBehaviour
         _timeManInstance = TimeManager.instance;
         _controls.Main.Backwards.performed += ctx => reverseActions();
         _controls.Main.Action.performed += ctx => action();
+        currentHealth = PlayerStats.startingHealth;
+        currentAttack = stats.startingAttack; 
+        currentSpeed = stats.startingSpeed;
     }
     // enables controls
     public void enableControls()

@@ -21,7 +21,7 @@ public class PlayerStats : ScriptableObject
     //Speed??
     public int speed;
     // How much is our starting health? 
-    public int startingHealth;  
+    public static int startingHealth;  
     // How much Armor does the player has? 
     public static int armorValue;  
     // How much is our starting armor
@@ -32,8 +32,6 @@ public class PlayerStats : ScriptableObject
     public double startingCurrency = 0.00;
     public int startingStepsTaken = 0;
     public int startingStepsAvailable = 999;
-    public int currentHealth;
-    public int currentSpeed;
 
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Items list for storing items.

@@ -18,8 +18,9 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 targetPos;
     [HideInInspector]
     public Vector3Int currentGridPos;
+    public PlayerActions actions;
     private TimeManager _timeManInstance;
-    private Collider2D _objectCollider;
+    private bool _isAttacked;
 
     public delegate void PlayerMove(int steps);
     public static PlayerMove CurrentStepsUpdated;
@@ -28,7 +29,10 @@ public class PlayerMovement : MonoBehaviour
     {
         // Get the time manger 
         _timeManInstance = TimeManager.instance;
-        _objectCollider = GetComponent<Collider2D>();
+
+        if(actions == null) {
+            Debug.LogError("player actions is null");
+        }
         //currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
     }
     private void Update()
@@ -93,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (EnemyManager.instance.enemyTurn)
         {
+            _isAttacked = false;
             return false;
         }
 
@@ -108,21 +113,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //
-
-        float rayDistance = 1.0f;
-
-        Vector2 rayOrigin = _objectCollider.bounds.center;
-        // Raycast in the given direction (the direction the player wants to move)
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, direction, rayDistance, enemyLayerMask);
-
-        // Check if there's an enemy in the direction we're trying to move
-        if (hit.collider != null && hit.collider.CompareTag("Enemy"))
-        {
-            Debug.Log("Enemy detected in direction: " + direction);
-            // We would attack here actually.. 
+        Debug.Log(actions);
+        Debug.Log(PlayerManager.instance.currentAttack);
+        Debug.Log(direction);
+        if (actions.checkAttack(PlayerManager.instance.currentAttack, direction, _isAttacked)) {
+            _isAttacked = true;
+            StartCoroutine(EnemyManager.instance.doAllEnemyActions(transform));
             return false;
         }
-
         return true;
     }
     public bool MoveToPosition(Vector3 pos)

@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 5182862434107161078}
   - component: {fileID: 2102170497621296551}
   m_Layer: 6
-  m_Name: PlaceHolderEnemy1
+  m_Name: PlaceHolderEnemy2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -331,7 +331,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 821b190a5cd53374d92afca4bbc8da87, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.10866976, a: 1}
+  m_Color: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathfinding: {fileID: 5182862434107161078}
   enemyID: 0
-  enemyStats: {fileID: 11400000, guid: 370da873cb0bd1f498c95eac62486fca, type: 2}
+  enemyStats: {fileID: 11400000, guid: 3da73ddf6b5dbb147a94c4163985516c, type: 2}
   currentHealth: 0
   healthBar: {fileID: 6412944011892709227}
 --- !u!114 &5182862434107161078
@@ -374,7 +374,7 @@ MonoBehaviour:
   wallTiles: {fileID: 0}
   EnemyMoveSpeed: 5
   isMoving: 0
-  priority: 0
+  priority: 1
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64

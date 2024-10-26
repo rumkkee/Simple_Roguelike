@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f036ab6a1562045bf2434352b354bd, type: 3}
+  m_Name: PlayerStats
+  m_EditorClassIdentifier: 
+  stepsAvaliable: 0
+  health: 4
+  speed: 0
+  startingAttack: 1
+  startingSpeed: 1
+  startingCurrency: 0
+  startingStepsTaken: 196
+  startingStepsAvailable: 999
+  healthItems: []
+  damageItems: []
+  armorItems: []
+  speedItems: []
