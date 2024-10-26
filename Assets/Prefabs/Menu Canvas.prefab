@@ -611,7 +611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43e7f1047da3024197b4feceb2fbee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastSelectedButton: {fileID: 0}
+  lastSelectedButton: {fileID: 357145555390240696}
   mainMenuPanel: {fileID: 1384484335484838954}
 --- !u!1 &1786899207124315672
 GameObject:
@@ -2111,8 +2111,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2943916152807492133}
-  - {fileID: 5055096450636784664}
   - {fileID: 6849683358226042500}
+  - {fileID: 5055096450636784664}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5121,6 +5121,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8a743c7032f7cd4ea2fee1567a3b276, type: 3}
+--- !u!1 &357145555390240696 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8078015094932105595, guid: b8a743c7032f7cd4ea2fee1567a3b276, type: 3}
+  m_PrefabInstance: {fileID: 8425683018664836803}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7221393388647018676 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1214143509064715895, guid: b8a743c7032f7cd4ea2fee1567a3b276, type: 3}

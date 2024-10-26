@@ -26,15 +26,16 @@ public class MenuManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.activeSceneChanged += OnSceneLoaded;
 
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    private void OnSceneLoaded(Scene oldScene, Scene newScene)
     {
-        if (scene.ToString() == Scenes.instance.mainMenuScene.ToString())
+        if (newScene.name == Scenes.instance.mainMenuScene.ToString())
         {
-
+            GameObject mainMenuButton = MenuManager.instance.mainMenuManager.lastSelectedButton;
+            EventSystem.current.SetSelectedGameObject(mainMenuButton);
         }
     }
 
@@ -61,7 +62,6 @@ public class MenuManager : MonoBehaviour
     {
         mainMenuManager.gameObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(mainMenuManager.lastSelectedButton);
-        //EventSystem.current.la
     }
 
     public void OpenPauseMenu()
@@ -72,5 +72,12 @@ public class MenuManager : MonoBehaviour
         pauseMenuManager.gameObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(pauseMenuManager.lastSelectedButton);
     }
+
+    public void ClosePauseMenu()
+    {
+        pauseMenuManager.gameObject.SetActive(false);
+    }
+
+    
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -23,8 +24,8 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnOptionsPressed()
     {
-
-        lastSelectedButton = MenuManager.instance.eventSystem.currentSelectedGameObject;
+        
+        lastSelectedButton = EventSystem.current.currentSelectedGameObject;
         MenuManager.instance.OpenOptionsMenu();
     }
 
