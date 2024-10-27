@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267a9d6048bfbf743a4594034c89d896, type: 3}
   m_Name: Step potion
   m_EditorClassIdentifier: 
-  type: 0
-  price: 0
-  delta: 0
+  type: 2
+  price: 3
+  delta: 5

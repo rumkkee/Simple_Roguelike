@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Health Potion
   m_EditorClassIdentifier: 
   type: 0
-  price: 0
-  delta: 0
+  price: 5
+  delta: 2
