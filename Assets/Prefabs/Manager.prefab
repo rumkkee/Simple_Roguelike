@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 329038779459057804}
   - component: {fileID: 8709598895672344238}
   - component: {fileID: 4230435552961615396}
+  - component: {fileID: 5817100364209978369}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -90,3 +91,20 @@ MonoBehaviour:
   rooms: []
   floorResources: {fileID: 9018631834194142861, guid: c042986323cbc84409920305ab8360e2, type: 3}
   developerDoorToggle: 1
+--- !u!114 &5817100364209978369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805141292191700271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7005f482d8b4de40b268c1ab8e3ece5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partcles:
+  - {fileID: 5901345825675129238, guid: e3d290ee317032f4493a096a6757fb68, type: 3}
+  - {fileID: 1377995218059552909, guid: 3f180a0e0d59e844b8b8e8f1a2333e5d, type: 3}
+  - {fileID: 1377995218059552909, guid: 8b84b402e04b32d439758142e87d1697, type: 3}
+  - {fileID: 8730878153197414286, guid: e29135570ce2e824ea368d1c9554f85c, type: 3}
