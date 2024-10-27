@@ -50,7 +50,7 @@ MonoBehaviour:
   - {fileID: 3019559883109214031, guid: e8c82fd86757e624d860093ae9e3ee66, type: 3}
   puzzleRooms:
   - {fileID: 2674208039893315860, guid: dbb1e6e936ac0244489afd4318b71276, type: 3}
-  shopRoom: {fileID: 0}
+  shopRoom: {fileID: 3209088738045059298, guid: c3f5f9d8711e0264cbe800dbe960312a, type: 3}
   treasureRoom: {fileID: 1410207637895938537, guid: eb8ccd24c2782f2469d4c8ae613dab63, type: 3}
   doorTileOpen: {fileID: 11400000, guid: 2be4dc046b43d4143b66a462eb0a928e, type: 2}
   doorTileClosed: {fileID: 11400000, guid: 5cdc3cda28a168c4ca00d4babdbd46e4, type: 2}

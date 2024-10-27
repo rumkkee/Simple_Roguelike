@@ -42,6 +42,10 @@ public class FloorResources : MonoBehaviour
         else if(roomNode.roomType == RoomType.treasureRoom){
             return treasureRoom;
         }
+        else if(roomNode.roomType == RoomType.shop)
+        {
+            return shopRoom;
+        }
         else if(roomNode.roomType == RoomType.firstRoom)
         {
             return startingRoomPrefab;
