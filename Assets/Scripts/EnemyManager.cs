@@ -61,7 +61,7 @@ public class EnemyManager : MonoBehaviour
         {
             yield return StartCoroutine(item.Value.pathfinding.pathfindTo(player));
         }
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.05f);
         enemyTurn = false;
 
         yield break;

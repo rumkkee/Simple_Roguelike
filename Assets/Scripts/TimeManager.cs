@@ -30,6 +30,11 @@ public class TimeManager : MonoBehaviour
     public void Start() {
         _man = PlayerManager.instance.statsMan;
     }
+    public void clear() {
+        _futureActions = new Stack<Action>();
+        _previousActions = new Stack<Action>();
+        _currentActionIndex = 0;
+    }
     public void revertAction()
     {
         if (_previousActions.Count == 0)

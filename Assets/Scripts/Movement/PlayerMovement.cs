@@ -56,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
             currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
             _timeManInstance.IncrementIndex();
             _timeManInstance.addAction(movement);
-            //CurrentStepsUpdated(_timeManInstance.)
         }
     }
     public static Vector2 SnapCardinal(Vector2 inputDir)
@@ -111,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
         if (EnemyManager.instance.enemyTurn)
         {
             _isAttacked = false;
+            Debug.Log("Its the enemies turn");
             return false;
         }
 
@@ -118,10 +118,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (FloorManager.instance.doorsAreOpen && activeRoom.doorTilemap.HasTile(gridPos)) // also check if doors are open
         {
+            Debug.Log("We can go there!");
             return true;
         }
         else if (!activeRoom.groundTilemap.HasTile(gridPos) || activeRoom.collisionTilemap.HasTile(gridPos))
         {
+            Debug.Log($"We can't go in dir:{direction}? its blocked: IsWall: {activeRoom.collisionTilemap.HasTile(gridPos)} or noGround: {!activeRoom.groundTilemap.HasTile(gridPos)}?");
             return false;
         }
 
@@ -129,6 +131,7 @@ public class PlayerMovement : MonoBehaviour
         if (actions.checkAttack(_man.currentAttack, direction, _isAttacked))
         {
             _isAttacked = true;
+            Debug.Log("We Enemy is right in front or behind us");
             StartCoroutine(EnemyManager.instance.doAllEnemyActions(transform));
             return false;
         }
@@ -138,15 +141,18 @@ public class PlayerMovement : MonoBehaviour
     {
 
         // take a direction!
-        Vector2 direction = new Vector2(pos.x - transform.position.x, pos.y - transform.position.y);
+        Vector2 direction = new Vector2(pos.x - transform.position.x, pos.y - transform.position.y).normalized;
         if (CanMove(direction))
         {
-            transform.position = pos;
-            currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
+            // transform.position = pos;
+            // currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
+            StartCoroutine(FullscreenFXController.instance.TimeFX());
+            Move(direction);
             return true;
         }
         else
         {
+            Debug.Log("We cannot move");
             return false;
         }
     }

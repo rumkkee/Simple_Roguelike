@@ -28,10 +28,10 @@ public class FloorManager : MonoBehaviour
 
     private void Update()
     {
-        if (developerDoorToggle && Input.GetKeyDown(KeyCode.K))
-        {
-            ToggleDoors();
-        }
+        // if (developerDoorToggle && Input.GetKeyDown(KeyCode.K))
+        // {
+        //     ToggleDoors();
+        // }
     }
 
     public void CloseDoors()
