@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorResources: {fileID: 9018631834194142861, guid: c042986323cbc84409920305ab8360e2, type: 3}
-  roomCount: 12
-  maxPuzzleRooms: 2
+  roomCount: 32
+  maxPuzzleRooms: 3
   seed: 1998256269

@@ -8,15 +8,15 @@ using UnityEngine.Tilemaps;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
-    private TimeManager _timeManInstance;
-    private PlayerControls _controls;
+    public PlayerStatsManager statsMan;
     public PlayerMovement Movement;
     public PlayerCamera Camera;
-    public PlayerStats stats;
-    public int currentHealth;
-    public int currentSpeed;
-    private InputAction _move;
+    //public PlayerStats stats;
+
+    private TimeManager _timeManInstance;
+    private PlayerControls _controls;
     private InputAction _action;
+    private InputAction _move;
     private void OnEnable() => enableControls();
     private void OnDisable() => disableControls();
     private void Awake()
@@ -34,13 +34,14 @@ public class PlayerManager : MonoBehaviour
         {
             Movement = GetComponent<PlayerMovement>();
         }
-        if(Camera == null) 
+        if (Camera == null)
         {
             Camera = GetComponent<PlayerCamera>();
         }
         _move = _controls.Main.Movement;
         _action = _controls.Main.Action;
-        createPlayerStats();
+
+        // createPlayerStats();
     }
     private void Start()
     {
@@ -81,7 +82,17 @@ public class PlayerManager : MonoBehaviour
     public void action()
     {
         // Debug.Log("Action done!");
-        
+
+    }
+
+    public void switchPotions()
+    {
+
+    }
+
+    public void usePotion()
+    {
+
     }
 
     private void reverseActions()
@@ -91,16 +102,8 @@ public class PlayerManager : MonoBehaviour
         enableControls();
     }
 
-    public void createPlayerStats()
+    public void changeStats()
     {
-        if(stats == null)
-        {
-            PlayerStats newStats = new PlayerStats();
-            stats = newStats;
-        }
-    }
 
-    public void changeStats() {
-        
     }
 }

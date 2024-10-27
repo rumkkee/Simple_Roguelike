@@ -8,27 +8,14 @@ public class HealthUI : MonoBehaviour
     // Update the count of health UI icons based on player's max health
     // Update this on start
     // Update this whenever the player's max health is changed
-
     // Update the players's current health whenever damaged or healed
 
     private List<Image> healthMarkers;
-    private int currentHealth = 0;
+    private int healthNumUI = 0;
 
     public Image healthMarkerPrefab;
 
-    public void Start()
-    {
-        int maxHealth = PlayerManager.instance.stats.health;
-        setMaxHealthDisplayed(maxHealth);
-        currentHealth = maxHealth;
-
-        int startingHealth = PlayerStats.startingHealth;
-        setCurrentHealthDisplayed(startingHealth);
-
-        PlayerStats.MaxHealthUpdated += setMaxHealthDisplayed;
-        PlayerStats.StartingHealthUpdated += setCurrentHealthDisplayed;
-    }
-
+    // Initializes or adjusts the number of health markers
     public void setMaxHealthDisplayed(int maxHealth)
     {
         if (healthMarkers == null)
@@ -36,62 +23,46 @@ public class HealthUI : MonoBehaviour
             healthMarkers = new List<Image>();
         }
 
-        if (healthMarkers.Count == maxHealth)
+        // Adjust health markers to match maxHealth
+        if (healthMarkers.Count < maxHealth)
         {
-            return;
-        }
-        else if (healthMarkers.Count < maxHealth)
-        {
-            while (healthMarkers.Count != maxHealth)
+            while (healthMarkers.Count < maxHealth)
             {
                 Image healthMarker = Instantiate(healthMarkerPrefab, this.transform);
                 healthMarkers.Add(healthMarker);
             }
         }
-        else
+        else if (healthMarkers.Count > maxHealth)
         {
-            while (healthMarkers.Count != maxHealth)
+            while (healthMarkers.Count > maxHealth)
             {
-
                 Image healthMarker = healthMarkers[healthMarkers.Count - 1];
-                healthMarkers.Remove(healthMarker);
+                healthMarkers.RemoveAt(healthMarkers.Count - 1);
                 Destroy(healthMarker);
-
             }
+        }
+
+        // Update healthNumUI to reflect the maximum health
+        healthNumUI = maxHealth;
+
+        // Set all health markers to active color
+        foreach (var healthMarker in healthMarkers)
+        {
+            healthMarker.color = Color.white;
         }
     }
 
+    // Updates the displayed health markers based on current health
     public void setCurrentHealthDisplayed(int currentHealth)
     {
-        if (this.currentHealth == currentHealth)
-        {
-            return;
-        }
-        else if (this.currentHealth < currentHealth)
-        {
-            while (this.currentHealth != currentHealth)
-            {
-                Image topHealthMarker = healthMarkers[this.currentHealth - 1];
-                topHealthMarker.color = Color.white;
-                this.currentHealth++;
-            }
-        }
-        else
-        {
-            while (this.currentHealth != currentHealth)
-            {
-                Image topHealthMarker = healthMarkers[this.currentHealth - 1];
-                topHealthMarker.color = Color.gray;
-                this.currentHealth--;
-            }
-            
-        }
-    }
+        if (healthNumUI == currentHealth) return;
 
-    private void OnDestroy()
-    {
-        PlayerStats.MaxHealthUpdated -= setMaxHealthDisplayed;
-        PlayerStats.StartingHealthUpdated -= setCurrentHealthDisplayed;
+        for (int i = 0; i < healthMarkers.Count; i++)
+        {
+            healthMarkers[i].color = (i < currentHealth) ? Color.white : Color.black;
+        }
+
+        healthNumUI = currentHealth;
     }
 
 }

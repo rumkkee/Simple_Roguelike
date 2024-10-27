@@ -18,17 +18,23 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 targetPos;
     [HideInInspector]
     public Vector3Int currentGridPos;
+    public PlayerActions actions;
     private TimeManager _timeManInstance;
-    private Collider2D _objectCollider;
+    private PlayerStatsManager _man;
+    private bool _isAttacked;
 
     public delegate void PlayerMove(int steps);
-    public static PlayerMove CurrentStepsUpdated;
 
     private void Start()
     {
         // Get the time manger 
         _timeManInstance = TimeManager.instance;
-        _objectCollider = GetComponent<Collider2D>();
+        _man = PlayerManager.instance.statsMan;
+
+        if (actions == null)
+        {
+            Debug.LogError("player actions is null");
+        }
         //currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
     }
     private void Update()
@@ -43,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         if (Vector3.Distance(transform.position, targetPos) < float.Epsilon)
         {
             isMoving = false;
-             Debug.Log($"We moved cells: {currentGridPos}");
+            Debug.Log($"We moved cells: {currentGridPos}");
             Action movement = new Action(Action.TypeOfAction.Movement, currentGridPos, MoveToPosition);
             StartCoroutine(EnemyManager.instance.doAllEnemyActions(transform));
             currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
@@ -79,20 +85,21 @@ public class PlayerMovement : MonoBehaviour
             }
             targetPos = transform.position + movementScale;
             isMoving = true;
-            PlayerManager.instance.stats.stepTaken();
+            _man.updateSteps(1); ;
             // Debug.Log($"Lets move?: isMoving? {isMoving}");
         }
     }
     public bool CanMove(Vector2 direction)
     {
-        if(PlayerManager.instance.stats.remainingSteps() <= 0)
+        if (_man.currentSteps <= 0)
         {
-            //Debug.Log("Become unalive");
+            Debug.Log("Become unalive");
             return false;
         }
 
         if (EnemyManager.instance.enemyTurn)
         {
+            _isAttacked = false;
             return false;
         }
 
@@ -107,22 +114,13 @@ public class PlayerMovement : MonoBehaviour
             return false;
         }
 
-        //
 
-        float rayDistance = 1.0f;
-
-        Vector2 rayOrigin = _objectCollider.bounds.center;
-        // Raycast in the given direction (the direction the player wants to move)
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, direction, rayDistance, enemyLayerMask);
-
-        // Check if there's an enemy in the direction we're trying to move
-        if (hit.collider != null && hit.collider.CompareTag("Enemy"))
+        if (actions.checkAttack(_man.currentAttack, direction, _isAttacked))
         {
-            Debug.Log("Enemy detected in direction: " + direction);
-            // We would attack here actually.. 
+            _isAttacked = true;
+            StartCoroutine(EnemyManager.instance.doAllEnemyActions(transform));
             return false;
         }
-
         return true;
     }
     public bool MoveToPosition(Vector3 pos)
@@ -135,7 +133,9 @@ public class PlayerMovement : MonoBehaviour
             transform.position = pos;
             currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }

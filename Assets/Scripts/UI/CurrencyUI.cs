@@ -7,8 +7,8 @@ public class CurrencyUI : MonoBehaviour
 {
     public TextMeshProUGUI currencyText;
 
-    public void updateCurrencyDisplayed(int currency)
+    public void updateCurrencyDisplayed(long currency)
     {
-        currencyText.text = currency.ToString();
+        currencyText.text = "$" + currency.ToString();
     }
 }

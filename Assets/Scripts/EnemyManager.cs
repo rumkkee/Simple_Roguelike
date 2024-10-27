@@ -10,6 +10,7 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager instance;
     [HideInInspector]
     public Dictionary<int, EnemyEntity> enemyDict;
+    public Dictionary<Vector3Int, int> enemyPositions;
     public bool enemyTurn;
     public void Awake()
     {
@@ -22,6 +23,7 @@ public class EnemyManager : MonoBehaviour
         // Okay then init
         instance = this;
         enemyDict = new();
+        enemyPositions = new();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -31,14 +33,16 @@ public class EnemyManager : MonoBehaviour
         enemyDict.Add(ID, newEnemy);
     }
 
-    public void deleteEnemy(int ID)
+    public void deleteEnemy(int ID, Vector3Int currentPos)
     {
         EnemyEntity retval;
         if (enemyDict.TryGetValue(ID, out retval))
         {
+            enemyDict.Remove(ID);
+            enemyPositions.Remove(currentPos);
             Destroy(retval.gameObject);
             // De list the key..
-            enemyDict.Remove(ID);
+            
         }
         else
         {
@@ -60,5 +64,18 @@ public class EnemyManager : MonoBehaviour
         enemyTurn = false;
 
         yield break;
+    }
+    public bool TryMoveEnemy(int enemyID, Vector3Int currentPos, Vector3Int newPos)
+    {
+        // Check if the new position is already occupied by a different enemy
+        if (enemyPositions.TryGetValue(newPos, out int occupyingEnemyID) && occupyingEnemyID != enemyID)
+        {
+            return false; // Position occupied by another enemy, move fails
+        }
+
+        // Update positions: remove old, add new
+        enemyPositions.Remove(currentPos);
+        enemyPositions[newPos] = enemyID;
+        return true;
     }
 }

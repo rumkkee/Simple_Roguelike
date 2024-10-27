@@ -15,7 +15,9 @@ GameObject:
   - component: {fileID: 1172304579182323835}
   - component: {fileID: 6568324391289941857}
   - component: {fileID: 231832987689413816}
-  m_Layer: 0
+  - component: {fileID: 5121789267016706016}
+  - component: {fileID: 5498956538265269402}
+  m_Layer: 3
   m_Name: PlayerCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -78,8 +80,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 99
-  m_Sprite: {fileID: 21300000, guid: 821b190a5cd53374d92afca4bbc8da87, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 1561837845, guid: a770b88600e49bf4996e7406558ffed9, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -151,7 +153,7 @@ BoxCollider2D:
   m_Offset: {x: 0.5, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -173,9 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538926c9e4db9b047824a0aad91ca912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statsMan: {fileID: 5498956538265269402}
   Movement: {fileID: 6568324391289941857}
   Camera: {fileID: 0}
-  stats: {fileID: 0}
 --- !u!114 &6568324391289941857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,14 +190,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257b5e31b2c901d4b961b74d3aa38936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  activeRoom: {fileID: 0}
+  moveSpeed: 10
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
   isMoving: 0
   targetPos: {x: 0, y: 0, z: 0}
   currentGridPos: {x: 0, y: 0, z: 0}
+  actions: {fileID: 5121789267016706016}
 --- !u!114 &231832987689413816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +211,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  cameraLayer:
+--- !u!114 &5121789267016706016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6319103495921026832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc3a205c669e4fb4282ebf41e8d5b1b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+--- !u!114 &5498956538265269402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6319103495921026832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 216434953e7e8a1498d20a73ea737634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: edc9bde9d2ef3d6479e50e479ec06582, type: 2}
+  healthUI: {fileID: 0}
+  currencyUI: {fileID: 0}
+  stepUI: {fileID: 0}
+  currentHealth: 0
+  currentSpeed: 0
+  currentAttack: 0
+  currentSteps: 0
