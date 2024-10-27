@@ -49,19 +49,23 @@ public class PartcleManager : MonoBehaviour
     }
     public void makePartcleFX(PartcleType type, Transform pos)
     {
+        makePartcleFX(type, transform.position);
+    }
+    public void makePartcleFX(PartcleType type, Vector3 pos)
+    {
         switch (type)
         {
             case PartcleType.Blood:
-                Instantiate(partcles[(int)PartcleType.Blood], pos, true);
+                Instantiate(partcles[(int)PartcleType.Blood], pos, Quaternion.identity);
                 break;
             case PartcleType.DustLeft:
-                Instantiate(partcles[(int)PartcleType.DustLeft], pos, true);
+                Instantiate(partcles[(int)PartcleType.DustLeft], pos, Quaternion.identity);
                 break;
             case PartcleType.DustRight:
-                Instantiate(partcles[(int)PartcleType.DustRight], pos, true);
+                Instantiate(partcles[(int)PartcleType.DustRight], pos, Quaternion.identity);
                 break;
             case PartcleType.Treasure:
-                Instantiate(partcles[(int)PartcleType.Treasure], pos, true);
+                Instantiate(partcles[(int)PartcleType.Treasure], pos, Quaternion.identity);
                 break;
             default:
                 break;

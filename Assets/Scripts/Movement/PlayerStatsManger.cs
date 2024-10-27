@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -43,8 +44,16 @@ public class PlayerStatsManager : MonoBehaviour
         healthUI.setMaxHealthDisplayed(stats.startingHealth);
         currencyUI.updateCurrencyDisplayed(stats.totalCurrency);
     }
-    public void takeDamage(int amount)
+    public void takeDamage(int amount, int enemySpeed)
     {
+        int calculation = currentSpeed - enemySpeed;
+        if(calculation < 0) {
+            int roll = UnityEngine.Random.Range(0, 2);
+            if(roll == 0) {
+                // No Hit today!
+                return; 
+            }
+        }
         currentHealth -= amount;
         currentHealth = Math.Max(currentHealth, 0);
         healthUI.setCurrentHealthDisplayed(currentHealth);
