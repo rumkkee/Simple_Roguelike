@@ -30,9 +30,14 @@ public class EnemyEntity : MonoBehaviour
 
     public void takeDamage(int amount) {
         currentHealth -= amount;
-        currentHealth = math.max(currentHealth , 0);
+        currentHealth = math.max(currentHealth, 0);
         updateHealthBar();
         if(currentHealth == 0) {
+            int rand = UnityEngine.Random.Range(3,10);
+            for (int i = 0; i < rand; i++)
+            {
+                LootManager.instance.InstantiateLoot(_collider.bounds.center);
+            }
             PartcleManager.instance.makePartcleFX(PartcleManager.PartcleType.Blood, _collider.bounds.center);
             EnemyManager.instance.deleteEnemy(enemyID, Vector3Int.CeilToInt(transform.position));
         }

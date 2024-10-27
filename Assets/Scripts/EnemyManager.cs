@@ -38,6 +38,7 @@ public class EnemyManager : MonoBehaviour
         EnemyEntity retval;
         if (enemyDict.TryGetValue(ID, out retval))
         {
+           
             enemyDict.Remove(ID);
             enemyPositions.Remove(currentPos);
             Destroy(retval.gameObject);
