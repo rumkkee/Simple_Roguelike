@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e775dd2335568664c9d495b0017f8852, type: 3}
   m_Name: Coin
   m_EditorClassIdentifier: 
+  collectableSprite: {fileID: 0}
   itemID: COIN
   type: 0
   itemValue: 1
+  dropChance: 40

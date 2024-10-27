@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_PixelationShader
-  m_Shader: {fileID: -6465566751694194690, guid: bc995fa81bf2d374fb334bc491ed0228, type: 3}
+  m_Name: Damage
+  m_Shader: {fileID: -6465566751694194690, guid: 00a977ca93ba3c4419179cd4f58f04e1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -36,8 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats:
-    - _ColorResolution: 32
-    - _DitherSpread: 0.2
-    m_Colors: []
+    m_Floats: []
+    m_Colors:
+    - _uColor: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
