@@ -20,17 +20,19 @@ public class PlayerMovement : MonoBehaviour
     public Vector3Int currentGridPos;
     public PlayerActions actions;
     private TimeManager _timeManInstance;
+    private PlayerStatsManager _man;
     private bool _isAttacked;
 
     public delegate void PlayerMove(int steps);
-    public static PlayerMove CurrentStepsUpdated;
 
     private void Start()
     {
         // Get the time manger 
         _timeManInstance = TimeManager.instance;
+        _man = PlayerManager.instance.statsMan;
 
-        if(actions == null) {
+        if (actions == null)
+        {
             Debug.LogError("player actions is null");
         }
         //currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         if (Vector3.Distance(transform.position, targetPos) < float.Epsilon)
         {
             isMoving = false;
-             Debug.Log($"We moved cells: {currentGridPos}");
+            Debug.Log($"We moved cells: {currentGridPos}");
             Action movement = new Action(Action.TypeOfAction.Movement, currentGridPos, MoveToPosition);
             StartCoroutine(EnemyManager.instance.doAllEnemyActions(transform));
             currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
@@ -83,13 +85,13 @@ public class PlayerMovement : MonoBehaviour
             }
             targetPos = transform.position + movementScale;
             isMoving = true;
-            PlayerManager.instance.stats.stepTaken();
+            _man.currentSteps++; ;
             // Debug.Log($"Lets move?: isMoving? {isMoving}");
         }
     }
     public bool CanMove(Vector2 direction)
     {
-        if(PlayerManager.instance.stats.remainingSteps() <= 0)
+        if ((_man.stats.startingStepsAvailable - _man.currentSteps) <= 0)
         {
             //Debug.Log("Become unalive");
             return false;
@@ -112,11 +114,9 @@ public class PlayerMovement : MonoBehaviour
             return false;
         }
 
-        //
-        Debug.Log(actions);
-        Debug.Log(PlayerManager.instance.currentAttack);
-        Debug.Log(direction);
-        if (actions.checkAttack(PlayerManager.instance.currentAttack, direction, _isAttacked)) {
+
+        if (actions.checkAttack(_man.currentAttack, direction, _isAttacked))
+        {
             _isAttacked = true;
             StartCoroutine(EnemyManager.instance.doAllEnemyActions(transform));
             return false;
@@ -133,7 +133,9 @@ public class PlayerMovement : MonoBehaviour
             transform.position = pos;
             currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }

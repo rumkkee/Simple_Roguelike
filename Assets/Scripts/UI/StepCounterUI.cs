@@ -9,22 +9,22 @@ public class StepCounterUI : MonoBehaviour
 
     public TextMeshProUGUI stepsRemainingText;
 
-    public void Start()
-    {
-        PlayerStats.StepsRemainingUpdated += updateStepsDisplayed;
+    // public void Start()
+    // {
+    //     PlayerStats.StepsRemainingUpdated += updateStepsDisplayed;
 
-        int remainingSteps = PlayerManager.instance.stats.remainingSteps();
-        updateStepsDisplayed(remainingSteps);
-    }
+    //     int remainingSteps = PlayerManager.instance.stats.remainingSteps();
+    //     updateStepsDisplayed(remainingSteps);
+    // }
 
-    public void updateStepsDisplayed(int stepsRemaining)
-    {
-        stepsRemainingText.text = stepsRemaining.ToString();
-    }
+    // public void updateStepsDisplayed(int stepsRemaining)
+    // {
+    //     stepsRemainingText.text = stepsRemaining.ToString();
+    // }
 
-    public void OnDestroy()
-    {
-        PlayerStats.StepsRemainingUpdated -= updateStepsDisplayed;
-    }
+    // public void OnDestroy()
+    // {
+    //     PlayerStats.StepsRemainingUpdated -= updateStepsDisplayed;
+    // }
 
 }

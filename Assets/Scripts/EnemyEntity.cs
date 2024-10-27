@@ -28,11 +28,10 @@ public class EnemyEntity : MonoBehaviour
 
     public void takeDamage(int amount) {
         currentHealth -= amount;
-        math.min(currentHealth , 0);
+        currentHealth = math.min(currentHealth , 0);
         updateHealthBar();
         if(currentHealth == 0) {
-            EnemyManager.instance.deleteEnemy(enemyID);
-            Destroy(gameObject);
+            EnemyManager.instance.deleteEnemy(enemyID, Vector3Int.CeilToInt(transform.position));
         }
     }
 

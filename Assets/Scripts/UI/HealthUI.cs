@@ -8,25 +8,21 @@ public class HealthUI : MonoBehaviour
     // Update the count of health UI icons based on player's max health
     // Update this on start
     // Update this whenever the player's max health is changed
-
     // Update the players's current health whenever damaged or healed
 
     private List<Image> healthMarkers;
-    private int currentHealth = 0;
+    private int healthNumUI = 0;
 
     public Image healthMarkerPrefab;
 
     public void Start()
     {
-        int maxHealth = PlayerManager.instance.stats.health;
-        setMaxHealthDisplayed(maxHealth);
-        currentHealth = maxHealth;
+        // int maxHealth = PlayerManager.instance.currentHealth;
+        // setMaxHealthDisplayed(maxHealth);
+        // healthNumUI = maxHealth;
 
-        int startingHealth = PlayerStats.startingHealth;
-        setCurrentHealthDisplayed(startingHealth);
-
-        PlayerStats.MaxHealthUpdated += setMaxHealthDisplayed;
-        PlayerStats.StartingHealthUpdated += setCurrentHealthDisplayed;
+        // int startingHealth = .;
+        // setCurrentHealthDisplayed(startingHealth);
     }
 
     public void setMaxHealthDisplayed(int maxHealth)
@@ -63,26 +59,26 @@ public class HealthUI : MonoBehaviour
 
     public void setCurrentHealthDisplayed(int currentHealth)
     {
-        if (this.currentHealth == currentHealth)
+        if (healthNumUI == currentHealth)
         {
             return;
         }
-        else if (this.currentHealth < currentHealth)
+        else if (healthNumUI < currentHealth)
         {
-            while (this.currentHealth != currentHealth)
+            while (healthNumUI != currentHealth)
             {
-                Image topHealthMarker = healthMarkers[this.currentHealth - 1];
+                Image topHealthMarker = healthMarkers[healthNumUI - 1];
                 topHealthMarker.color = Color.white;
-                this.currentHealth++;
+                healthNumUI++;
             }
         }
         else
         {
-            while (this.currentHealth != currentHealth)
+            while (healthNumUI != currentHealth)
             {
-                Image topHealthMarker = healthMarkers[this.currentHealth - 1];
-                topHealthMarker.color = Color.gray;
-                this.currentHealth--;
+                Image topHealthMarker = healthMarkers[healthNumUI - 1];
+                topHealthMarker.color = Color.black;
+                healthNumUI--;
             }
             
         }
@@ -90,8 +86,8 @@ public class HealthUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerStats.MaxHealthUpdated -= setMaxHealthDisplayed;
-        PlayerStats.StartingHealthUpdated -= setCurrentHealthDisplayed;
+        // PlayerStats.MaxHealthUpdated -= setMaxHealthDisplayed;
+        // PlayerStats.StartingHealthUpdated -= setCurrentHealthDisplayed;
     }
 
 }

@@ -24,6 +24,7 @@ public class EnemyPathfinding : MonoBehaviour
     private Vector3Int _currentTile;
     private TimeManager _timeManger;
     private Collider2D _objectCollider;
+    private EnemyEntity _entity;
     public LayerMask enemyLayerMask;
     // Which directions? 
 
@@ -38,8 +39,10 @@ public class EnemyPathfinding : MonoBehaviour
         _timeManger = TimeManager.instance;
     }
 
-    public void Start() {
+    public void Start()
+    {
         _objectCollider = GetComponent<Collider2D>();
+        _entity = GetComponent<EnemyEntity>();
 
     }
 
@@ -48,7 +51,6 @@ public class EnemyPathfinding : MonoBehaviour
         // Gets Current tile. 
         Vector3 pos = transform.position;
         _currentTile = groundTiles.WorldToCell(pos);
-        Debug.Log(target);
 
         // we only need to run this when something major changes.. 
         List<Vector3Int> ptp = _getPath(target);
@@ -66,6 +68,13 @@ public class EnemyPathfinding : MonoBehaviour
             // Debug.Log("Melee range of the player.. Imagine it attacking");
             yield break;
         }
+        if (!EnemyManager.instance.TryMoveEnemy(_entity.enemyID, _currentTile, ptp[1]))
+        {
+            Debug.Log("Move blocked by another enemy.");
+            yield break; // Move fails, so we stop here
+        }
+
+
         yield return StartCoroutine(MoveToPosition(groundTiles.CellToWorld(ptp[1])));
     }
 
@@ -118,7 +127,7 @@ public class EnemyPathfinding : MonoBehaviour
                 {
                     continue;
                 }
-            
+
                 float tentativeGScore = gScore[current] + 1; // All moves have equal cost FOR NOW
 
                 if (!gScore.ContainsKey(neighbor) || tentativeGScore < gScore[neighbor])
@@ -171,20 +180,6 @@ public class EnemyPathfinding : MonoBehaviour
 
     public IEnumerator MoveToPosition(Vector3 targetPosition)
     {
-        float rayDistance = 1.0f;
-        Vector2 direction = new Vector2(targetPosition.x - transform.position.x, targetPosition.y - transform.position.y);
-        Vector2 rayOrigin = _objectCollider.bounds.center;
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, direction, rayDistance, enemyLayerMask);
-
-        // Check if there's an enemy in the direction we're trying to move
-        if (hit.collider != null && hit.collider.CompareTag("Enemy"))
-        {
-            if (hit.collider.gameObject != gameObject)
-            {
-                Debug.Log("Enemy detected in direction: " + direction);
-                yield break;
-            }
-        }
         while (Vector3.Distance(transform.position, targetPosition) > float.Epsilon)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, EnemyMoveSpeed * Time.deltaTime);
