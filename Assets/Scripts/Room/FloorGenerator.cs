@@ -28,8 +28,9 @@ public class FloorGenerator : MonoBehaviour
 
         GenerateNodes();
         SetEndRoomNodes();
-        SetSpecialRoom(RoomType.bossRoom, true);
+        SetSpecialRoom(RoomType.nextFloorRoom, true);
         SetSpecialRoom(RoomType.treasureRoom, false);
+        SetSpecialRoom(RoomType.shop, false);
         SetPuzzleRooms();
         GenerateRoomsAndDoors();
     }
