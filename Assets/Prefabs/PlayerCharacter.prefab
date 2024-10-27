@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6568324391289941857}
   - component: {fileID: 231832987689413816}
   - component: {fileID: 5121789267016706016}
+  - component: {fileID: 5498956538265269402}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -174,12 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538926c9e4db9b047824a0aad91ca912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statsMan: {fileID: 5498956538265269402}
   Movement: {fileID: 6568324391289941857}
   Camera: {fileID: 0}
-  stats: {fileID: 11400000, guid: edc9bde9d2ef3d6479e50e479ec06582, type: 2}
-  currentHealth: 0
-  currentSpeed: 0
-  currentAttack: 0
 --- !u!114 &6568324391289941857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257b5e31b2c901d4b961b74d3aa38936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 10
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -228,3 +226,23 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &5498956538265269402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6319103495921026832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 216434953e7e8a1498d20a73ea737634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: edc9bde9d2ef3d6479e50e479ec06582, type: 2}
+  healthUI: {fileID: 0}
+  currencyUI: {fileID: 0}
+  stepUI: {fileID: 0}
+  currentHealth: 0
+  currentSpeed: 0
+  currentAttack: 0
+  currentSteps: 0

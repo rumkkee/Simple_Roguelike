@@ -85,15 +85,15 @@ public class PlayerMovement : MonoBehaviour
             }
             targetPos = transform.position + movementScale;
             isMoving = true;
-            _man.currentSteps++; ;
+            _man.updateSteps(1); ;
             // Debug.Log($"Lets move?: isMoving? {isMoving}");
         }
     }
     public bool CanMove(Vector2 direction)
     {
-        if ((_man.stats.startingStepsAvailable - _man.currentSteps) <= 0)
+        if (_man.currentSteps <= 0)
         {
-            //Debug.Log("Become unalive");
+            Debug.Log("Become unalive");
             return false;
         }
 

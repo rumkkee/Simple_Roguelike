@@ -15,16 +15,7 @@ public class HealthUI : MonoBehaviour
 
     public Image healthMarkerPrefab;
 
-    public void Start()
-    {
-        // int maxHealth = PlayerManager.instance.currentHealth;
-        // setMaxHealthDisplayed(maxHealth);
-        // healthNumUI = maxHealth;
-
-        // int startingHealth = .;
-        // setCurrentHealthDisplayed(startingHealth);
-    }
-
+    // Initializes or adjusts the number of health markers
     public void setMaxHealthDisplayed(int maxHealth)
     {
         if (healthMarkers == null)
@@ -32,62 +23,46 @@ public class HealthUI : MonoBehaviour
             healthMarkers = new List<Image>();
         }
 
-        if (healthMarkers.Count == maxHealth)
+        // Adjust health markers to match maxHealth
+        if (healthMarkers.Count < maxHealth)
         {
-            return;
-        }
-        else if (healthMarkers.Count < maxHealth)
-        {
-            while (healthMarkers.Count != maxHealth)
+            while (healthMarkers.Count < maxHealth)
             {
                 Image healthMarker = Instantiate(healthMarkerPrefab, this.transform);
                 healthMarkers.Add(healthMarker);
             }
         }
-        else
+        else if (healthMarkers.Count > maxHealth)
         {
-            while (healthMarkers.Count != maxHealth)
+            while (healthMarkers.Count > maxHealth)
             {
-
                 Image healthMarker = healthMarkers[healthMarkers.Count - 1];
-                healthMarkers.Remove(healthMarker);
+                healthMarkers.RemoveAt(healthMarkers.Count - 1);
                 Destroy(healthMarker);
-
             }
+        }
+
+        // Update healthNumUI to reflect the maximum health
+        healthNumUI = maxHealth;
+
+        // Set all health markers to active color
+        foreach (var healthMarker in healthMarkers)
+        {
+            healthMarker.color = Color.white;
         }
     }
 
+    // Updates the displayed health markers based on current health
     public void setCurrentHealthDisplayed(int currentHealth)
     {
-        if (healthNumUI == currentHealth)
-        {
-            return;
-        }
-        else if (healthNumUI < currentHealth)
-        {
-            while (healthNumUI != currentHealth)
-            {
-                Image topHealthMarker = healthMarkers[healthNumUI - 1];
-                topHealthMarker.color = Color.white;
-                healthNumUI++;
-            }
-        }
-        else
-        {
-            while (healthNumUI != currentHealth)
-            {
-                Image topHealthMarker = healthMarkers[healthNumUI - 1];
-                topHealthMarker.color = Color.black;
-                healthNumUI--;
-            }
-            
-        }
-    }
+        if (healthNumUI == currentHealth) return;
 
-    private void OnDestroy()
-    {
-        // PlayerStats.MaxHealthUpdated -= setMaxHealthDisplayed;
-        // PlayerStats.StartingHealthUpdated -= setCurrentHealthDisplayed;
+        for (int i = 0; i < healthMarkers.Count; i++)
+        {
+            healthMarkers[i].color = (i < currentHealth) ? Color.white : Color.black;
+        }
+
+        healthNumUI = currentHealth;
     }
 
 }

@@ -372,7 +372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTiles: {fileID: 0}
   wallTiles: {fileID: 0}
-  EnemyMoveSpeed: 5
+  EnemyMoveSpeed: 10
   isMoving: 0
   priority: 1
   enemyLayerMask:

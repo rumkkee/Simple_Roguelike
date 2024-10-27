@@ -28,7 +28,7 @@ public class EnemyEntity : MonoBehaviour
 
     public void takeDamage(int amount) {
         currentHealth -= amount;
-        currentHealth = math.min(currentHealth , 0);
+        currentHealth = math.max(currentHealth , 0);
         updateHealthBar();
         if(currentHealth == 0) {
             EnemyManager.instance.deleteEnemy(enemyID, Vector3Int.CeilToInt(transform.position));

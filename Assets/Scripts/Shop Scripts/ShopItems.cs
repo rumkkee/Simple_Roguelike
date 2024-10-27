@@ -9,17 +9,17 @@ public class ShopItems : MonoBehaviour
 
     public void BuyItem()
     {
-        if (PlayerStats.totalCurrency >= itemCost)
-        {
-            PlayerStats.totalCurrency -= itemCost;
+        // if (PlayerStats.totalCurrency >= itemCost)
+        // {
+        //     PlayerStats.totalCurrency -= itemCost;
             
-            //do later: add item to inventory
-            Debug.Log("You bought " + itemName);
-        }
-        else
-        {
-            Debug.Log("You don't have enough money");  
-        }
+        //     //do later: add item to inventory
+        //     Debug.Log("You bought " + itemName);
+        // }
+        // else
+        // {
+        //     Debug.Log("You don't have enough money");  
+        // }
     }
     
 }

@@ -36,7 +36,6 @@ public class Room : MonoBehaviour
         {
             PlayerMovement.activeRoom = this;
             // Set the camera's Confiners to this.. 
-            Debug.Log(player.Camera);
             player.Camera.setConfines(cameraConfines, groundTilemap.transform);
             if (type == RoomType.dungeonRoom)
             {

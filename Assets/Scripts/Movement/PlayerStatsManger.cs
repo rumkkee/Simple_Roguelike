@@ -38,23 +38,38 @@ public class PlayerStatsManager : MonoBehaviour
         currentHealth = stats.startingHealth;
         currentAttack = stats.startingAttack;
         currentSpeed = stats.startingSpeed;
-        currentSpeed = stats.startingStepsAvailable;
+        currentSteps = stats.startingStepsAvailable;
+        stepUI.updateStepsDisplayed(currentSteps);
+        healthUI.setMaxHealthDisplayed(stats.startingHealth);
+        currencyUI.updateCurrencyDisplayed(stats.totalCurrency);
     }
     public void takeDamage(int amount)
     {
         currentHealth -= amount;
-        currentHealth = Math.Min(currentHealth, 0);
+        currentHealth = Math.Max(currentHealth, 0);
+        healthUI.setCurrentHealthDisplayed(currentHealth);
+        if(currentHealth == 0) {
+            Debug.Log("Player Dies");
+        }
     }
 
     public void updateCurrency(int amount)
     {
         stats.totalCurrency += amount;
         currencyUI.updateCurrencyDisplayed(stats.totalCurrency);
+    }
 
+    public bool canBuyItem(int amount) {
+        return (stats.totalCurrency - amount < 0) ? false : true;
     }
 
     public void updateSteps(int amount)
     {
-
+        currentSteps -= amount;
+        currentSteps = Math.Max(currentSteps, 0);
+        stepUI.updateStepsDisplayed(currentSteps);
+        if(currentSteps == 0) {
+            Debug.Log("Player Dies");
+        }
     }
 }

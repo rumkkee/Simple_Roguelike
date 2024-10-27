@@ -9,6 +9,6 @@ public class CurrencyUI : MonoBehaviour
 
     public void updateCurrencyDisplayed(long currency)
     {
-        currencyText.text = currency.ToString();
+        currencyText.text = "$" + currency.ToString();
     }
 }

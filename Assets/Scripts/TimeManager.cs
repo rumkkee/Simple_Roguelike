@@ -11,6 +11,7 @@ public class TimeManager : MonoBehaviour
     // The current action is on the top of the stack.. 
     private Stack<Action> _previousActions;
     private int _currentActionIndex = 0;
+    private PlayerStatsManager _man;
     public void Awake()
     {
         // check for any other inst. 
@@ -23,7 +24,11 @@ public class TimeManager : MonoBehaviour
         instance = this;
         _futureActions = new Stack<Action>();
         _previousActions = new Stack<Action>();
+        
         DontDestroyOnLoad(gameObject);
+    }
+    public void Start() {
+        _man = PlayerManager.instance.statsMan;
     }
     public void revertAction()
     {
@@ -61,7 +66,8 @@ public class TimeManager : MonoBehaviour
         if (act.actionType == Action.TypeOfAction.Movement)
         {
             Debug.Log($"Going back to position: {act.position}");
-            PlayerManager.instance.stats.stepReversed();
+            // PlayerManager.instance.stats.stepReversed();
+            _man.updateSteps(1);
             return act.mCallback(act.position);
         }
         else if (act.actionType == Action.TypeOfAction.Action) 
