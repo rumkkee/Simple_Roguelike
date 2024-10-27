@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257b5e31b2c901d4b961b74d3aa38936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 20
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64

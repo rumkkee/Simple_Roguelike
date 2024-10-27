@@ -15,3 +15,4 @@ MonoBehaviour:
   startingHealth: 2
   defence: 1
   attackStrength: 1
+  speed: 2

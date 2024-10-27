@@ -18,6 +18,7 @@ public class Room : MonoBehaviour
     [Tooltip("The Enemy spawner object")]
     public EnemySpawnerHandler EnemySpawns;
     public bool isEnemyActive = false;
+    public bool isRoomCleared = false;
 
     void Start()
     {
@@ -25,22 +26,32 @@ public class Room : MonoBehaviour
         {
             Debug.LogError("No enemy spawner!");
         }
+    }
 
+    void Update() {
+        if(EnemyManager.instance.enemyDict.Count == 0) {
+            isRoomCleared = true;
+            EnemyManager.instance.enemyPositions.Clear();
+            FloorManager.instance.OpenDoors();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         // Set the player's grids to use this room's grids.
         PlayerManager player = collider.GetComponent<PlayerManager>();
+        TimeManager.instance.clear();
         if (player != null)
         {
             PlayerMovement.activeRoom = this;
             // Set the camera's Confiners to this.. 
             player.Camera.setConfines(cameraConfines, groundTilemap.transform);
-            if (type == RoomType.dungeonRoom)
+            if (type == RoomType.dungeonRoom && !isEnemyActive)
             {
                 EnemySpawns.spawnAllEnemies(groundTilemap, collisionTilemap);
             }
+            isEnemyActive = true;
+            FloorManager.instance.CloseDoors();
             return;
         }
     }

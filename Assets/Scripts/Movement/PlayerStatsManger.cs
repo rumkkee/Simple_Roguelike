@@ -57,6 +57,7 @@ public class PlayerStatsManager : MonoBehaviour
         currentHealth -= amount;
         currentHealth = Math.Max(currentHealth, 0);
         healthUI.setCurrentHealthDisplayed(currentHealth);
+        StartCoroutine(FullscreenFXController.instance.Hurt());
         if(currentHealth == 0) {
             Debug.Log("Player Dies");
         }

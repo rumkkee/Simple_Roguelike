@@ -38,6 +38,7 @@ public class EnemyManager : MonoBehaviour
         EnemyEntity retval;
         if (enemyDict.TryGetValue(ID, out retval))
         {
+           
             enemyDict.Remove(ID);
             enemyPositions.Remove(currentPos);
             Destroy(retval.gameObject);
@@ -60,7 +61,7 @@ public class EnemyManager : MonoBehaviour
         {
             yield return StartCoroutine(item.Value.pathfinding.pathfindTo(player));
         }
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.05f);
         enemyTurn = false;
 
         yield break;

@@ -4,8 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Collectable", menuName = "Collectable Object")]
 public class CollectableStats : ScriptableObject
 {
-    [Tooltip("The sprite the collectable uses")]
-    public Sprite collectableSprite; 
     [Header("Collectable stats")]
     [Tooltip("Which item is it")]
     public string itemID; 

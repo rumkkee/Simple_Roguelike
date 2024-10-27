@@ -62,6 +62,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UsePotion"",
+                    ""type"": ""Button"",
+                    ""id"": ""b1743b1f-c3de-400e-925f-b3313689158a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""switchPotion"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8c2f07a-a701-40f8-98ed-604de03ba492"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -350,6 +368,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""31a09652-6fde-4797-9ebd-a2973e2e9aaf"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UsePotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd07cec7-c728-441d-a6ad-7d60b7fa5943"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UsePotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62e3b1af-ba04-433a-8f9d-b7f77ae82a4d"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""switchPotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aa6712b0-18eb-494a-bebc-2cbd1f5aafc2"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""switchPotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -362,6 +424,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Main_Backwards = m_Main.FindAction("Backwards", throwIfNotFound: true);
         m_Main_Fowards = m_Main.FindAction("Fowards", throwIfNotFound: true);
         m_Main_Action = m_Main.FindAction("Action", throwIfNotFound: true);
+        m_Main_UsePotion = m_Main.FindAction("UsePotion", throwIfNotFound: true);
+        m_Main_switchPotion = m_Main.FindAction("switchPotion", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -427,6 +491,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Main_Backwards;
     private readonly InputAction m_Main_Fowards;
     private readonly InputAction m_Main_Action;
+    private readonly InputAction m_Main_UsePotion;
+    private readonly InputAction m_Main_switchPotion;
     public struct MainActions
     {
         private @PlayerControls m_Wrapper;
@@ -435,6 +501,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Backwards => m_Wrapper.m_Main_Backwards;
         public InputAction @Fowards => m_Wrapper.m_Main_Fowards;
         public InputAction @Action => m_Wrapper.m_Main_Action;
+        public InputAction @UsePotion => m_Wrapper.m_Main_UsePotion;
+        public InputAction @switchPotion => m_Wrapper.m_Main_switchPotion;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -456,6 +524,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Action.started += instance.OnAction;
             @Action.performed += instance.OnAction;
             @Action.canceled += instance.OnAction;
+            @UsePotion.started += instance.OnUsePotion;
+            @UsePotion.performed += instance.OnUsePotion;
+            @UsePotion.canceled += instance.OnUsePotion;
+            @switchPotion.started += instance.OnSwitchPotion;
+            @switchPotion.performed += instance.OnSwitchPotion;
+            @switchPotion.canceled += instance.OnSwitchPotion;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -472,6 +546,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Action.started -= instance.OnAction;
             @Action.performed -= instance.OnAction;
             @Action.canceled -= instance.OnAction;
+            @UsePotion.started -= instance.OnUsePotion;
+            @UsePotion.performed -= instance.OnUsePotion;
+            @UsePotion.canceled -= instance.OnUsePotion;
+            @switchPotion.started -= instance.OnSwitchPotion;
+            @switchPotion.performed -= instance.OnSwitchPotion;
+            @switchPotion.canceled -= instance.OnSwitchPotion;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -495,5 +575,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnBackwards(InputAction.CallbackContext context);
         void OnFowards(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
+        void OnUsePotion(InputAction.CallbackContext context);
+        void OnSwitchPotion(InputAction.CallbackContext context);
     }
 }
