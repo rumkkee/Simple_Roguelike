@@ -11,7 +11,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerStatsManager statsMan;
     public PlayerMovement Movement;
     public PlayerCamera Camera;
-    // public PlayerStats stats;
+    //public PlayerStats stats;
 
     private TimeManager _timeManInstance;
     private PlayerControls _controls;

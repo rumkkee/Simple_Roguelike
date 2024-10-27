@@ -40,7 +40,7 @@ public class PauseMenuManager : MonoBehaviour
     public void OnSavePressed()
     {
         // Call the SaveManager to Save your game
-        SaveManger.instance.setSave(SaveManger.saveFileOne, PlayerManager.instance.stats);
+        SaveManger.instance.setSave(SaveManger.saveFileOne, PlayerManager.instance.statsMan.stats);
         Debug.Log("Game Saved");
         Debug.Log(SaveManger.instance.fetchSave(SaveManger.saveFileOne));
         Debug.Log(SaveManger.instance.fetchSave("Eos"));
