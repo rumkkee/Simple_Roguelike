@@ -37,4 +37,20 @@ public class PlayerActions : MonoBehaviour
         if(!isAttacked) tmp.takeDamage(dmg);
         return true;
     }
+
+    public void action()
+    {
+        Debug.Log("Action done!");
+
+    }
+
+    public void switchPotions()
+    {
+        Debug.Log("Switching Potions");
+    }
+
+    public void usePotion()
+    {
+        Debug.Log("Use potions");
+    }
 }

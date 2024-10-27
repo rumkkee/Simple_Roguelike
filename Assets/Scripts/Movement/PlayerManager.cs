@@ -11,8 +11,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerStatsManager statsMan;
     public PlayerMovement Movement;
     public PlayerCamera Camera;
-    //public PlayerStats stats;
-
+    public PlayerActions actions;
     private TimeManager _timeManInstance;
     private PlayerControls _controls;
     private InputAction _action;
@@ -47,9 +46,9 @@ public class PlayerManager : MonoBehaviour
     {
         _timeManInstance = TimeManager.instance;
         _controls.Main.Backwards.performed += ctx => reverseActions();
-        _controls.Main.Action.performed += ctx => action();
-        _controls.Main.UsePotion.performed += ctx => usePotion();
-        _controls.Main.switchPotion.performed += ctx => switchPotions();
+        _controls.Main.Action.performed += ctx => actions.action();
+        _controls.Main.UsePotion.performed += ctx => actions.usePotion();
+        _controls.Main.switchPotion.performed += ctx => actions.switchPotions();
     }
     // enables controls
     public void enableControls()
@@ -81,31 +80,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void action()
-    {
-        Debug.Log("Action done!");
-
-    }
-
-    public void switchPotions()
-    {
-        Debug.Log("Switching Potions");
-    }
-
-    public void usePotion()
-    {
-        Debug.Log("Use potions");
-    }
-
     private void reverseActions()
     {
         disableControls();
         _timeManInstance.revertAction();
         enableControls();
-    }
-
-    public void changeStats()
-    {
-
     }
 }
