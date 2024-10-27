@@ -7,7 +7,10 @@ using UnityEngine;
 
 public class SaveManger : MonoBehaviour
 {
-    public static SaveManger instance; 
+    public static SaveManger instance;
+
+    public static string saveFileOne = "SaveFileOne";
+
     public void Awake()
     {
         // check for any other inst. 
