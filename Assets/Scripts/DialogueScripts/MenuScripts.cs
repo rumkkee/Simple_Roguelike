@@ -6,7 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Menu Script", menuName = "Menu Text Object")]
 public class MenuScripts : ScriptableObject
 {
-    public Dictionary<string, string> scripts;
+    [Header("Main Menu")]
+    public string gameTitle;
     public string continueText;
     public string newGame;
     public string options;
