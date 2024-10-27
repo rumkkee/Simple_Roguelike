@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public Vector3Int currentGridPos;
     public PlayerActions actions;
+    public PlayerOrientationManger orient;
     private TimeManager _timeManInstance;
     private PlayerStatsManager _man;
     private bool _isAttacked;
@@ -85,7 +86,17 @@ public class PlayerMovement : MonoBehaviour
             }
             targetPos = transform.position + movementScale;
             isMoving = true;
-            _man.updateSteps(1); ;
+            _man.updateSteps(1);
+            orient.swtichOrientation(direction);
+            if (orient.isLeft)
+            {
+                PartcleManager.instance.makePartcleFX(PartcleManager.PartcleType.DustLeft, orient.leftDust);
+            }
+            else
+            {
+                PartcleManager.instance.makePartcleFX(PartcleManager.PartcleType.DustRight, orient.rightDust);
+            }
+
             // Debug.Log($"Lets move?: isMoving? {isMoving}");
         }
     }

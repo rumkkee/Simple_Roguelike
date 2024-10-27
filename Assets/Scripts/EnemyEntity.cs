@@ -14,12 +14,14 @@ public class EnemyEntity : MonoBehaviour
     public EnemyStats enemyStats;
     public int currentHealth;
     public Image healthBar;
+    private Collider2D _collider; 
     private void Start() {
         enemyID = totalEnemies + 1;
         currentHealth = enemyStats.startingHealth;
         totalEnemies++;
         Debug.Log($"enemy ID {enemyID}");
         EnemyManager.instance.addEnemyToDict(enemyID, this);
+        _collider = gameObject.GetComponent<Collider2D>();
     }
     public void pathFind(Transform target) {
         Debug.Log($"Pathfinding to transform.Pos{target.position}");
@@ -31,6 +33,7 @@ public class EnemyEntity : MonoBehaviour
         currentHealth = math.max(currentHealth , 0);
         updateHealthBar();
         if(currentHealth == 0) {
+            PartcleManager.instance.makePartcleFX(PartcleManager.PartcleType.Blood, _collider.bounds.center);
             EnemyManager.instance.deleteEnemy(enemyID, Vector3Int.CeilToInt(transform.position));
         }
     }

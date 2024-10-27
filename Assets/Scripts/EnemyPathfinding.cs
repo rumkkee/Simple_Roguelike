@@ -25,7 +25,7 @@ public class EnemyPathfinding : MonoBehaviour
     private TimeManager _timeManger;
     private Collider2D _objectCollider;
     private EnemyEntity _entity;
-    public LayerMask enemyLayerMask;
+    public LayerMask playerLayerMask;
     // Which directions? 
 
     // Just horizontal
@@ -65,8 +65,9 @@ public class EnemyPathfinding : MonoBehaviour
         Vector3Int goal = groundTiles.WorldToCell(target.position);
         if (ptp[1] == goal)
         {
-            // Debug.Log("Melee range of the player.. Imagine it attacking");
+            PlayerManager.instance.statsMan.takeDamage(_entity.enemyStats.attackStrength, _entity.enemyStats.speed);
             yield break;
+
         }
         if (!EnemyManager.instance.TryMoveEnemy(_entity.enemyID, _currentTile, ptp[1]))
         {
@@ -83,7 +84,18 @@ public class EnemyPathfinding : MonoBehaviour
     {
         return _getPath(target);
     }
-
+    // private IEnumerator getHitOnPlayer(Vector3 dir)
+    // {
+    //     float rayDistance = 1.5f;
+    //     Vector2 direction = new Vector2(dir.x - transform.position.x, dir.y - transform.position.y);
+    //     Vector2 rayOrigin = _objectCollider.bounds.center;
+    //     RaycastHit2D hit = Physics2D.Raycast(rayOrigin, direction, rayDistance, playerLayerMask);
+    //     if (hit.collider != null && hit.collider.CompareTag("Player"))
+    //     {
+            
+    //     }
+    //     yield break;
+    // }
     private List<Vector3Int> _getPath(Transform target)
     {
         // Functional programming rocks.. 

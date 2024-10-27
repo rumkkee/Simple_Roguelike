@@ -451,9 +451,9 @@ MonoBehaviour:
   EnemyMoveSpeed: 10
   isMoving: 0
   priority: 0
-  enemyLayerMask:
+  playerLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 8
 --- !u!61 &2102170497621296551
 BoxCollider2D:
   m_ObjectHideFlags: 0
