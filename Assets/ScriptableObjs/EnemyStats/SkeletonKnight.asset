@@ -9,15 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16f036ab6a1562045bf2434352b354bd, type: 3}
-  m_Name: PlayerStats
+  m_Script: {fileID: 11500000, guid: 6e5a4a14d961bd147931bcb1eeadf2dc, type: 3}
+  m_Name: SkeletonKnight
   m_EditorClassIdentifier: 
-  totalCurrency: 0
-  totalStepsTaken: 0
-  startingHealth: 2
-  armorValue: 0
-  startingArmor: 0
-  startingAttack: 1
-  startingSpeed: 1
-  startingCurrency: 0
-  startingStepsAvailable: 999
+  startingHealth: 4
+  defence: 2
+  attackStrength: 4
