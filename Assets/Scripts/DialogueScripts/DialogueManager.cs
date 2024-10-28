@@ -33,9 +33,9 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance;
-    
+
     //place files here 
-    
+
     [Header("English Ink Files")]
     public TextAsset[] englishInkFiles;
     [Header("Spanish Ink Files")]
@@ -43,9 +43,9 @@ public class DialogueManager : MonoBehaviour
     [Header("Japanese Ink Files")]
     public TextAsset[] japaneseInkFiles;
 
-    
+
     private TextAsset[] currentInkFiles; //currently loaded files 
-    
+
     private string currentLanguage = "english"; //default is English, change later with menu buttons 
     private Language currentLang;
 
@@ -53,20 +53,20 @@ public class DialogueManager : MonoBehaviour
                                                     //and what story elements you triggered 
                                                     //the string corresponds to the character name OR quest objective
                                                     //more on that later 
-    
-                                                    
-                                                    
-                                                    
+
+
+
+
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
-    [SerializeField] private TextMeshProUGUI dialogueText; 
-    
+    [SerializeField] private TextMeshProUGUI dialogueText;
+
     public static bool dialogueActive { get; private set; } //read only to outside scripts 
-    private string currentCharacter; 
+    private string currentCharacter;
     private Story story;
-    
-         
-    
+
+
+
     // We will use a singleton pattern to ensure we don't duplicate anything 
     void Awake()
     {
@@ -81,8 +81,8 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    
-    
+
+
     private void Start()
     {
         dialogueActive = false;
@@ -100,19 +100,19 @@ public class DialogueManager : MonoBehaviour
         {
             return;
         }
-        
+
         //handle continuation to next line
         if (Input.GetKeyUp(KeyCode.Space)) //this may change depending on input scheme 
         {
             continueDialogue(currentCharacter, story);
         }
     }
-    
-    public static DialogueManager GetInstance() 
+
+    public static DialogueManager GetInstance()
     {
         return instance;
     }
-    
+
     public void setLanguage(string language)
     {
         currentLanguage = language;
@@ -128,22 +128,24 @@ public class DialogueManager : MonoBehaviour
         {
             currentInkFiles = japaneseInkFiles;
         }
-        
-        Debug.Log("language:"+currentLanguage);
-        
+
+        Debug.Log("language:" + currentLanguage);
+
         //display current contents of currentInkFiles
         debugPrintTextAssets();
-        
+
     }
 
-    public void setLanguage(Language language) {
+    public void setLanguage(Language language)
+    {
         currentLang = language;
         if (language == Language.English)
         {
             currentInkFiles = englishInkFiles;
         }
-        else if (language == Language.Spanish) { 
-            currentInkFiles= spanishInkFiles;
+        else if (language == Language.Spanish)
+        {
+            currentInkFiles = spanishInkFiles;
         }
         Debug.Log("language:" + currentLanguage);
 
@@ -164,19 +166,19 @@ public class DialogueManager : MonoBehaviour
     }
 
     public Language getCurrentLanguage() => currentLang;
-    
-    
-    
+
+
+
     public void startDialogue(string characterName)
     {
-        currentCharacter = characterName; 
-        
+        currentCharacter = characterName;
+
         Debug.Log("starting dialogue");
-        
+
         TextAsset inkFile = getCharacterInkFile(characterName); //get the specific character's story 
 
         Debug.Log("character chosen: " + characterName);
-        
+
         if (inkFile != null)
         {
             story = new Story(inkFile.text);
@@ -184,11 +186,11 @@ public class DialogueManager : MonoBehaviour
             dialoguePanel.SetActive(true);
             continueDialogue(characterName, story);
         }
-        
+
     }
 
 
-    
+
     //here we will search for this character's story from all the loaded stories 
     private TextAsset getCharacterInkFile(string characterName)
     {
@@ -203,41 +205,41 @@ public class DialogueManager : MonoBehaviour
         return null;
     }
 
-    
-    
+
+
     public void continueDialogue(string characterName, Story story)
     {
-        
-            if (story.canContinue)
-            {
-                string text = story.Continue(); //continue here is like popping the next text off a stack 
-                dialogueText.text = text;
-                Debug.Log(text); //display dialogue text
-                questProgress[characterName] = true; // mark character or quest objective as already visited 
-                                                    // comment out this line if you would like to repeat 
-                                                    //the same story 
-                                                    
-                                                    //note: we may want to edit this whole section to create
-                                                    //different options for a default NPC response or something
-            }
-            else
-            {
-                exitDialogueMode();
-            }
-        
+
+        if (story.canContinue)
+        {
+            string text = story.Continue(); //continue here is like popping the next text off a stack 
+            dialogueText.text = text;
+            Debug.Log(text); //display dialogue text
+            questProgress[characterName] = true; // mark character or quest objective as already visited 
+                                                 // comment out this line if you would like to repeat 
+                                                 //the same story 
+
+            //note: we may want to edit this whole section to create
+            //different options for a default NPC response or something
+        }
+        else
+        {
+            exitDialogueMode();
+        }
+
     }
 
-    
-    
+
+
     private void exitDialogueMode()
     {
         dialogueActive = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
     }
-    
-    
-    
+
+
+
     void debugPrintTextAssets()
     {
         // Loop through the array and print each TextAsset's contents
@@ -253,7 +255,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
-    
-    
-    
+
+
+
 }

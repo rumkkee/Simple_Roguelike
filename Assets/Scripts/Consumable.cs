@@ -15,5 +15,5 @@ public class Consumable : ScriptableObject
     [Tooltip("How much is it?")]
     public int price;
     [Tooltip("How much does it change a stat?")]
-    public int delta; 
+    public int delta;
 }

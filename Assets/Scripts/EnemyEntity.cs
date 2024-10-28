@@ -10,12 +10,13 @@ public class EnemyEntity : MonoBehaviour
     [HideInInspector]
     public static int totalEnemies = 0;
     [HideInInspector]
-    public int enemyID; 
+    public int enemyID;
     public EnemyStats enemyStats;
     public int currentHealth;
     public Image healthBar;
-    private Collider2D _collider; 
-    private void Start() {
+    private Collider2D _collider;
+    private void Start()
+    {
         enemyID = totalEnemies + 1;
         currentHealth = enemyStats.startingHealth;
         totalEnemies++;
@@ -23,17 +24,20 @@ public class EnemyEntity : MonoBehaviour
         EnemyManager.instance.addEnemyToDict(enemyID, this);
         _collider = gameObject.GetComponent<Collider2D>();
     }
-    public void pathFind(Transform target) {
+    public void pathFind(Transform target)
+    {
         Debug.Log($"Pathfinding to transform.Pos{target.position}");
         StartCoroutine(pathfinding.pathfindTo(target));
     }
 
-    public void takeDamage(int amount) {
+    public void takeDamage(int amount)
+    {
         currentHealth -= amount;
         currentHealth = math.max(currentHealth, 0);
         updateHealthBar();
-        if(currentHealth == 0) {
-            int rand = UnityEngine.Random.Range(3,10);
+        if (currentHealth == 0)
+        {
+            int rand = UnityEngine.Random.Range(3, 10);
             for (int i = 0; i < rand; i++)
             {
                 LootManager.instance.InstantiateLoot(_collider.bounds.center);
@@ -43,7 +47,8 @@ public class EnemyEntity : MonoBehaviour
         }
     }
 
-    public void updateHealthBar() {
+    public void updateHealthBar()
+    {
         healthBar.fillAmount = (float)currentHealth / enemyStats.startingHealth;
     }
 }

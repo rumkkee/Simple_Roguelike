@@ -6,8 +6,9 @@ public class CollectableStats : ScriptableObject
 {
     [Header("Collectable stats")]
     [Tooltip("Which item is it")]
-    public string itemID; 
-    public enum itemType {
+    public string itemID;
+    public enum itemType
+    {
         Currency,
         Item,
         Consumable,

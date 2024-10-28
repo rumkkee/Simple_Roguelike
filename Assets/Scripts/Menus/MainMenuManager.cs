@@ -34,7 +34,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnOptionsPressed()
     {
-        
+
         lastSelectedButton = EventSystem.current.currentSelectedGameObject;
         MenuManager.instance.OpenOptionsMenu();
     }
@@ -43,7 +43,7 @@ public class MainMenuManager : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("You've left the game, and I stay here");
-        
+
     }
 
     private void LoadGameScene()

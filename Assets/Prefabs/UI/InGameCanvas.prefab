@@ -413,7 +413,7 @@ MonoBehaviour:
   m_CellSize: {x: 64, y: 64}
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 1
-  m_ConstraintCount: 10
+  m_ConstraintCount: 24
 --- !u!1 &2995469650144388817
 GameObject:
   m_ObjectHideFlags: 0

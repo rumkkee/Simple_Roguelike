@@ -28,8 +28,10 @@ public class Room : MonoBehaviour
         }
     }
 
-    void Update() {
-        if(EnemyManager.instance.enemyDict.Count == 0) {
+    void Update()
+    {
+        if (EnemyManager.instance.enemyDict.Count == 0)
+        {
             isRoomCleared = true;
             EnemyManager.instance.enemyPositions.Clear();
             FloorManager.instance.OpenDoors();

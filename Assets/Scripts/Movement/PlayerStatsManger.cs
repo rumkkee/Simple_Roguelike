@@ -72,10 +72,6 @@ public class PlayerStatsManager : MonoBehaviour
         currencyUI.updateCurrencyDisplayed(stats.totalCurrency);
     }
 
-    public bool canBuyItem(int amount) {
-        return (stats.totalCurrency - amount < 0) ? false : true;
-    }
-
     public void updateSteps(int amount)
     {
         currentSteps -= amount;

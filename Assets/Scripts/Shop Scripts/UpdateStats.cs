@@ -6,43 +6,22 @@ using UnityEngine;
 public class UpdateStats : MonoBehaviour
 {
     //put all the stats here - might change 
-    public TextMeshProUGUI totalCurrency; 
+    public TextMeshProUGUI totalCurrency;
     public TextMeshProUGUI maxHealthText;
     public TextMeshProUGUI maxStepsText;
-    public TextMeshProUGUI HPText;
-    public TextMeshProUGUI ArmorText;
-    public TextMeshProUGUI SpeedText;
-    public TextMeshProUGUI AttackText; 
-    
-    
-    private PlayerStats playerStats;
-    
-    void Start()
-    {
-        GameObject playerObject = GameObject.FindWithTag("Player"); //make sure we are getting player stats from player object 
-        
-        if (playerObject != null)
-        {
-            playerStats = playerObject.GetComponent<PlayerStats>();
-        }
-        
-        
-    }
+    public TextMeshProUGUI AttackText;
+    public TextMeshProUGUI healthPotionNum;
+    public TextMeshProUGUI stepPotionNum;
+    public PlayerStats playerStats;
 
     // Update is called once per frame
     void Update()
     {
-        if (playerStats != null)
-        {
-            /* here is where we will access the stats to update - need to wait to see what all stats we need 
-            totalCurrency; 
-            maxHealthText = playerStats.totalCurrency.ToString();;
-            maxStepsText;
-            HPText;
-            ArmorText;
-            SpeedText;
-            AttackText; 
-            */
-        }
+        totalCurrency.text = "$" + playerStats.totalCurrency.ToString();
+        maxHealthText.text = playerStats.startingHealth.ToString();
+        maxStepsText.text = playerStats.startingStepsAvailable.ToString();
+        AttackText.text = playerStats.startingAttack.ToString();
+        healthPotionNum.text = playerStats.numberOfHealthPotions.ToString();
+        stepPotionNum.text = playerStats.numberOfStepPotions.ToString();
     }
 }

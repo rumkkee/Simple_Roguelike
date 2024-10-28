@@ -37,7 +37,8 @@ public class FullscreenFXController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public IEnumerator Hurt() {
+    public IEnumerator Hurt()
+    {
         dmg_feature.SetActive(true);
         dmg_material.SetFloat(_uVorInten, 0f);
         dmg_material.SetFloat(_uVinIntensity, 0f);
@@ -47,12 +48,12 @@ public class FullscreenFXController : MonoBehaviour
             elapsedTime += Time.deltaTime;
 
             float lerpVor = Mathf.Lerp(0f, VOR_INTENSITY_START, elapsedTime / damageShaderFadeOut);
-            float lerpVignette = Mathf.Lerp(0f, VI_INTENSITY_START,  elapsedTime / damageShaderFadeOut);
+            float lerpVignette = Mathf.Lerp(0f, VI_INTENSITY_START, elapsedTime / damageShaderFadeOut);
             dmg_material.SetFloat(_uVorInten, lerpVor);
             dmg_material.SetFloat(_uVinIntensity, lerpVignette);
             yield return null;
         }
-        
+
         dmg_material.SetFloat(_uVorInten, VOR_INTENSITY_START);
         dmg_material.SetFloat(_uVinIntensity, VI_INTENSITY_START);
 
@@ -66,7 +67,7 @@ public class FullscreenFXController : MonoBehaviour
             float lerpVor = Mathf.Lerp(VOR_INTENSITY_START, 0f, elapsedTime / damageShaderFadeOut);
             float lerpVignette = Mathf.Lerp(VI_INTENSITY_START, 0f, elapsedTime / damageShaderFadeOut);
             dmg_material.SetFloat(_uVorInten, lerpVor);
-        dmg_material.SetFloat(_uVinIntensity, lerpVignette);
+            dmg_material.SetFloat(_uVinIntensity, lerpVignette);
             yield return null;
         }
 
@@ -74,7 +75,8 @@ public class FullscreenFXController : MonoBehaviour
 
     }
 
-    public IEnumerator TimeFX() {
+    public IEnumerator TimeFX()
+    {
         time_feature.SetActive(true);
         time_material.SetFloat(_uFadeVal, 1f);
         float elapsedTime = 0f;
@@ -88,7 +90,7 @@ public class FullscreenFXController : MonoBehaviour
         }
         time_material.SetFloat(_uFadeVal, 0.75f);
         yield return new WaitForSeconds(timeShaderDuration);
-        
+
         elapsedTime = 0f;
         while (elapsedTime < timeShaderFadeTime)
         {

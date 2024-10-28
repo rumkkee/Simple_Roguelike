@@ -4,9 +4,10 @@ using UnityEngine;
 
 // This exists for saving
 [CreateAssetMenu(fileName = "EnemyStatsObject", menuName = "Enemy Stats Object")]
-public class EnemyStats : ScriptableObject {
+public class EnemyStats : ScriptableObject
+{
     public int startingHealth;
     public int defence;
     public int attackStrength;
-    public int speed; 
+    public int speed;
 }
