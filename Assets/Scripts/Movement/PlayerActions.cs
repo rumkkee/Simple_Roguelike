@@ -47,10 +47,12 @@ public class PlayerActions : MonoBehaviour
     public void switchPotions()
     {
         Debug.Log("Switching Potions");
+        PlayerManager.instance.statsMan.potUI.ToggleActivePotionUI();
     }
 
     public void usePotion()
     {
         Debug.Log("Use potions");
+        PlayerManager.instance.statsMan.updatePotion();
     }
 }

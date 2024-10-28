@@ -82,11 +82,11 @@ public class FullscreenFXController : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
 
-            float lerpFade = Mathf.Lerp(1f, 0f, elapsedTime / timeShaderFadeTime);
+            float lerpFade = Mathf.Lerp(1f, 0.75f, elapsedTime / timeShaderFadeTime);
             time_material.SetFloat(_uFadeVal, lerpFade);
             yield return null;
         }
-        time_material.SetFloat(_uFadeVal, 0f);
+        time_material.SetFloat(_uFadeVal, 0.75f);
         yield return new WaitForSeconds(timeShaderDuration);
         
         elapsedTime = 0f;
@@ -94,7 +94,7 @@ public class FullscreenFXController : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
 
-            float lerpFade = Mathf.Lerp(0f, 1f, elapsedTime / timeShaderFadeTime);
+            float lerpFade = Mathf.Lerp(0.75f, 1f, elapsedTime / timeShaderFadeTime);
             time_material.SetFloat(_uFadeVal, lerpFade);
             yield return null;
         }

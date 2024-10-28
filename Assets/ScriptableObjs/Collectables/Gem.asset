@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e775dd2335568664c9d495b0017f8852, type: 3}
   m_Name: Gem
   m_EditorClassIdentifier: 
-  collectableSprite: {fileID: 0}
   itemID: GEM
   type: 0
   itemValue: 5
-  dropChance: 20
+  dropChance: 40

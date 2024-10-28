@@ -15,9 +15,9 @@ public class PlayerStats : ScriptableObject
     // Again stats reasons
     public long totalStepsTaken;
     // How much is our starting health? 
-    public int startingHealth;  
+    public int startingHealth;
     // How much Armor does the player has? 
-    public int armorValue;  
+    public int armorValue;
     // How much is our starting armor
     public int startingArmor;
     // Consumable list for storing consumables. 
@@ -25,11 +25,12 @@ public class PlayerStats : ScriptableObject
     public int startingSpeed = 1;
     public double startingCurrency = 0.00;
     public int startingStepsAvailable = 999;
-
+    public int numberOfHealthPotions = 1;
+    public int numberOfStepPotions = 1;
     public string Serialize()
     {
         StringBuilder retval = new StringBuilder();
-        
+
         retval.Append(totalCurrency).Append(",")          // Append each field with a separator (comma)
               .Append(totalStepsTaken).Append(",")
               .Append(startingHealth).Append(",")
@@ -38,7 +39,9 @@ public class PlayerStats : ScriptableObject
               .Append(startingAttack).Append(",")
               .Append(startingSpeed).Append(",")
               .Append(startingCurrency).Append(",")
-              .Append(startingStepsAvailable);
+              .Append(startingStepsAvailable).Append(",")
+              .Append(numberOfHealthPotions).Append(",")
+              .Append(numberOfStepPotions);
 
         return retval.ToString();  // Return the concatenated string
     }
@@ -63,5 +66,7 @@ public class PlayerStats : ScriptableObject
         startingSpeed = int.Parse(values[6]);
         startingCurrency = double.Parse(values[7]);
         startingStepsAvailable = int.Parse(values[8]);
+        numberOfHealthPotions = int.Parse(values[9]);
+        numberOfStepPotions = int.Parse(values[10]);
     }
 }

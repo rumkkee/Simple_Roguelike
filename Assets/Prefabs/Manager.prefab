@@ -79,6 +79,9 @@ MonoBehaviour:
   dmg_feature: {fileID: 0}
   time_material: {fileID: 0}
   time_feature: {fileID: 0}
+  timeShaderDuration: 1
+  timeShaderFadeTime: 0.5
+  damageShaderFadein: 0.5
   damageShaderDuration: 1.25
   damageShaderFadeOut: 0.5
 --- !u!114 &4230435552961615396
@@ -131,11 +134,17 @@ MonoBehaviour:
   - {fileID: 3726813157999478170, guid: ae63697ecf734f34b9cfd8ae6e4dfbf8, type: 3}
   - {fileID: 1391612162886838353, guid: 39e672b1820014e42bc2503b53f14634, type: 3}
   - {fileID: 6268734199861417846, guid: f0e1a76cd9d962d41b290279474df49b, type: 3}
+  - {fileID: 4689736324159363438, guid: 97fe9b2f644ce7441bb574732f7f3e88, type: 3}
+  - {fileID: 4689736324159363438, guid: 630ad234fc9e6fb4c94c192d212b69b0, type: 3}
+  - {fileID: 4689736324159363438, guid: ac2e51270894f414f8338eb5633d7d04, type: 3}
   collectable:
   - {fileID: 6406809373221685856, guid: ebd7aee9702623c47b80ba632b316bbc, type: 3}
   - {fileID: 4317594563709580443, guid: ae63697ecf734f34b9cfd8ae6e4dfbf8, type: 3}
   - {fileID: 8939440666041745300, guid: 39e672b1820014e42bc2503b53f14634, type: 3}
   - {fileID: 1947062834621217540, guid: f0e1a76cd9d962d41b290279474df49b, type: 3}
+  - {fileID: 6406809373221685856, guid: 97fe9b2f644ce7441bb574732f7f3e88, type: 3}
+  - {fileID: 6406809373221685856, guid: 630ad234fc9e6fb4c94c192d212b69b0, type: 3}
+  - {fileID: 6406809373221685856, guid: ac2e51270894f414f8338eb5633d7d04, type: 3}
 --- !u!114 &5814992012779913897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,5 +161,8 @@ MonoBehaviour:
   dmg_feature: {fileID: 3421196501055018738, guid: 424799608f7334c24bf367e4bbfa7f9a, type: 2}
   time_material: {fileID: -876546973899608171, guid: ee4c1a6279fe70d4a8b178d3ad9fa363, type: 3}
   time_feature: {fileID: -3412621195665635008, guid: 424799608f7334c24bf367e4bbfa7f9a, type: 2}
+  timeShaderDuration: 1
+  timeShaderFadeTime: 0.5
+  damageShaderFadein: 0.5
   damageShaderDuration: 1.25
   damageShaderFadeOut: 0.5
