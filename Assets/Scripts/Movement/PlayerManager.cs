@@ -20,7 +20,7 @@ public class PlayerManager : MonoBehaviour
     private void OnDisable() => disableControls();
     private void Awake()
     {
-        if (instance != null && instance != this)
+        if (instance != null)
         {
             Destroy(gameObject);
             return;
