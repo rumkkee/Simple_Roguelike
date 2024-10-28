@@ -24,6 +24,11 @@ public class MenuScripts : ScriptableObject
     public string spanish;
     public string setDefault;
 
+
+    [Header("Pause Menu")]
+    public string pauseMenuTitle;
+    public string save;
+    public string gameSavedNotifier;
     
 
 }

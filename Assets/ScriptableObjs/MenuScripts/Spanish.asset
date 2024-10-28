@@ -26,3 +26,6 @@ MonoBehaviour:
   english: Ingles
   spanish: Espanol
   setDefault: Restaurar predeterminado
+  pauseMenuTitle: Pausado
+  save: Guardar
+  gameSavedNotifier: Juego Guardado

@@ -26,3 +26,6 @@ MonoBehaviour:
   english: English
   spanish: Spanish
   setDefault: Set Default
+  pauseMenuTitle: Paused
+  save: Save
+  gameSavedNotifier: Save Complete

@@ -29,15 +29,11 @@ public class MenuManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         SceneManager.activeSceneChanged += OnSceneLoaded;
-
-        currentScripts = spanishScripts;
-        //currentScripts = (LanguageManager.instance.currentLanguage == Language.English) ? englishScripts : spanishScripts;
     }
 
     private void Start()
     {
-        mainMenuManager.SetText(currentScripts);
-        optionsMenuManager.SetText(currentScripts);
+        SetMenuText();
     }
 
     private void OnSceneLoaded(Scene oldScene, Scene newScene)
@@ -106,7 +102,7 @@ public class MenuManager : MonoBehaviour
         currentScripts = isEnglish ? englishScripts : spanishScripts;
         mainMenuManager.SetText(currentScripts);
         optionsMenuManager.SetText(currentScripts);
-
+        pauseMenuManager.SetText(currentScripts);
     }
 
 }
