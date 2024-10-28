@@ -1,5 +1,5 @@
 # Time Taker
-[Video Walkthrough](https://youtu.be/W1ptUfHK7v0?si=Yhl8L05XkBXOST8w)
+[Video Walkthrough](https://www.youtube.com/watch?v=Ez84WR_OEvQ)
 
 [Github Repo](https://github.com/rumkkee/Simple_Roguelike)
 
