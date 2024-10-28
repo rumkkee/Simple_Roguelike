@@ -34,8 +34,10 @@ public class OptionsMenuManager : MonoBehaviour
     public void OnLanguageButtonPressed()
     {
         LanguageManager.instance.toggleLanguage();
-        string currentLang = LanguageManager.instance.currentLanguage.ToString();
-        languageText.text = currentLang;
+        SetLanguageText();
+        MenuManager.instance.SetMenuText();
+        //string currentLang = LanguageManager.instance.currentLanguage.ToString();
+        //languageText.text = currentLang;
     }
 
     public void OnScreenModePressed()

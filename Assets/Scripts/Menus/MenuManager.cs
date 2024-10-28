@@ -37,6 +37,7 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         mainMenuManager.SetText(currentScripts);
+        optionsMenuManager.SetText(currentScripts);
     }
 
     private void OnSceneLoaded(Scene oldScene, Scene newScene)
@@ -97,6 +98,15 @@ public class MenuManager : MonoBehaviour
         {
             OpenMainMenu();
         }
+    }
+
+    public void SetMenuText()
+    {
+        bool isEnglish = LanguageManager.instance.currentLanguage == Language.English;
+        currentScripts = isEnglish ? englishScripts : spanishScripts;
+        mainMenuManager.SetText(currentScripts);
+        optionsMenuManager.SetText(currentScripts);
+
     }
 
 }
