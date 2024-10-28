@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class PlayerManager : MonoBehaviour
@@ -20,13 +21,12 @@ public class PlayerManager : MonoBehaviour
     private void OnDisable() => disableControls();
     private void Awake()
     {
-        if (instance != null)
+        if (instance != null && instance != this)
         {
-            Destroy(gameObject);
+            // Destroy(gameObject);
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
 
         _controls = new PlayerControls();
         if (Movement == null)
@@ -42,6 +42,15 @@ public class PlayerManager : MonoBehaviour
 
         // createPlayerStats();
     }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+
+        // Check the name of the loaded scene
+        if (scene.name == Scenes.instance.gameScene)
+        {
+            enableControls();
+        }
+    }
     private void Start()
     {
         _timeManInstance = TimeManager.instance;
@@ -53,6 +62,7 @@ public class PlayerManager : MonoBehaviour
     // enables controls
     public void enableControls()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
         _move.Enable();
         _action.Enable();
         _controls.Enable();
@@ -61,6 +71,7 @@ public class PlayerManager : MonoBehaviour
     // disables controls
     public void disableControls()
     {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
         _move.Disable();
         _action.Disable();
         _controls.Disable();
@@ -69,6 +80,9 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+        if(_move == null) {
+            Debug.LogError("Move is null");
+        }
         Vector2 moveVec = _move.ReadValue<Vector2>();
 
         if (moveVec.sqrMagnitude > float.Epsilon)

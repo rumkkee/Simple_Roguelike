@@ -23,7 +23,7 @@ public class FloorManager : MonoBehaviour
         }
         instance = this;
         rooms = new List<Room>();
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
     }
 
     private void Update()

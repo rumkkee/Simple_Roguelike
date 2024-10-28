@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2361764967969820029}
   - component: {fileID: 4723963045878312687}
   - component: {fileID: 329038779459057804}
-  - component: {fileID: 8709598895672344238}
   - component: {fileID: 4230435552961615396}
   - component: {fileID: 5817100364209978369}
   - component: {fileID: 8199511628593229751}
@@ -66,27 +65,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTurn: 0
---- !u!114 &8709598895672344238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7805141292191700271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 121ee9acca0736344b25b86eb4afa370, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dmg_material: {fileID: 0}
-  dmg_feature: {fileID: 0}
-  time_material: {fileID: 0}
-  time_feature: {fileID: 0}
-  timeShaderDuration: 1
-  timeShaderFadeTime: 0.5
-  damageShaderFadein: 0.5
-  damageShaderDuration: 1.25
-  damageShaderFadeOut: 0.5
 --- !u!114 &4230435552961615396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,3 +186,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuScene: Main Menu Scene
   gameScene: Dungeon
+  shopScene: 

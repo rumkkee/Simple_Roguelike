@@ -57,7 +57,6 @@ public class PlayerStatsManager : MonoBehaviour
         if(currentHealth == 0) {
             Debug.Log("Player Dies");
             PartcleManager.instance.makePartcleFX(PartcleManager.PartcleType.Blood, gameObject.transform.position);
-            // gameObject.SetActive(false);
             PlayerManager.instance.Movement.orient.setPlayerInvis();
             PlayerManager.instance.disableControls();
             StartCoroutine(transitionToMenu());
@@ -79,8 +78,8 @@ public class PlayerStatsManager : MonoBehaviour
         if(currentSteps == 0) {
             Debug.Log("Player Dies");
             PartcleManager.instance.makePartcleFX(PartcleManager.PartcleType.Blood, gameObject.transform.position);
-            gameObject.SetActive(false);
             PlayerManager.instance.disableControls();
+            PlayerManager.instance.Movement.orient.setPlayerInvis();
             StartCoroutine(transitionToMenu());
             SaveManger.instance.setSave(SaveManger.saveFileOne, stats);
         }

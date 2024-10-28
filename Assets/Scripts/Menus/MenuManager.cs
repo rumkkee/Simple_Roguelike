@@ -41,6 +41,7 @@ public class MenuManager : MonoBehaviour
         {
             GameObject mainMenuButton = MenuManager.instance.mainMenuManager.lastSelectedButton;
             EventSystem.current.SetSelectedGameObject(mainMenuButton);
+            mainMenuManager.gameObject.SetActive(true);
         }
     }
 

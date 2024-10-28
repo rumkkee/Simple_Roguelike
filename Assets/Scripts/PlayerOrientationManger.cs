@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerOrientationManger : MonoBehaviour
 {
@@ -29,5 +30,25 @@ public class PlayerOrientationManger : MonoBehaviour
     public void setPlayerInvis() {
         leftSprite.SetActive(false);
         rightSprite.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+
+        // Check the name of the loaded scene
+        if (scene.name == Scenes.instance.gameScene)
+        {
+            leftSprite.SetActive(true);
+        }
     }
 }

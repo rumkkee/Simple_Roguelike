@@ -10,9 +10,17 @@ public class EnemySpawnerHandler : MonoBehaviour
 
     public void spawnAllEnemies(Tilemap ground, Tilemap wall)
     {
+        int len = 1;
+        
+        if(PlayerManager.instance.statsMan.stats.startingHealth >= 10) {
+            len++;
+        }
+        if(PlayerManager.instance.statsMan.stats.startingHealth >= 15) {
+            len++;
+        }
         foreach (var point in spawnPoints)
         {
-            int randIndex = Random.Range(0, enemyList.Length);
+            int randIndex = Random.Range(0, len);
             GameObject enemy = Instantiate(enemyList[randIndex], point.position, Quaternion.identity);
             EnemyPathfinding pwd = enemy.GetComponent<EnemyPathfinding>();
             pwd.groundTiles = ground;

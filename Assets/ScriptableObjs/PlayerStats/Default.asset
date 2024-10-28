@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f036ab6a1562045bf2434352b354bd, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  totalCurrency: 3000
+  totalCurrency: 10
   totalStepsTaken: 0
-  startingHealth: 24
+  startingHealth: 2
   armorValue: 0
   startingArmor: 0
-  startingAttack: 10
+  startingAttack: 1
   startingSpeed: 1
   startingCurrency: 0
-  startingStepsAvailable: 1012
-  numberOfHealthPotions: 11
-  numberOfStepPotions: 15
+  startingStepsAvailable: 20
+  numberOfHealthPotions: 1
+  numberOfStepPotions: 1
