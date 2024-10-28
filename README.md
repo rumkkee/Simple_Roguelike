@@ -44,21 +44,20 @@ I was the lead programmer for Timetaker, primarily focused on systems work.
 2. Arturo's issues are [here](https://github.com/rumkkee/Simple_Roguelike/issues?q=assignee%3Arumkkee)
 
 #### What was your role / which stories did you work on
-My three main areas of focus included implementing the random room generator, menus
-and UI, and spanish localization.
+I worked on the Room Generator, menu and UI implementations, and spanish localization.
 
 + What was the biggest challenge? 
-  + 🍲🥖🍷
+  + Technically, the Room Generator. Emotionally, the spanish localization.
 + Why was it a challenge?
-  + 🍲🥖🍷
+  + The Spanish localization was my final issue assigned and it was crunch time. Our team initially planned on using Ink for dialogue, which is new to me.
 + How was the challenge addressed?
-  + 🍲🥖🍷
+  + I decided to use ScriptableObjects (SOs) instead of Ink because I was already familiar with them, and the fewer steps in setting up SOs allowed me to finish localization faster.
 + Favorite / most interesting part of this project
-  + One part I found interesting was working on displaying the steps counter, as it required understanding my teammate’s movement code to find all cases where the player either takes or reverts a step.
+  + Finding a good blend of working and socializing with my team was always great.
 + If you could do it over, what would you change?
-  + 🍲🥖🍷
+  + I would ask my group more about the intended feelings or experience we want the player to have when playing.
 + What is the most valuable thing you learned?
-  + 🍲🥖🍷
+  + I learned how impactful it can be to have teammates who get along like we have.
 
 
 ### [Bhavik Chand](https://github.com/BhavikChand)
