@@ -1,60 +1,148 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Ink;
+using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class ButtonClickHandler : MonoBehaviour
 {
-    private PlayerStats playerStats;
-    public enum ButtonType
+    public PlayerStats playerStats;
+    public Consumable stepStats;
+    public Consumable healthStats;
+    public TextMeshProUGUI healthPrice;
+    public TextMeshProUGUI stepPrice;
+    public TextMeshProUGUI attackPrice;
+    public TextMeshProUGUI healthPotion;
+    public TextMeshProUGUI stepPotion;
+    private int stepUpgradePrice;
+    private int healthUpgradePrice;
+    private int attackUpgradePrice;
+    public BackToDungeon back;
+    public int attackLimt = 10;
+    public int healthLimit = 20;
+
+    // Increase player's attack
+    public void increaseAttack()
     {
-        BuyHealth,
-        BuySteps,
-        BuyArmour,
-        BuySpeed,
-        ExitShop,
-        BuyRandom1,
-        BuyRandom2,
-        BuyRandom3,
-        SpeakMerchant
+        if (playerStats.totalCurrency >= attackUpgradePrice && playerStats.startingAttack < attackLimt)
+        {
+            playerStats.totalCurrency -= attackUpgradePrice;
+            playerStats.startingAttack++;
+            updatePriceAttack(); // Update the price for the next attack upgrade
+        }
+        else
+        {
+            Debug.Log("Not enough currency to upgrade attack!");
+        }
     }
 
-    
-    // Method that accepts a parameter to handle different button clicks
-    // public void OnButtonClick(int buttonID)
-    // {
-    //     switch (buttonID)
-    //     {
-    //         case 0:
-    //             Debug.Log("Button 0 clicked! Speaking to merchant!");
-    //             // Add functionality for Merchant
-    //             playerStats.
-    //             break;
-            
-    //         case 1:
-    //             Debug.Log("Button 1 clicked! Adding Health!");
-    //             // Add functionality for Health++
-    //             playerStats
-    //             break;
-    //         case 2:
-    //             Debug.Log("Button 2 clicked! Adding Steps!");
-    //             // Add functionality for Steps++
-    //             break;
-    //         case 3:
-    //             Debug.Log("Button 3 clicked! Adding Speed!");
-    //             // Add functionality for Speed++
-    //             break;
-    
-    //         case 4:
-    //             Debug.Log("Button 5 clicked! Exiting to shop!");
-    //             // Add functionality for exit screen
-    //             break;
-            
-            
-    //         default:
-    //             Debug.Log("Unknown button clicked!");
-    //             break;
-    //     }
-    // }
+    public void increaseSteps()
+    {
+        if (playerStats.totalCurrency >= stepUpgradePrice)
+        {
+            playerStats.totalCurrency -= stepUpgradePrice;
+            playerStats.startingStepsAvailable++;
+            updatePriceAttack();
+        }
+        else
+        {
+            Debug.Log("Not enough currency to upgrade speed!");
+        }
+    }
 
-    
+    public void increaseHealth()
+    {
+        if (playerStats.totalCurrency >= healthUpgradePrice && playerStats.startingHealth < healthLimit)
+        {
+            playerStats.totalCurrency -= healthUpgradePrice;
+            playerStats.startingHealth++;
+            updatePriceHealth();
+        }
+        else
+        {
+            Debug.Log("Not enough currency to upgrade health!");
+        }
+    }
+    public void buyHealthPotion()
+    {
+        if (playerStats.totalCurrency >= healthStats.price)
+        {
+            playerStats.totalCurrency -= healthStats.price;
+            playerStats.numberOfHealthPotions++;
+        }
+        else
+        {
+            Debug.Log("Not enough currency to buy health potion!");
+        }
+    }
+
+    public void buyStepPotion()
+    {
+        if (playerStats.totalCurrency >= stepStats.price)
+        {
+            playerStats.totalCurrency -= stepStats.price;
+            playerStats.numberOfStepPotions++;
+        }
+        else
+        {
+            Debug.Log("Not enough currency to buy step potion!");
+        }
+    }
+
+    public void updatePriceStep()
+    {
+        stepUpgradePrice = (int)(Math.Log(playerStats.startingStepsAvailable + 1) / 2) * 10 + 50;
+        updateUIPrices();
+    }
+
+    public void updatePriceHealth()
+    {
+        healthUpgradePrice = (int)(Math.Pow(playerStats.startingHealth, 2) + 50);
+        updateUIPrices();
+    }
+
+    public void updatePriceAttack()
+    {
+        attackUpgradePrice = (int)(Math.Pow(playerStats.startingSpeed, 3) + 50);
+        updateUIPrices();
+    }
+    public void updateUIPrices()
+    {
+        healthPotion.text = "$" + healthStats.price.ToString();
+        stepPrice.text = "$" + stepUpgradePrice.ToString();
+
+
+        stepPotion.text = "$" + stepStats.price.ToString();
+        if (playerStats.startingHealth >= healthLimit)
+        {
+            healthPrice.text = "SOLD OUT";
+        }
+        else
+        {
+            healthPrice.text = "$" + healthUpgradePrice.ToString();
+        }
+        if (playerStats.startingAttack >= attackLimt)
+        {
+            attackPrice.text = "SOLD OUT";
+        }
+        else
+        {
+            attackPrice.text = "$" + attackUpgradePrice.ToString();
+        }
+    }
+
+    public void goBackToMain()
+    {
+        back.GoToDungeon();
+    }
+
+    private void Start()
+    {
+        updatePriceStep();
+        updatePriceHealth();
+        updatePriceAttack();
+        updateUIPrices();
+    }
 }

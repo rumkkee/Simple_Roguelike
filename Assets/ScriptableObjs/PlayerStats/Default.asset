@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16f036ab6a1562045bf2434352b354bd, type: 3}
-  m_Name: PlayerStats
+  m_Name: Default
   m_EditorClassIdentifier: 
   totalCurrency: 3000
   totalStepsTaken: 0

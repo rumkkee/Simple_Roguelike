@@ -34,7 +34,7 @@ public class PlayerActions : MonoBehaviour
         {
             return true;
         }
-        if(!isAttacked) tmp.takeDamage(dmg);
+        if (!isAttacked) tmp.takeDamage(dmg);
         return true;
     }
 

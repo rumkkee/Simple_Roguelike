@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isMoving = false;
             Debug.Log($"We moved cells: {currentGridPos}");
+            floorPosition();
             Action movement = new Action(Action.TypeOfAction.Movement, currentGridPos, MoveToPosition);
             StartCoroutine(EnemyManager.instance.doAllEnemyActions(transform));
             currentGridPos = activeRoom.groundTilemap.WorldToCell(transform.position);
@@ -136,6 +137,10 @@ public class PlayerMovement : MonoBehaviour
             return false;
         }
         return true;
+    }
+    public void floorPosition()
+    {
+        transform.position = new Vector3(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y), transform.position.z);
     }
     public bool MoveToPosition(Vector3 pos)
     {

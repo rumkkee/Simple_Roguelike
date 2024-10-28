@@ -69,7 +69,7 @@ public class FloorManager : MonoBehaviour
 
     private void ToggleDoors()
     {
-        if(doorsAreOpen)
+        if (doorsAreOpen)
         {
             CloseDoors();
         }

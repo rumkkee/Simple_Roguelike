@@ -8,7 +8,7 @@ public class WASDNav : MonoBehaviour
 
     public Button[] buttons;
     private int selectedIndex = 0;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +39,6 @@ public class WASDNav : MonoBehaviour
 
     void selectButton()
     {
-        buttons[selectedIndex].Select(); 
+        buttons[selectedIndex].Select();
     }
 }

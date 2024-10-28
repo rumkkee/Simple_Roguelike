@@ -13,7 +13,7 @@ public class FloorGenerator : MonoBehaviour
 
     [SerializeField] private FloorResources floorResources;
     private GameObject floorsContainer;
-    
+
     public int roomCount; // Number of rooms to generate, apart from starting room.
 
     public int maxPuzzleRooms; // The max possible amount of puzzle rooms that will be generated. The min is 1
@@ -55,22 +55,22 @@ public class FloorGenerator : MonoBehaviour
             int randWallPos = Random.Range(0, 4);
 
             Vector2 gridPosShift = Vector2.zero;
-            if (randWallPos == 0) 
-            { 
-                gridPosShift = Vector2.up; 
-            } 
-            else if (randWallPos == 1) 
-            { 
-                gridPosShift = Vector2.right; 
-            } 
-            else if (randWallPos == 2) 
-            { 
-                gridPosShift = Vector2.down; 
-            } 
-            else 
-            { 
-                gridPosShift = Vector2.left; 
-            } 
+            if (randWallPos == 0)
+            {
+                gridPosShift = Vector2.up;
+            }
+            else if (randWallPos == 1)
+            {
+                gridPosShift = Vector2.right;
+            }
+            else if (randWallPos == 2)
+            {
+                gridPosShift = Vector2.down;
+            }
+            else
+            {
+                gridPosShift = Vector2.left;
+            }
 
             Vector2 newNodePos = nodeSpawnedFrom.gridPos + gridPosShift;
 
@@ -96,12 +96,12 @@ public class FloorGenerator : MonoBehaviour
 
     private bool NodeExistsAtGridPos(Vector2 gridPos)
     {
-        foreach (RoomNode roomNode in roomNodes) 
-        { 
-            if (roomNode.gridPos == gridPos) 
-            {  
-                return true; 
-            } 
+        foreach (RoomNode roomNode in roomNodes)
+        {
+            if (roomNode.gridPos == gridPos)
+            {
+                return true;
+            }
         }
         return false;
     }
@@ -129,9 +129,9 @@ public class FloorGenerator : MonoBehaviour
             foreach (RoomNode endRoomNode in endRoomNodes)
             {
                 //Debug.Log(endRoomNode.distanceFromSpawn);
-                if(endRoomNode.roomType == RoomType.dungeonRoom)
+                if (endRoomNode.roomType == RoomType.dungeonRoom)
                 {
-                    if(endRoomNode.distanceFromSpawn > furthestFoundDistance)
+                    if (endRoomNode.distanceFromSpawn > furthestFoundDistance)
                     {
                         furthestFoundDistance = endRoomNode.distanceFromSpawn;
                         currentChosenEndRoomNode = endRoomNode;
@@ -157,7 +157,7 @@ public class FloorGenerator : MonoBehaviour
                 }
                 attemptCount++;
             } while (!specialRoomSet && attemptCount > 0);
-            
+
         }
     }
 
@@ -169,21 +169,21 @@ public class FloorGenerator : MonoBehaviour
         int attemptLimit = 30;
         int attempts = 0;
 
-        while(puzzleRoomsSet < maxPuzzleRooms && attempts < attemptLimit)
+        while (puzzleRoomsSet < maxPuzzleRooms && attempts < attemptLimit)
         {
             attempts++;
             int randomRoomNode = Random.Range(0, roomNodes.Count - 1);
 
             RoomNode randomNode = roomNodes[randomRoomNode];
             //Debug.Log("RNode Pos: " + randomNode.gridPos);
-            if(randomNode.roomType == RoomType.dungeonRoom)
+            if (randomNode.roomType == RoomType.dungeonRoom)
             {
                 if (randomNode.neighborRooms.ContainsKey(Vector2.up) &&
                     randomNode.neighborRooms[Vector2.up].roomType == RoomType.puzzleRoom)
                 {
                     continue;
                 }
-                else if(randomNode.neighborRooms.ContainsKey(Vector2.right) &&
+                else if (randomNode.neighborRooms.ContainsKey(Vector2.right) &&
                     randomNode.neighborRooms[Vector2.right].roomType == RoomType.puzzleRoom)
                 {
                     continue;
@@ -213,7 +213,7 @@ public class FloorGenerator : MonoBehaviour
         floorsContainer = Instantiate(new GameObject(), Vector3.zero, Quaternion.identity);
         floorsContainer.name = "FloorsContainer";
 
-        foreach(RoomNode roomNode in roomNodes)
+        foreach (RoomNode roomNode in roomNodes)
         {
             Room roomPrefab = floorResources.GetRoom(roomNode);
             Vector2 pos = roomNode.gridPos * floorResources.GetRoomScale();
@@ -221,18 +221,18 @@ public class FloorGenerator : MonoBehaviour
             roomNode.room = room;
             FloorManager.instance.rooms.Add(room);
 
-            foreach(KeyValuePair<Vector2, RoomNode> entry in roomNode.neighborRooms)
+            foreach (KeyValuePair<Vector2, RoomNode> entry in roomNode.neighborRooms)
             {
                 // Create tiles of door
                 Vector3Int leftSideGridPos = Vector3Int.zero;
                 Vector3Int rightSideGridPos = Vector3Int.zero;
 
-                if(entry.Key == Vector2.right)
+                if (entry.Key == Vector2.right)
                 {
-                    leftSideGridPos = new Vector3Int(8,-1);
-                    rightSideGridPos = new Vector3Int(8,0);
+                    leftSideGridPos = new Vector3Int(8, -1);
+                    rightSideGridPos = new Vector3Int(8, 0);
                 }
-                else if(entry.Key == Vector2.left)
+                else if (entry.Key == Vector2.left)
                 {
                     leftSideGridPos = new Vector3Int(-9, 0);
                     rightSideGridPos = new Vector3Int(-9, -1);
@@ -244,7 +244,7 @@ public class FloorGenerator : MonoBehaviour
                 }
                 else
                 {
-                    leftSideGridPos = new Vector3Int(-1,-5);
+                    leftSideGridPos = new Vector3Int(-1, -5);
                     rightSideGridPos = new Vector3Int(0, -5);
                 }
 

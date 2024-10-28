@@ -11,7 +11,6 @@ public class MenuManager : MonoBehaviour
     public MainMenuManager mainMenuManager;
     public OptionsMenuManager optionsMenuManager;
     public PauseMenuManager pauseMenuManager;
-
     public MenuScripts englishScripts;
     public MenuScripts spanishScripts;
     public MenuScripts currentScripts; // Set to english or spanish scripts, dependent on which are active
@@ -47,14 +46,15 @@ public class MenuManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             if (!mainMenuManager.mainMenuPanel.activeSelf)
             {
                 Debug.Log("Eos");
                 OpenPauseMenu();
             }
             Debug.Log("Esset");
-            
+
         }
     }
 
@@ -86,7 +86,7 @@ public class MenuManager : MonoBehaviour
 
     public void OnOptionsMenuClosed()
     {
-        if(SceneManager.GetActiveScene().name == Scenes.instance.gameScene)
+        if (SceneManager.GetActiveScene().name == Scenes.instance.gameScene)
         {
             OpenPauseMenu();
         }

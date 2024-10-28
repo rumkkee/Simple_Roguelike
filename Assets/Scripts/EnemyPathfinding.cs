@@ -84,18 +84,6 @@ public class EnemyPathfinding : MonoBehaviour
     {
         return _getPath(target);
     }
-    // private IEnumerator getHitOnPlayer(Vector3 dir)
-    // {
-    //     float rayDistance = 1.5f;
-    //     Vector2 direction = new Vector2(dir.x - transform.position.x, dir.y - transform.position.y);
-    //     Vector2 rayOrigin = _objectCollider.bounds.center;
-    //     RaycastHit2D hit = Physics2D.Raycast(rayOrigin, direction, rayDistance, playerLayerMask);
-    //     if (hit.collider != null && hit.collider.CompareTag("Player"))
-    //     {
-            
-    //     }
-    //     yield break;
-    // }
     private List<Vector3Int> _getPath(Transform target)
     {
         // Functional programming rocks.. 

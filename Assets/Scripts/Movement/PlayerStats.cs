@@ -9,7 +9,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "playerStatsObject", menuName = "Player Stats Object")]
 public class PlayerStats : ScriptableObject
 {
-    private const int NUM_OF_ITEMS = 12;
     // Exists for stats reasons
     public long totalCurrency;
     // Again stats reasons
@@ -49,12 +48,6 @@ public class PlayerStats : ScriptableObject
     public void Deserialize(string serializedData)
     {
         string[] values = serializedData.Split(',');
-
-        if (values.Length < NUM_OF_ITEMS)
-        {
-            Debug.LogError($"Data length mismatch: expected {NUM_OF_ITEMS} elements.");
-            return;
-        }
 
 
         totalCurrency = long.Parse(values[0]);

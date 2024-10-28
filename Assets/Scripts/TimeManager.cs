@@ -24,13 +24,11 @@ public class TimeManager : MonoBehaviour
         instance = this;
         _futureActions = new Stack<Action>();
         _previousActions = new Stack<Action>();
-        
+
         DontDestroyOnLoad(gameObject);
     }
-    public void Start() {
-        _man = PlayerManager.instance.statsMan;
-    }
-    public void clear() {
+    public void clear()
+    {
         _futureActions = new Stack<Action>();
         _previousActions = new Stack<Action>();
         _currentActionIndex = 0;
@@ -50,7 +48,8 @@ public class TimeManager : MonoBehaviour
             _futureActions.Push(_previousActions.Peek());
             // Revert goes here
             bool check = _revert(_previousActions.Peek());
-            if(!check) {
+            if (!check)
+            {
                 // Can not be reverted.. 
                 break;
             }
@@ -75,7 +74,7 @@ public class TimeManager : MonoBehaviour
             _man.updateSteps(1);
             return act.mCallback(act.position);
         }
-        else if (act.actionType == Action.TypeOfAction.Action) 
+        else if (act.actionType == Action.TypeOfAction.Action)
         {
             Debug.Log($"Going reverting Action: {act.actionDesc}");
             return act.aCallback(act.actionDesc);
@@ -87,6 +86,7 @@ public class TimeManager : MonoBehaviour
     public void IncrementIndex() => _currentActionIndex++;
     public void addAction(Action newAction)
     {
+        _man = PlayerManager.instance.statsMan;
         newAction.actionIndex = _currentActionIndex;
         Debug.Log($"Action: {newAction.actionType} : {newAction.actionType} at {newAction.actionIndex}");
         _previousActions.Push(newAction);

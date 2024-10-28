@@ -15,7 +15,8 @@ public class MainMenuManager : MonoBehaviour
     public Button continueButton; // Will be selected first if a saved game exists. Else, is made unselectable.
     public TextMeshProUGUI continueButtonText; // will be greyed if disabled
     public Button newGameButton; // Will be selected first if no saved game exists
-
+    public PlayerStats defa;
+    public PlayerStats currentStats;
     public TextMeshProUGUI gameTitleText;
     public TextMeshProUGUI newGameText;
     public TextMeshProUGUI optionsText;
@@ -28,18 +29,22 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnContinuePressed()
     {
+        string data = SaveManger.instance.fetchSave(SaveManger.saveFileOne);
+        currentStats.Deserialize(data);
         LoadGameScene();
     }
 
     public void OnNewGamePressed()
     {
         // TODO: If a currentRunData exists, wipe the currentData
+        SaveManger.instance.setSave(SaveManger.saveFileOne, defa);
+        currentStats = defa;
         LoadGameScene();
     }
 
     public void OnOptionsPressed()
     {
-        
+
         lastSelectedButton = EventSystem.current.currentSelectedGameObject;
         MenuManager.instance.OpenOptionsMenu();
     }
@@ -48,7 +53,7 @@ public class MainMenuManager : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("You've left the game, and I stay here");
-        
+
     }
 
     private void LoadGameScene()
@@ -69,7 +74,6 @@ public class MainMenuManager : MonoBehaviour
             continueButton.interactable = true;
             continueButtonText.color = Color.white;
             EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
-
         }
         else
         {

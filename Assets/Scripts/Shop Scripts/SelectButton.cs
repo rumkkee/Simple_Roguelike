@@ -6,13 +6,13 @@ using UnityEngine.EventSystems;
 
 public class SelectButton : MonoBehaviour
 {
-    
+
     public GameObject FirstButton;
-    
+
     void Start()
     {
         //Debug.Log("button clicked!");
         EventSystem.current.SetSelectedGameObject(FirstButton);
     }
-    
+
 }

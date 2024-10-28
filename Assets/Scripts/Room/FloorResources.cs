@@ -28,25 +28,26 @@ public class FloorResources : MonoBehaviour
 
     public Room GetRoom(RoomNode roomNode)
     {
-        if(roomNode.roomType == RoomType.bossRoom || roomNode.roomType == RoomType.nextFloorRoom)
+        if (roomNode.roomType == RoomType.bossRoom || roomNode.roomType == RoomType.nextFloorRoom)
         {
             return exitRoom;
         }
-        else if(roomNode.roomType == RoomType.puzzleRoom)
+        else if (roomNode.roomType == RoomType.puzzleRoom)
         {
             int size = puzzleRooms.Count;
             int randomIndex = Random.Range(0, size - 1);
             Room randomPuzzleRoom = puzzleRooms[randomIndex];
             return randomPuzzleRoom;
         }
-        else if(roomNode.roomType == RoomType.treasureRoom){
+        else if (roomNode.roomType == RoomType.treasureRoom)
+        {
             return treasureRoom;
         }
-        else if(roomNode.roomType == RoomType.shop)
+        else if (roomNode.roomType == RoomType.shop)
         {
             return shopRoom;
         }
-        else if(roomNode.roomType == RoomType.firstRoom)
+        else if (roomNode.roomType == RoomType.firstRoom)
         {
             return startingRoomPrefab;
         }

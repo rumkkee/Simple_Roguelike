@@ -67,7 +67,7 @@ public class OptionsMenuManager : MonoBehaviour
 
     private IEnumerator OnSliderBeingControlled()
     {
-        while(EventSystem.current.currentSelectedGameObject == musicVolumeSlider.gameObject)
+        while (EventSystem.current.currentSelectedGameObject == musicVolumeSlider.gameObject)
         {
             yield return null;
             if (Input.GetKeyDown(KeyCode.Return))

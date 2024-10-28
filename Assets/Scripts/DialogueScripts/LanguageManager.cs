@@ -30,7 +30,8 @@ public class LanguageManager : MonoBehaviour
         {
             currentLanguage = Language.English;
         }
-        if (DialogueManager.instance != null) { 
+        if (DialogueManager.instance != null)
+        {
             DialogueManager.instance.setLanguage(currentLanguage);
         }
     }

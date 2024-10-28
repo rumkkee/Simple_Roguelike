@@ -15,10 +15,12 @@ public class Collectable : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player") && stats.type == CollectableStats.itemType.Item)
         {
-            if(stats.name == "HEALTHPOT") {
+            if (stats.name == "HEALTHPOT")
+            {
                 PlayerManager.instance.statsMan.stats.numberOfHealthPotions++;
             }
-            if(stats.name == "STEPPOT") {
+            if (stats.name == "STEPPOT")
+            {
                 PlayerManager.instance.statsMan.stats.numberOfStepPotions++;
             }
             Destroy(gameObject);

@@ -311,6 +311,7 @@ MonoBehaviour:
   healthUI: {fileID: 0}
   currencyUI: {fileID: 0}
   stepUI: {fileID: 0}
+  potUI: {fileID: 0}
   currentHealth: 0
   currentSpeed: 0
   currentAttack: 0
