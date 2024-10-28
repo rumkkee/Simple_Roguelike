@@ -9,6 +9,7 @@ public class PlayerOrientationManger : MonoBehaviour
     public GameObject leftDust;
     public GameObject rightDust;
     public bool isLeft = false;
+    
     public void swtichOrientation(Vector2 dir)
     {
         if (dir == Vector2.left)
@@ -23,5 +24,10 @@ public class PlayerOrientationManger : MonoBehaviour
             rightSprite.SetActive(false);
             isLeft = true;
         }
+    }
+
+    public void setPlayerInvis() {
+        leftSprite.SetActive(false);
+        rightSprite.SetActive(false);
     }
 }

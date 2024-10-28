@@ -11,7 +11,6 @@ public class MenuManager : MonoBehaviour
     public MainMenuManager mainMenuManager;
     public OptionsMenuManager optionsMenuManager;
     public PauseMenuManager pauseMenuManager;
-
     public MenuScripts englishScripts;
     public MenuScripts spanishScripts;
     public MenuScripts currentScripts; // Set to english or spanish scripts, dependent on which are active

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerStatsManager : MonoBehaviour
@@ -49,20 +50,18 @@ public class PlayerStatsManager : MonoBehaviour
     }
     public void takeDamage(int amount, int enemySpeed)
     {
-        int calculation = currentSpeed - enemySpeed;
-        if(calculation < 0) {
-            int roll = UnityEngine.Random.Range(0, 2);
-            if(roll == 0) {
-                // No Hit today!
-                return; 
-            }
-        }
         currentHealth -= amount;
         currentHealth = Math.Max(currentHealth, 0);
         healthUI.setCurrentHealthDisplayed(currentHealth);
         StartCoroutine(FullscreenFXController.instance.Hurt());
         if(currentHealth == 0) {
             Debug.Log("Player Dies");
+            PartcleManager.instance.makePartcleFX(PartcleManager.PartcleType.Blood, gameObject.transform.position);
+            // gameObject.SetActive(false);
+            PlayerManager.instance.Movement.orient.setPlayerInvis();
+            PlayerManager.instance.disableControls();
+            StartCoroutine(transitionToMenu());
+            SaveManger.instance.setSave(SaveManger.saveFileOne, stats);
         }
     }
 
@@ -79,7 +78,18 @@ public class PlayerStatsManager : MonoBehaviour
         stepUI.updateStepsDisplayed(currentSteps);
         if(currentSteps == 0) {
             Debug.Log("Player Dies");
+            PartcleManager.instance.makePartcleFX(PartcleManager.PartcleType.Blood, gameObject.transform.position);
+            gameObject.SetActive(false);
+            PlayerManager.instance.disableControls();
+            StartCoroutine(transitionToMenu());
+            SaveManger.instance.setSave(SaveManger.saveFileOne, stats);
         }
+    }
+
+    public IEnumerator transitionToMenu()
+    {
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene("Main Menu Scene");
     }
 
     public void updatePotion() {

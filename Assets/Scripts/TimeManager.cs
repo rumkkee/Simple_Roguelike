@@ -27,10 +27,6 @@ public class TimeManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-    public void Start()
-    {
-        _man = PlayerManager.instance.statsMan;
-    }
     public void clear()
     {
         _futureActions = new Stack<Action>();
@@ -90,6 +86,7 @@ public class TimeManager : MonoBehaviour
     public void IncrementIndex() => _currentActionIndex++;
     public void addAction(Action newAction)
     {
+        _man = PlayerManager.instance.statsMan;
         newAction.actionIndex = _currentActionIndex;
         Debug.Log($"Action: {newAction.actionType} : {newAction.actionType} at {newAction.actionIndex}");
         _previousActions.Push(newAction);
