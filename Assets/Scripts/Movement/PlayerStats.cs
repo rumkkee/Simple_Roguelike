@@ -62,4 +62,25 @@ public class PlayerStats : ScriptableObject
         numberOfHealthPotions = int.Parse(values[9]);
         numberOfStepPotions = int.Parse(values[10]);
     }
+
+    public void Copy(PlayerStats other)
+    {
+        if (other == null)
+        {
+            Debug.LogError("Cannot copy from a null PlayerStats instance.");
+            return;
+        }
+
+        totalCurrency = other.totalCurrency;
+        totalStepsTaken = other.totalStepsTaken;
+        startingHealth = other.startingHealth;
+        armorValue = other.armorValue;
+        startingArmor = other.startingArmor;
+        startingAttack = other.startingAttack;
+        startingSpeed = other.startingSpeed;
+        startingCurrency = other.startingCurrency;
+        startingStepsAvailable = other.startingStepsAvailable;
+        numberOfHealthPotions = other.numberOfHealthPotions;
+        numberOfStepPotions = other.numberOfStepPotions;
+    }
 }

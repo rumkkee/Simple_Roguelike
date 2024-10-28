@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5814992012779913897}
   - component: {fileID: 7271846726272164459}
   - component: {fileID: 7245658637222475292}
+  - component: {fileID: 5598748394787066279}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -193,3 +194,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a5c55021bccc94492d76b1ba9688e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5598748394787066279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805141292191700271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f83eb3e4eae924ba35d67128d42c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuScene: Main Menu Scene
+  gameScene: Dungeon
