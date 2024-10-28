@@ -45,6 +45,13 @@ public class PauseMenuManager : MonoBehaviour
         PlayerManager.instance.gameObject.SetActive(true);
     }
 
+    public void OnShopPressed()
+    {
+        // Open Shop
+        pauseMenuPanel.SetActive(false);
+        SceneManager.LoadScene(Scenes.instance.shopScene);
+    }
+
     public void OnSavePressed()
     {
         // Call the SaveManager to Save your game

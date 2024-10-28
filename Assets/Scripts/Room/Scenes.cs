@@ -10,7 +10,7 @@ public class Scenes : MonoBehaviour
 
     public string mainMenuScene;
     public string gameScene;
-
+    public string shopScene;
 
     private void Awake()
     {
