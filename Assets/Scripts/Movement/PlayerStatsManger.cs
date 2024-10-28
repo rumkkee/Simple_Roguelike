@@ -10,6 +10,7 @@ public class PlayerStatsManager : MonoBehaviour
     public HealthUI healthUI;
     public CurrencyUI currencyUI;
     public StepCounterUI stepUI;
+    public PotionUI potUI;
     public int currentHealth;
     public int currentSpeed;
     public int currentAttack;
@@ -43,6 +44,8 @@ public class PlayerStatsManager : MonoBehaviour
         stepUI.updateStepsDisplayed(currentSteps);
         healthUI.setMaxHealthDisplayed(stats.startingHealth);
         currencyUI.updateCurrencyDisplayed(stats.totalCurrency);
+        potUI.updateSpeedPotDisplayed(stats.numberOfStepPotions);
+        potUI.updateHealthPotDisplayed(stats.numberOfHealthPotions);
     }
     public void takeDamage(int amount, int enemySpeed)
     {
@@ -80,6 +83,29 @@ public class PlayerStatsManager : MonoBehaviour
         stepUI.updateStepsDisplayed(currentSteps);
         if(currentSteps == 0) {
             Debug.Log("Player Dies");
+        }
+    }
+
+    public void updatePotion() {
+        string tmp = potUI.GetActivePotionType();
+        if(tmp == "speed")  {
+            if(stats.numberOfStepPotions <= 0) {
+                return;
+            }
+            stats.numberOfStepPotions--;
+            currentSteps += potUI.speedStats.delta;
+            potUI.updateSpeedPotDisplayed(stats.numberOfStepPotions);
+            stepUI.updateStepsDisplayed(currentSteps);
+        }
+        if(tmp == "health")  {
+            if(stats.numberOfHealthPotions <= 0) {
+                return;
+            }
+            stats.numberOfHealthPotions--;
+            currentHealth += potUI.healthStats.delta;
+            currentHealth = Math.Min(currentHealth, stats.startingHealth);
+            potUI.updateHealthPotDisplayed(stats.numberOfHealthPotions);
+            healthUI.setCurrentHealthDisplayed(currentHealth);
         }
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f036ab6a1562045bf2434352b354bd, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  totalCurrency: 0
+  totalCurrency: 54
   totalStepsTaken: 0
   startingHealth: 2
   armorValue: 0
@@ -21,3 +21,5 @@ MonoBehaviour:
   startingSpeed: 1
   startingCurrency: 0
   startingStepsAvailable: 999
+  numberOfHealthPotions: 0
+  numberOfStepPotions: 2

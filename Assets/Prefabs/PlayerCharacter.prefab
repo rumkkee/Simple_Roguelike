@@ -245,6 +245,7 @@ MonoBehaviour:
   statsMan: {fileID: 5498956538265269402}
   Movement: {fileID: 6568324391289941857}
   Camera: {fileID: 0}
+  actions: {fileID: 5121789267016706016}
 --- !u!114 &6568324391289941857
 MonoBehaviour:
   m_ObjectHideFlags: 0
