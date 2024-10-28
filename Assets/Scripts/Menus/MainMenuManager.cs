@@ -38,7 +38,7 @@ public class MainMenuManager : MonoBehaviour
     {
         // TODO: If a currentRunData exists, wipe the currentData
         SaveManger.instance.setSave(SaveManger.saveFileOne, defa);
-        currentStats = defa;
+        currentStats.Copy(defa);
         LoadGameScene();
     }
 
