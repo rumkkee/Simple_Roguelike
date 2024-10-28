@@ -108,6 +108,6 @@ My roll was programming. The stories I worked on were Item Stats, Player Stats, 
 - What was the largest victory?
   - We believe the largest victory to be our modified A* and Room Generation code. Those pieces of code being fundemantally core to testing further features.
 - Final Assessment of the project
-  - Time Taker was a successful project that achieved its goal of allowing users to play... a simple roguelike! 😊
+  - Time Taker was a successful project that achieved its goal of allowing users to play a short fun roguelike! 😊
  
 [Github Repo](https://github.com/rumkkee/Simple_Roguelike)
