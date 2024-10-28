@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,13 @@ public class PauseMenuManager : MonoBehaviour
     public GameObject lastSelectedButton;
 
     public GameObject gameSavedPanel;
+
+    public TextMeshProUGUI pausedText;
+    public TextMeshProUGUI continueText;
+    public TextMeshProUGUI saveText;
+    public TextMeshProUGUI savedNotificationText;
+    public TextMeshProUGUI optionsText;
+    public TextMeshProUGUI exitText;
 
     private IEnumerator gameSavedTextCoroutine;
 
@@ -82,4 +90,14 @@ public class PauseMenuManager : MonoBehaviour
 
     public bool isGamePaused() => pauseMenuPanel.activeInHierarchy;
 
+
+    public void SetText(MenuScripts script)
+    {
+        pausedText.text = script.pauseMenuTitle;
+        continueText.text = script.continueText;
+        saveText.text = script.save;
+        savedNotificationText.text = script.gameSavedNotifier;
+        optionsText.text = script.options;
+        exitText.text = script.exit;
+    }
 }

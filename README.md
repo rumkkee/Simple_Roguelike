@@ -44,7 +44,8 @@ I was the lead programmer for Timetaker, primarily focused on systems work.
 2. Arturo's issues are [here](https://github.com/rumkkee/Simple_Roguelike/issues?q=assignee%3Arumkkee)
 
 #### What was your role / which stories did you work on
-🍲🥖🍷
+My three main areas of focus included implementing the random room generator, menus
+and UI, and spanish localization.
 
 + What was the biggest challenge? 
   + 🍲🥖🍷
@@ -53,7 +54,7 @@ I was the lead programmer for Timetaker, primarily focused on systems work.
 + How was the challenge addressed?
   + 🍲🥖🍷
 + Favorite / most interesting part of this project
-  + 🍲🥖🍷
+  + One part I found interesting was working on displaying the steps counter, as it required understanding my teammate’s movement code to find all cases where the player either takes or reverts a step.
 + If you could do it over, what would you change?
   + 🍲🥖🍷
 + What is the most valuable thing you learned?
