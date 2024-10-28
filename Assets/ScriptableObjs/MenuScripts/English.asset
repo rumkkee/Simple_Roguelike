@@ -12,7 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06972f766992a9c48a9a21e3f77a0369, type: 3}
   m_Name: English
   m_EditorClassIdentifier: 
+  gameTitle: Time Taker
   continueText: Continue
   newGame: New Game
   options: Options
   exit: Exit
+  optionsTitle: Options
+  musicVol: Music Vol.
+  screenMode: Screen
+  fullScreen: Full Screen
+  windowed: Windowed
+  language: Language
+  english: English
+  spanish: Spanish
+  setDefault: Set Default

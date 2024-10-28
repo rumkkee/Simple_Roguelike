@@ -32,6 +32,10 @@ public class MenuManager : MonoBehaviour
 
         currentScripts = spanishScripts;
         //currentScripts = (LanguageManager.instance.currentLanguage == Language.English) ? englishScripts : spanishScripts;
+    }
+
+    private void Start()
+    {
         mainMenuManager.SetText(currentScripts);
     }
 

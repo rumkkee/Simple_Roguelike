@@ -12,7 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06972f766992a9c48a9a21e3f77a0369, type: 3}
   m_Name: Spanish
   m_EditorClassIdentifier: 
+  gameTitle: Tomador Tiempo
   continueText: Continuar
   newGame: Nuevo Juego
   options: Opciones
   exit: Salir
+  optionsTitle: Opciones
+  musicVol: Vol. Musica
+  screenMode: Pantalla
+  fullScreen: Llena
+  windowed: Ventanada
+  language: Idioma
+  english: Ingles
+  spanish: Espanol
+  setDefault: Restaurar predeterminado

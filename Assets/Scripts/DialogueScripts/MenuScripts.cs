@@ -13,4 +13,17 @@ public class MenuScripts : ScriptableObject
     public string options;
     public string exit;
 
+    [Header("Options Menu")]
+    public string optionsTitle;
+    public string musicVol;
+    public string screenMode;
+    public string fullScreen;
+    public string windowed;
+    public string language;
+    public string english;
+    public string spanish;
+    public string setDefault;
+
+    
+
 }
