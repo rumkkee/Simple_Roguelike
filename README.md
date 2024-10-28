@@ -24,20 +24,20 @@ We added stories along the way as the project progressed as we felt we were capa
 2. Alex's issues are [here](https://github.com/rumkkee/Simple_Roguelike/issues?q=assignee%3AXOR-SABER)
 
 #### What was your role / which stories did you work on
-🍲🥖🍷
+I was the lead programmer for Timetaker, primarily focused on systems work.
 
 + What was the biggest challenge? 
-  + 🍲🥖🍷
+  + The biggest challenge I faced was creating custom pathfinding for enemies, which was a first for me but overall really enjoyable.
 + Why was it a challenge?
-  + 🍲🥖🍷
+  + The challenge was making it work for the type of game we were trying to create, with the step based system and grid based movement.
 + How was the challenge addressed?
-  + 🍲🥖🍷
+  + I addressed it by dedicating extra time to refining the algorithm and adapting it to fit the project. It ended up working brilliantly.
 + Favorite / most interesting part of this project
-  + 🍲🥖🍷
+  + I really enjoyed working with the team on this project—definitely my favorite part. 
 + If you could do it over, what would you change?
-  + 🍲🥖🍷
+  + If I did this all over again, I’d spend more time on planning and creating more specific issues; I felt like the ones I made were a bit too open-ended. Which leads to some miscommunication. 
 + What is the most valuable thing you learned?
-  + 🍲🥖🍷
+  + The most valuable thing I learned from this project is that you can depend on others who share your passion. A good team can make development feel smooth and seamless.
 
 ### [Arturo Cesareo-Zacarias](https://github.com/rumkkee)
 1. Arturo's pull requests are [here](https://github.com/rumkkee/Simple_Roguelike/pulls?q=is%3Apr+is%3Amerged+author%3Arumkkee)
