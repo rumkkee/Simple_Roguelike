@@ -12,6 +12,10 @@ public class MenuManager : MonoBehaviour
     public OptionsMenuManager optionsMenuManager;
     public PauseMenuManager pauseMenuManager;
 
+    public MenuScripts englishScripts;
+    public MenuScripts spanishScripts;
+    public MenuScripts currentScripts; // Set to english or spanish scripts, dependent on which are active
+
     public EventSystem eventSystem;
 
     private void Awake()
@@ -25,7 +29,11 @@ public class MenuManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         SceneManager.activeSceneChanged += OnSceneLoaded;
+    }
 
+    private void Start()
+    {
+        SetMenuText();
     }
 
     private void OnSceneLoaded(Scene oldScene, Scene newScene)
@@ -86,6 +94,15 @@ public class MenuManager : MonoBehaviour
         {
             OpenMainMenu();
         }
+    }
+
+    public void SetMenuText()
+    {
+        bool isEnglish = LanguageManager.instance.currentLanguage == Language.English;
+        currentScripts = isEnglish ? englishScripts : spanishScripts;
+        mainMenuManager.SetText(currentScripts);
+        optionsMenuManager.SetText(currentScripts);
+        pauseMenuManager.SetText(currentScripts);
     }
 
 }

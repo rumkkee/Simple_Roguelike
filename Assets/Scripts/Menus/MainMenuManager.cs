@@ -16,6 +16,11 @@ public class MainMenuManager : MonoBehaviour
     public TextMeshProUGUI continueButtonText; // will be greyed if disabled
     public Button newGameButton; // Will be selected first if no saved game exists
 
+    public TextMeshProUGUI gameTitleText;
+    public TextMeshProUGUI newGameText;
+    public TextMeshProUGUI optionsText;
+    public TextMeshProUGUI exitText;
+
     public void Start()
     {
         OnSceneLoaded();
@@ -72,5 +77,14 @@ public class MainMenuManager : MonoBehaviour
             continueButtonText.color = Color.gray;
             EventSystem.current.SetSelectedGameObject(newGameButton.gameObject);
         }
+    }
+
+    public void SetText(MenuScripts menuScript)
+    {
+        gameTitleText.text = menuScript.gameTitle;
+        continueButtonText.text = menuScript.continueText;
+        newGameText.text = menuScript.newGame;
+        optionsText.text = menuScript.options;
+        exitText.text = menuScript.exit;
     }
 }
