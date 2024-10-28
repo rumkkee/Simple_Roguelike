@@ -16,7 +16,7 @@ Messaging was for short communication, progress reporting and alerting out teamm
 
 Originally we had around 65 stories, with the idea that some stories being stretch goals that wouldn't make it into the final product.
 
-We added stories along the way as the project progressed as we felt we were capable of completing more. As a team we completed 53 out of 65 stories.
+We added stories along the way as the project progressed as we felt we were capable of completing more. As a team we completed 65 out of 65 stories.
 
 ## Team Retrospective:
 ### [Alexander Betancourt](https://github.com/XOR-SABER/)
