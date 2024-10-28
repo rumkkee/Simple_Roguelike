@@ -85,20 +85,20 @@ My roll was programming. The stories I worked on were Item Stats, Player Stats, 
 2. Kyle's issues are [here](https://github.com/rumkkee/Simple_Roguelike/issues?q=assignee%3AKyleKrack)
 
 #### What was your role / which stories did you work on
- I worked primarily as a technical artist, which is a fancy way of saying I split my time between writing code and making art assets. I tried to focus on making our game look good with a nice high contrast color palette that is both pleasing to the eye and friendly to our colorblind brothers and sisters. For the code, I focused on making a series of scripts that manage the dialogue and scripts related to the shop/progression.
+ +I worked primarily as a technical artist, which is a fancy way of saying I split my time between writing code and making art assets. I tried to focus on making our game look good with a nice high contrast color palette that is both pleasing to the eye and friendly to our colorblind brothers and sisters. For the code, I focused on making a series of scripts that manage the dialogue and scripts related to the shop/progression.
 
 + What was the biggest challenge? 
-   I think one of my biggest challenges during this project was knowing what to priritize and then getting bottlenecked because one feature was dependant on another feature that had not been completed yet. 
+   +I think one of my biggest challenges during this project was knowing what to priritize and then getting bottlenecked because one feature was dependant on another feature that had not been completed yet. 
 + Why was it a challenge?
-  Some things took a lot longer than we expected to near the end we had to crunch to get it working. 
+  +Some things took a lot longer than we expected to near the end we had to crunch to get it working. 
 + How was the challenge addressed?
-  We did a good job of meeting online to talk about priorities and distribute labor in a way that made a lot of sense given each of our skillsets.  
+  +We did a good job of meeting online to talk about priorities and distribute labor in a way that made a lot of sense given each of our skillsets.  
 + Favorite / most interesting part of this project
-  I really enjoyed working in this team. I think we were successful in what we set out to do and I feel like I strengthened the bonds of friendship with my team members. 
+  +I really enjoyed working in this team. I think we were successful in what we set out to do and I feel like I strengthened the bonds of friendship with my team members. 
 + If you could do it over, what would you change?
-  I would like to try to do a better job of getting a playable build running as soon as practicable and then iterate from there. 
+  +I would like to try to do a better job of getting a playable build running as soon as practicable and then iterate from there. 
 + What is the most valuable thing you learned?
-  I learned what it is like to work in a very functional and very communicative team. I got a way better idea of how to use github issues and how to resolve conflicts. I also enjoyed the chance to learn more about Unity and C# 
+  +I learned what it is like to work in a very functional and very communicative team. I got a way better idea of how to use github issues and how to resolve conflicts. I also enjoyed the chance to learn more about Unity and C# 
  
 
 ## Conclusion
